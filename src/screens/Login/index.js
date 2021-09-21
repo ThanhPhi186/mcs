@@ -11,7 +11,7 @@ import {
 import {trans} from '../../utils/i18n';
 import styles from './styles';
 import {useDispatch, useSelector} from 'react-redux';
-import {AuthenOverallRedux} from '../../redux/authen';
+import {AuthenOverallRedux} from '../../redux';
 import AppText from '../../components/atoms/AppText';
 import {AppDialog} from '../../components/molecules';
 import {AppLoading} from '../../components/atoms';

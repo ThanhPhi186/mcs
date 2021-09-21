@@ -8,7 +8,7 @@ import {trans} from '../../utils/i18n';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AppDialog} from '../../components/molecules';
 import {useDispatch, useSelector} from 'react-redux';
-import {AuthenOverallRedux} from '../../redux/authen';
+import {AuthenOverallRedux} from '../../redux';
 import {ProductRedux, StoreRedux} from '../../redux';
 import {images} from '../../assets';
 
@@ -25,7 +25,7 @@ export function DrawerContent(props) {
   );
 
   const logout = () => {
-    dispatch(StoreRedux.Actions.changeChanel(''));
+    // dispatch(StoreRedux.Actions.changeChanel(''));
     dispatch(AuthenOverallRedux.Actions.logout.request());
   };
 
@@ -252,7 +252,7 @@ export function DrawerContent(props) {
       <View style={styles.drawerContent}>
         <View style={styles.userInfoSection}>
           <Avatar.Image source={images.logo_circle} size={80} />
-          <Title style={styles.title}>{accountUser.USERNAME}</Title>
+          {/* <Title style={styles.title}>{accountUser.USERNAME}</Title> */}
         </View>
         {channel ? renderWithChannel() : renderWithoutChannel()}
 

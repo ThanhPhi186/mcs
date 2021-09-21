@@ -23,7 +23,7 @@ const overallReducer = createReducer(initialState, {
     state.type = action.type;
   },
   [Actions.getDomain.success]: (state, action) => {
-    state.domain = `https://${action.payload}/customer-apis/control`;
+    state.domain = `https://${action.payload}/mobilemcs/control`;
     // state.domain = `https://${action.payload}/mobileservices/control`;
     state.errorMessage = '';
     state.type = action.type;

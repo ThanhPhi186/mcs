@@ -18,6 +18,7 @@ const MainNavigator = () => {
     <NavigationContainer>
       {authReducer.userAuthen._LOGIN_PASSED_ ? (
         <Drawer.Navigator
+          screenOptions={{headerShown: false}}
           drawerStyle={styles.drawerContainer}
           initialRouteName={channel ? 'createOrder' : 'changeChannel'}
           drawerContent={props => <DrawerContent {...props} />}>

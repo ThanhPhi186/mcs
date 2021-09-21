@@ -1,18 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, RefreshControl, TouchableOpacity, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppText} from '../../components/atoms';
 import {StoreRedux} from '../../redux';
-import {trans} from '../../utils';
+import {Const, trans} from '../../utils';
 import styles from './styles';
 // import RNBootSplash from 'react-native-bootsplash';
 import {Colors} from '../../styles';
+import {post} from '../../services/ServiceHandle';
 
 const ChangeChannel = ({navigation}) => {
+  const BaseUrl = useSelector(state => state.AuthenOverallReducer.domain);
   const listStore = useSelector(state => state.StoreReducer.listProductStore);
   const channel = useSelector(state => state.StoreReducer.channel);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    post(BaseUrl + Const.API.GetListProductStoreMobileMcs).then(res => {
+      if (res.ok) {
+      }
+    });
+  }, []);
 
   const onChangeChanel = item => {
     // RNBootSplash.show();
