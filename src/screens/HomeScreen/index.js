@@ -8,6 +8,7 @@ import {container, titleBold, viewRow} from '../../styles/GlobalStyles';
 import {SliderBox} from 'react-native-image-slider-box';
 import {device_width} from '../../styles/Mixin';
 import ItemHomeMenu from './component/ItemHomeMenu';
+import {Colors} from '../../styles';
 
 const HomeScreen = () => {
   const imagesSlider = [
@@ -133,7 +134,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={container}>
-      <StatusBar backgroundColor="red" />
+      <StatusBar backgroundColor={Colors.WHITE} barStyle="dark-content" />
       {renderHeader}
       {renderImageSlider}
       {renderItem}
