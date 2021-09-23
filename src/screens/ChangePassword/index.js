@@ -89,23 +89,29 @@ const ChangePassword = ({navigation}) => {
           value={currentPassword}
           onChangeText={setCurrentPassword}
           style={styles.containerInput}
+          mode="outlined"
+          autoCapitalize="none"
         />
         <TextInput
           label={trans('newPass')}
           value={newPassword}
           onChangeText={setNewPassword}
           style={styles.containerInput}
+          mode="outlined"
+          autoCapitalize="none"
         />
         <TextInput
           label={trans('confirmPass')}
           value={passwordVerify}
           onChangeText={setPasswordVerify}
           style={styles.containerInput}
+          mode="outlined"
+          autoCapitalize="none"
         />
         <Button
           containerStyle={styles.btn}
           titleColor={Colors.WHITE}
-          title={trans('change').toUpperCase()}
+          title={trans('confirm').toUpperCase()}
           onPress={changePass}
         />
       </View>

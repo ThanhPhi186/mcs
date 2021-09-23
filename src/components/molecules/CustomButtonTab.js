@@ -28,9 +28,7 @@ const CustomButtonTab = (props, children) => {
 };
 const styles = {
   container: {
-    bottom: isIphoneX()
-      ? NAVIGATION_BOTTOM_TABS_HEIGHT / 2 + 5
-      : NAVIGATION_BOTTOM_TABS_HEIGHT / 2 + 25,
+    bottom: NAVIGATION_BOTTOM_TABS_HEIGHT / 2,
   },
   circleInside: {
     width: HEIGHT_MIDDLE_HOME_BTN,

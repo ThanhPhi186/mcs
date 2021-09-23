@@ -49,7 +49,7 @@ const LoginCompanyScreen = props => {
   return (
     <View style={styles.container}>
       <Image
-        source={images.logo_trans}
+        source={images.logoWhite}
         style={{width: 170, height: 100, marginBottom: 20}}
       />
       <TextInput

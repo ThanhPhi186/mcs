@@ -14,6 +14,7 @@ const styles = {
   btn: {
     backgroundColor: Colors.PRIMARY,
     marginTop: Mixin.moderateSize(24),
+    width: '100%',
   },
 };
 

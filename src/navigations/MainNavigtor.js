@@ -4,11 +4,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {ChangeChannel, ChangePassword} from '../screens';
 import {DrawerContent} from '../screens/DrawerContent';
-import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
+import BottomTabNavigator from './BottomTabNavigator';
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
 
 const MainNavigator = () => {
   const authReducer = useSelector(state => state.AuthenOverallReducer);
@@ -16,15 +15,8 @@ const MainNavigator = () => {
 
   return (
     <NavigationContainer>
-      {authReducer.userAuthen._LOGIN_PASSED_ ? (
-        <Drawer.Navigator
-          screenOptions={{headerShown: false}}
-          drawerStyle={styles.drawerContainer}
-          initialRouteName={channel ? 'createOrder' : 'changeChannel'}
-          drawerContent={props => <DrawerContent {...props} />}>
-          <Drawer.Screen name="changeChannel" component={ChangeChannel} />
-          <Drawer.Screen name="changePassword" component={ChangePassword} />
-        </Drawer.Navigator>
+      {!authReducer.userAuthen._LOGIN_PASSED_ ? (
+        <BottomTabNavigator />
       ) : (
         <MainStackNavigator />
       )}

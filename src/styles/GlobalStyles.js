@@ -1,9 +1,9 @@
 import {Colors, Mixin} from '.';
 import {getBottomSpace} from '../helpers/iphoneXHelper';
-import {FONT_SIZE_20} from './Typography';
+import {FONT_SIZE_16, FONT_SIZE_20} from './Typography';
 
 export const NAVIGATION_BOTTOM_TABS_HEIGHT = 64 + getBottomSpace();
-export const HEIGHT_MIDDLE_HOME_BTN = 70;
+export const HEIGHT_MIDDLE_HOME_BTN = 60;
 
 export const container = {
   flex: 1,
@@ -29,8 +29,8 @@ export const rowSpaceBetween = {
 };
 
 export const titleBold = {
-  fontSize: FONT_SIZE_20,
-  fontWeight: '600',
+  fontSize: FONT_SIZE_16,
+  fontWeight: 'bold',
 };
 
 export const fontWeight600 = {

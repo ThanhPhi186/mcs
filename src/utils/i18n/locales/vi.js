@@ -177,4 +177,11 @@ export default {
   selectOneAddress: 'Vui lòng chọn địa chỉ',
   enterAddress: 'Nhập địa chỉ',
   emptyDisplayCumulative: 'Chưa có chương trình tích luỹ',
+  home: 'Trang chủ',
+  help: 'Trợ giúp',
+  share: 'Chia sẻ',
+  personal: 'Cá nhân',
+  contact: 'Liên hệ',
+  notification: 'Thông báo',
+  confirm: 'Xác nhận',
 };
