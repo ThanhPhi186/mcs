@@ -30,9 +30,9 @@ const App = () => {
     <Provider store={store}>
       <PaperProvider theme={theme}>
         <PersistGate persistor={persistor}>
-          {/* <SafeAreaProvider> */}
-          <MainNavigator />
-          {/* </SafeAreaProvider> */}
+          <SafeAreaProvider>
+            <MainNavigator />
+          </SafeAreaProvider>
         </PersistGate>
       </PaperProvider>
     </Provider>

@@ -5,7 +5,6 @@ import {Svg, Path} from 'react-native-svg';
 import {line, curveBasis} from 'd3-shape';
 
 import {Colors} from '../styles';
-import {getBottomSpace} from '../helpers/iphoneXHelper';
 import {NAVIGATION_BOTTOM_TABS_HEIGHT} from '../styles/GlobalStyles';
 
 const {width: wWidth} = Dimensions.get('window');

@@ -1,11 +1,5 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import MainAccount from './MainAccount';
+import ChangePassword from './ChangePassword';
+import ChangeChannel from './ChangeChannel';
 
-const Account = () => {
-  return (
-    <View>
-      <Text>AAA</Text>
-    </View>
-  );
-};
-export default Account;
+export {MainAccount, ChangeChannel, ChangePassword};

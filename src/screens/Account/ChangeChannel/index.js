@@ -1,14 +1,13 @@
 import React, {useEffect} from 'react';
-import {FlatList, RefreshControl, TouchableOpacity, View} from 'react-native';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppText} from '../../components/atoms';
-import {StoreRedux} from '../../redux';
-import {Const, trans} from '../../utils';
+import {AppText} from '../../../components/atoms';
+import {StoreRedux} from '../../../redux';
+import {post} from '../../../services/ServiceHandle';
+import {Colors} from '../../../styles';
+import {Const, trans} from '../../../utils';
 import styles from './styles';
-// import RNBootSplash from 'react-native-bootsplash';
-import {Colors} from '../../styles';
-import {post} from '../../services/ServiceHandle';
 
 const ChangeChannel = ({navigation}) => {
   const BaseUrl = useSelector(state => state.AuthenOverallReducer.domain);
@@ -77,7 +76,7 @@ const ChangeChannel = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Appbar.Header>
-        <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('changeSalesChannels')} />
       </Appbar.Header>
       <FlatList

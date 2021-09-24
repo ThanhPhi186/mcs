@@ -3,11 +3,11 @@ import {Alert, View} from 'react-native';
 import {Appbar, TextInput} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppDialog, Button} from '../../components/molecules';
-import {AuthenOverallRedux} from '../../redux/authen';
-import {post} from '../../services/ServiceHandle';
-import {Colors} from '../../styles';
-import {Const, trans} from '../../utils';
+import {AppDialog, Button} from '../../../components/molecules';
+import {AuthenOverallRedux} from '../../../redux/authen';
+import {post} from '../../../services/ServiceHandle';
+import {Colors} from '../../../styles';
+import {Const, trans} from '../../../utils';
 
 import styles from './styles';
 
@@ -20,9 +20,7 @@ const ChangePassword = ({navigation}) => {
   const [messErr, setMessErr] = useState();
   const [modalError, setModalError] = useState(false);
   const [modalLogout, setModalLogout] = useState(false);
-  const userAuthen = useSelector(
-    state => state.AuthenOverallReducer.userAuthen,
-  );
+
   const accountUser = useSelector(
     state => state.AuthenOverallReducer.accountUser,
   );
@@ -76,11 +74,8 @@ const ChangePassword = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Appbar.Header>
-        {userAuthen._REQ_PASS_CHANGE ? (
-          <Appbar.BackAction onPress={() => navigation.goBack()} />
-        ) : (
-          <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
-        )}
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+
         <Appbar.Content title={trans('changePass')} />
       </Appbar.Header>
       <View style={styles.content}>

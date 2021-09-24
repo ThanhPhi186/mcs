@@ -1,9 +1,12 @@
 import * as React from 'react';
-
 import {createStackNavigator} from '@react-navigation/stack';
-
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {HomeScreen, ChangePassword} from '../screens';
+import {
+  HomeScreen,
+  ChangePassword,
+  MainAccount,
+  ChangeChannel,
+} from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
 import {trans} from '../utils';
@@ -41,15 +44,7 @@ const BottomTabNavigator = () => {
   const getPersonVisibility = route => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'MainAccount';
 
-    if (
-      routeName === 'HistoryOrder' ||
-      routeName === 'ListCustomer' ||
-      routeName === 'HistoryPoint' ||
-      routeName === 'ReportScreen' ||
-      routeName === 'PromotionScreen' ||
-      routeName === 'Policy' ||
-      routeName === 'ChangePassword'
-    ) {
+    if (routeName === 'ChangeChannel' || routeName === 'ChangePassword') {
       return false;
     }
     return true;
@@ -87,6 +82,8 @@ const BottomTabNavigator = () => {
           animationEnabled: true,
         }}
         initialRouteName="MainAccount">
+        <Stack.Screen name="MainAccount" component={MainAccount} />
+        <Stack.Screen name="ChangeChannel" component={ChangeChannel} />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
       </Stack.Navigator>
     );

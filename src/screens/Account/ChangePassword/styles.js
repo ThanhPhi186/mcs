@@ -1,4 +1,4 @@
-import {Colors, Mixin} from '../../styles';
+import {Colors, Mixin} from '../../../styles';
 
 const styles = {
   container: {
