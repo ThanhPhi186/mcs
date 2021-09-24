@@ -12,10 +12,7 @@ const CustomButtonTab = (props, children) => {
   const {onPress} = props;
 
   return (
-    <TouchableOpacity
-      style={styles.container}
-      // activeOpacity={1}
-      onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.circleInside}>
         <IconMaterialCommunityIcons
           name="plus"
@@ -28,7 +25,9 @@ const CustomButtonTab = (props, children) => {
 };
 const styles = {
   container: {
-    bottom: NAVIGATION_BOTTOM_TABS_HEIGHT / 2,
+    bottom: isIphoneX()
+      ? NAVIGATION_BOTTOM_TABS_HEIGHT / 2
+      : NAVIGATION_BOTTOM_TABS_HEIGHT / 2 + 20,
   },
   circleInside: {
     width: HEIGHT_MIDDLE_HOME_BTN,
