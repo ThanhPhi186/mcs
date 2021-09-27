@@ -14,6 +14,7 @@ import ItemAccount from '../component/ItemAccount';
 import BannerBehind from '../component/BannerBehind';
 import {images} from '../../../assets';
 import {AppDialog} from '../../../components/molecules';
+import {NAVIGATION_NAME} from '../../../navigations/NavigationName';
 
 const MainAccount = ({navigation}) => {
   const dispatch = useDispatch();
@@ -53,8 +54,8 @@ const MainAccount = ({navigation}) => {
           <View style={styles.smallIndicate} />
           <ItemAccount
             icon="gift-outline"
-            title={trans('changeSalesChannels')}
-            onPress={() => navigation.navigate('ChangeChannel')}
+            title={trans('changeStore')}
+            onPress={() => navigation.navigate(NAVIGATION_NAME.ChangeStore)}
           />
           <View style={styles.smallIndicate} />
           <ItemAccount

@@ -16,8 +16,11 @@ import AppText from '../../components/atoms/AppText';
 import {AppDialog} from '../../components/molecules';
 import {AppLoading} from '../../components/atoms';
 import {Mixin} from '../../styles';
-import {post} from '../../services/ServiceHandle';
+import ServiceHandle from '../../services/ServiceHandle';
 import {Const} from '../../utils';
+import CookieManager from '@react-native-cookies/cookies';
+import axios from 'axios';
+import {set} from 'lodash';
 
 const LoginScreen = ({navigation}) => {
   const [employeeCode, setEmployeeCode] = useState();
@@ -27,11 +30,8 @@ const LoginScreen = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
-  // const errorMessage = useSelector(
-  //   (state) => state.AuthenOverallReducer.errorMessage,
-  // );
-  // const loading = useSelector((state) => state.AuthenOverallReducer.loading);
-  const BaseUrl = useSelector(state => state.AuthenOverallReducer.domain);
+
+  const domain = useSelector(state => state.AuthenOverallReducer.domain);
 
   const userAuthen = useSelector(
     state => state.AuthenOverallReducer.userAuthen,
@@ -41,38 +41,14 @@ const LoginScreen = ({navigation}) => {
   const animatedSpin = new Animated.Value(0);
 
   useEffect(() => {
-    animate();
-  }, []);
-
-  // useEffect(() => {
-  //   if (errorMessage) {
-  //     setMessage(errorMessage);
-  //     setTimeout(() => {
-  //       setModalError(true);
-  //     }, 700);
-  //   }
-  // }, [errorMessage]);
-
-  useEffect(() => {
     if (userAuthen._REQ_PASS_CHANGE) {
       navigation.navigate('changePassword');
     }
   }, [userAuthen, navigation]);
 
-  //todo
-  // const login = () => {
-  //   if (employeeCode && password) {
-  //     const params = {
-  //       USERNAME: employeeCode,
-  //       PASSWORD: password,
-  //     };
-  //     dispatch(AuthenOverallRedux.Actions.login.request(params));
-  //     dispatch(AuthenOverallRedux.Actions.getAccount(params));
-  //   } else {
-  //     setModalError(true);
-  //     setMessage(trans('accountAndPassNotEmpty'));
-  //   }
-  // };
+  useEffect(() => {
+    animate();
+  }, []);
 
   const login = () => {
     if (employeeCode && password) {
@@ -81,10 +57,14 @@ const LoginScreen = ({navigation}) => {
         USERNAME: employeeCode,
         PASSWORD: password,
       };
-      post(BaseUrl + Const.API.Login, params).then(response => {
+      ServiceHandle.post(Const.API.Login, params).then(response => {
         if (!response.data._ERROR_MESSAGE_) {
-          dispatch(AuthenOverallRedux.Actions.getAccount(params));
-          dispatch(AuthenOverallRedux.Actions.loginSuccess(response.data));
+          CookieManager.get(domain + Const.API.Login).then(cookies => {
+            ServiceHandle.setHeader(cookies.JSESSIONID.value);
+            dispatch(AuthenOverallRedux.Actions.getAccount(params));
+            dispatch(AuthenOverallRedux.Actions.loginSuccess(response.data));
+          });
+
           setLoading(false);
         } else {
           setMessage(response.data._ERROR_MESSAGE_);
@@ -123,28 +103,8 @@ const LoginScreen = ({navigation}) => {
         createAnimation(animatedBtnHorizontal, false, 1000, Easing.ease),
       ]),
       createAnimation(animatedSpin, true, 1000, Easing.ease),
-      // Animated.spring(animatedTitle, {
-      //   useNativeDriver: false,
-      //   toValue: 1,
-      //   friction: Platform.OS === 'android' ? 6 : 4,
-      //   duration: 1000,
-      //   tension: 50,
-
-      // }),
     ]).start();
   };
-
-  // const renderTitleAnimation = () => {
-  //   const scaleTitle = animatedTitle.interpolate({
-  //     inputRange: [0, 1],
-  //     outputRange: [-Mixin.moderateSize(60), Mixin.device_height / 4],
-  //   });
-  //   return (
-  //     <Animated.Text style={[styles.txtTile, {top: scaleTitle}]}>
-  //       {trans('MontE').toUpperCase()}
-  //     </Animated.Text>
-  //   );
-  // };
 
   const renderTitleAnimation = () => {
     const btnHorizontal = animatedBtnHorizontal.interpolate({

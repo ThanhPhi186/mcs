@@ -2,7 +2,7 @@ import {Colors, Mixin} from '.';
 import {getBottomSpace} from '../helpers/iphoneXHelper';
 import {FONT_SIZE_16, FONT_SIZE_20} from './Typography';
 
-export const NAVIGATION_BOTTOM_TABS_HEIGHT = 64 + getBottomSpace();
+export const NAVIGATION_BOTTOM_TABS_HEIGHT = 84;
 export const HEIGHT_MIDDLE_HOME_BTN = 60;
 
 export const container = {

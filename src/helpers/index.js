@@ -1,5 +1,5 @@
 import * as reduxHelper from './reduxHelpers';
 import * as iphoneXHelper from './iphoneXHelper';
-import * as collaHelper from './collaHelper';
+import * as mcsHelper from './mcsHelper';
 
-export {reduxHelper, iphoneXHelper, collaHelper};
+export {reduxHelper, iphoneXHelper, mcsHelper};

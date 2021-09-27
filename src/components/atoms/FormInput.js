@@ -48,10 +48,6 @@ const FormInput = props => {
       case 'selectLocation':
         return (
           <TouchableOpacity onPress={goToMap} style={styles.viewInput}>
-            {/* <TextInput
-              {...props}
-              style={{flex: 1, fontSize: FONT_SIZE_14}}
-            /> */}
             <AppText
               numberOfLines={1}
               style={{
@@ -104,7 +100,6 @@ const styles = {
   },
   content: {
     flexDirection: 'row',
-    flex: 1,
   },
   viewInput: {
     borderWidth: 1,

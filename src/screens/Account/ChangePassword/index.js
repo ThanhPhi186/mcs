@@ -5,15 +5,13 @@ import SimpleToast from 'react-native-simple-toast';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDialog, Button} from '../../../components/molecules';
 import {AuthenOverallRedux} from '../../../redux/authen';
-import {post} from '../../../services/ServiceHandle';
+import ServiceHandle, {post} from '../../../services/ServiceHandle';
 import {Colors} from '../../../styles';
 import {Const, trans} from '../../../utils';
 
 import styles from './styles';
 
 const ChangePassword = ({navigation}) => {
-  const BaseUrl = useSelector(state => state.AuthenOverallReducer.domain);
-
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [passwordVerify, setPasswordVerify] = useState('');
@@ -50,7 +48,7 @@ const ChangePassword = ({navigation}) => {
       newPassword,
       passwordVerify,
     };
-    post(BaseUrl + Const.API.ChangePassWord, params).then(res => {
+    ServiceHandle.post(Const.API.ChangePassWord, params).then(res => {
       if (res.ok) {
         if (!res.data._ERROR_MESSAGE_ && !res.data._ERROR_MESSAGE_LIST_) {
           if (res.data.login === 'FALSE') {

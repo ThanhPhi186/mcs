@@ -5,11 +5,12 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducers from './rootReducer';
 import sagas from './rootSagas';
 import AsyncStorage from '@react-native-community/async-storage';
-import {setCookies} from '../../services/ServiceHandle';
+
 import moment from 'moment';
 
 import {AuthenOverallRedux} from '../../redux';
 import SimpleToast from 'react-native-simple-toast';
+import ServiceHandle from '../../services/ServiceHandle';
 
 const config = {
   key: 'root',
@@ -62,8 +63,14 @@ const store = createStore(reducers, undefined, compose(...enhancers));
 const persistor = persistStore(store, persistConfig, () => {
   const stateData = store.getState();
 
+  if (stateData.AuthenOverallReducer.domain) {
+    ServiceHandle.setBaseUrl(stateData.AuthenOverallReducer.domain);
+  }
+
   if (stateData.AuthenOverallReducer.cookies) {
-    setCookies(stateData.AuthenOverallReducer.cookies.JSESSIONID.value);
+    ServiceHandle.setHeader(
+      stateData.AuthenOverallReducer.cookies.JSESSIONID.value,
+    );
   }
 });
 

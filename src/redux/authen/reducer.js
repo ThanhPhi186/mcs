@@ -3,34 +3,18 @@ import * as Actions from './action';
 
 const initialState = {
   domain: '',
-  userAuthen: {
-    // accessToken: null,
-    // refreshToken: null,
-    // id: null,
-  },
+  userAuthen: {},
   location: null,
   errorMessage: '',
   loading: false,
-  type: '',
   accountUser: null,
   cookies: '',
 };
 
 const overallReducer = createReducer(initialState, {
-  //getDomain
-  [Actions.getDomain.request]: (state, action) => {
-    state.errorMessage = '';
-    state.type = action.type;
-  },
-  [Actions.getDomain.success]: (state, action) => {
-    state.domain = `https://${action.payload}/mobilemcs/control`;
-    // state.domain = `https://${action.payload}/mobileservices/control`;
-    state.errorMessage = '';
-    state.type = action.type;
-  },
-  [Actions.getDomain.failed]: (state, action) => {
-    state.errorMessage = action.payload;
-    state.type = action.type;
+  //setDomain
+  [Actions.setDomain]: (state, action) => {
+    state.domain = action.payload;
   },
 
   //login
@@ -58,7 +42,6 @@ const overallReducer = createReducer(initialState, {
   // reset Company
   [Actions.resetCompany]: (state, action) => {
     state.domain = '';
-    state.type = '';
   },
 });
 

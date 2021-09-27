@@ -6,10 +6,16 @@ export function isIphoneX() {
     Platform.OS === 'ios' &&
     !Platform.isPad &&
     !Platform.isTVOS &&
-    (dimension.height === 812 ||
+    (dimension.height === 780 ||
+      dimension.width === 780 ||
+      dimension.height === 812 ||
       dimension.width === 812 ||
+      dimension.height === 844 ||
+      dimension.width === 844 ||
       dimension.height === 896 ||
-      dimension.width === 896)
+      dimension.width === 896 ||
+      dimension.height === 926 ||
+      dimension.width === 926)
   );
 }
 
@@ -22,12 +28,12 @@ export function ifIphoneX(iphoneXStyle, regularStyle) {
 
 export function getStatusBarHeight(safe) {
   return Platform.select({
-    ios: ifIphoneX(safe ? 44 : 30, 10),
+    ios: ifIphoneX(safe ? 44 : 30, 20),
     android: StatusBar.currentHeight,
     default: 0,
   });
 }
 
 export function getBottomSpace() {
-  return isIphoneX() ? 20 : 0;
+  return isIphoneX() ? 34 : 0;
 }

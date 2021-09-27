@@ -1,14 +1,13 @@
 export default {
   API: {
     GetDomain: 'https://api.olbius.com/token',
-    // baseURL: 'https://demold.olbius.com/mobileservices/control',
-    baseURL: 'https://testldmarket.olbius.com/mobileservices/control',
-    baseImgURL: 'https://demold.olbius.com',
-    urlGetDomain: 'https://api.olbius.com/token',
-    Login: '/mLogin',
+    // baseURL: 'https://testchth.olbius.com/mobilemcs/control',
+    baseImgURL: 'https://testchth.olbius.com',
+    Login: '/loginMobilemcs',
     Logout: '/logoutMobilemcs',
     GetListProductStoreMobileMcs: '/getListProductStoreMobileMcs',
     GetAllProductStores: '/mGetAllProductStores',
+    GetListPOMobilemcs: '/getListPOMobilemcs',
   },
   RESPONSE_CODES: {
     SUCCESS: {

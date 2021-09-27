@@ -184,4 +184,7 @@ export default {
   contact: 'Liên hệ',
   notification: 'Thông báo',
   confirm: 'Xác nhận',
+  orderList: 'Danh sách đơn hàng',
+  noProduct: 'Chưa có sản phẩm nào',
+  changeStore: 'Thay đổi cửa hàng',
 };

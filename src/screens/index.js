@@ -1,7 +1,7 @@
 import LoginScreen from './Login';
 import LoginCompanyScreen from './LoginCompany';
-import HomeScreen from './HomeScreen';
-import {MainAccount, ChangePassword, ChangeChannel} from './Account';
+import {HomeScreen, PurchaseOrder, SearchProductScreen} from './Home';
+import {MainAccount, ChangePassword, ChangeStore} from './Account';
 
 export {
   LoginScreen,
@@ -9,5 +9,7 @@ export {
   HomeScreen,
   MainAccount,
   ChangePassword,
-  ChangeChannel,
+  ChangeStore,
+  PurchaseOrder,
+  SearchProductScreen,
 };

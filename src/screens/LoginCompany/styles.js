@@ -30,6 +30,16 @@ const styles = {
     justifyContent: 'center',
     borderRadius: 8,
   },
+  logo: {
+    width: 170,
+    height: 100,
+    marginBottom: 20,
+  },
+  txtContinue: {
+    color: Colors.WHITE,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 };
 
 export default styles;

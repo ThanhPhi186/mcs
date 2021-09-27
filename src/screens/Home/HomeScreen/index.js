@@ -1,16 +1,16 @@
 import React from 'react';
-import {StatusBar, Text, View} from 'react-native';
+import {StatusBar, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {images} from '../../assets';
-import {AppText} from '../../components/atoms';
-import {container, titleBold, viewRow} from '../../styles/GlobalStyles';
 import {SliderBox} from 'react-native-image-slider-box';
-import {device_width} from '../../styles/Mixin';
-import ItemHomeMenu from './component/ItemHomeMenu';
-import {Colors} from '../../styles';
+import {images} from '../../../assets';
+import {AppText} from '../../../components/atoms';
+import {NAVIGATION_NAME} from '../../../navigations/NavigationName';
+import {Colors} from '../../../styles';
+import {container, titleBold, viewRow} from '../../../styles/GlobalStyles';
+import {device_width, statusBar} from '../../../styles/Mixin';
+import ItemHomeMenu from '../component/ItemHomeMenu';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const imagesSlider = [
     'https://source.unsplash.com/1024x768/?nature',
     'https://source.unsplash.com/1024x768/?water',
@@ -92,10 +92,17 @@ const HomeScreen = () => {
           justifyContent: 'space-between',
           marginTop: 16,
         }}>
-        <ItemHomeMenu iconName="cart" title={`Đơn hàng ${'\n'} mua`} />
+        <ItemHomeMenu
+          iconName="cart"
+          title={`Đơn hàng ${'\n'} mua`}
+          onPress={() => navigation.navigate(NAVIGATION_NAME.PurchaseOrder)}
+        />
         <ItemHomeMenu
           iconName="shopping-search"
           title={`Tìm kiếm ${'\n'} sản phẩm`}
+          onPress={() =>
+            navigation.navigate(NAVIGATION_NAME.SearchProductScreen)
+          }
         />
         <ItemHomeMenu iconName="bag-personal" title="Kiểm kê" />
       </View>
@@ -109,14 +116,8 @@ const HomeScreen = () => {
           iconName="currency-usd-circle"
           title={'Danh sách chính sách giá'}
         />
-        <ItemHomeMenu
-          iconName="currency-usd-circle"
-          title={'Danh sách giá thay đổi'}
-        />
-        <ItemHomeMenu
-          iconName="currency-usd-circle"
-          title={'Danh sách huỷ hàng'}
-        />
+        <ItemHomeMenu iconName="file-edit" title={'Danh sách giá thay đổi'} />
+        <ItemHomeMenu iconName="file-remove" title={'Danh sách huỷ hàng'} />
       </View>
       <View
         style={{
@@ -124,21 +125,24 @@ const HomeScreen = () => {
           justifyContent: 'space-between',
           marginTop: 16,
         }}>
-        <ItemHomeMenu
-          iconName="currency-usd-circle"
-          title={`Lịch sử ${'\n'} đăng nhập`}
-        />
+        <ItemHomeMenu iconName="history" title={`Lịch sử ${'\n'} đăng nhập`} />
       </View>
     </View>
   );
 
   return (
-    <SafeAreaView style={container}>
-      <StatusBar backgroundColor={Colors.WHITE} barStyle="dark-content" />
+    <View style={container}>
+      <View style={{height: statusBar, backgroundColor: Colors.WHITE}}>
+        <StatusBar
+          backgroundColor={Colors.WHITE}
+          translucent
+          barStyle="dark-content"
+        />
+      </View>
       {renderHeader}
       {renderImageSlider}
       {renderItem}
-    </SafeAreaView>
+    </View>
   );
 };
 

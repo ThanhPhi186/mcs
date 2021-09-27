@@ -1,5 +1,5 @@
 import MainAccount from './MainAccount';
 import ChangePassword from './ChangePassword';
-import ChangeChannel from './ChangeChannel';
+import ChangeStore from './ChangeStore';
 
-export {MainAccount, ChangeChannel, ChangePassword};
+export {MainAccount, ChangeStore, ChangePassword};

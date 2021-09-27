@@ -1,4 +1,4 @@
-export const removeDiacritics = (txt) => {
+export const removeDiacritics = txt => {
   return txt
     .toLowerCase()
     .normalize('NFD')

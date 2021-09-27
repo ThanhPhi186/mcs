@@ -4,7 +4,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import configureStore from './src/config/store/configureStore';
-import MainNavigator from './src/navigations/MainNavigtor';
+import MainNavigator from './src/navigations/MainNavigator';
 
 import {Colors} from './src/styles';
 

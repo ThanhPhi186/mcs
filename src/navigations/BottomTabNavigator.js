@@ -5,7 +5,9 @@ import {
   HomeScreen,
   ChangePassword,
   MainAccount,
-  ChangeChannel,
+  ChangeStore,
+  PurchaseOrder,
+  SearchProductScreen,
 } from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
@@ -17,6 +19,7 @@ import {FONT_SIZE_10} from '../styles/Typography';
 import {device_width} from '../styles/Mixin';
 import TabShape from './TabShape';
 import {NAVIGATION_BOTTOM_TABS_HEIGHT} from '../styles/GlobalStyles';
+import {NAVIGATION_NAME} from './NavigationName';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -26,15 +29,8 @@ const BottomTabNavigator = () => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeScreen';
 
     if (
-      routeName === 'ListProduct' ||
-      routeName === 'DetailProduct' ||
-      routeName === 'CartScreen' ||
-      routeName === 'PaymentScreen' ||
-      routeName === 'DeliveryAddressScreen' ||
-      routeName === 'AddNewAddress' ||
-      routeName === 'NotificationScreen' ||
-      routeName === 'TopSales' ||
-      routeName === 'PromotionScreen'
+      routeName === NAVIGATION_NAME.PurchaseOrder ||
+      routeName === NAVIGATION_NAME.SearchProductScreen
     ) {
       return false;
     }
@@ -44,7 +40,10 @@ const BottomTabNavigator = () => {
   const getPersonVisibility = route => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'MainAccount';
 
-    if (routeName === 'ChangeChannel' || routeName === 'ChangePassword') {
+    if (
+      routeName === NAVIGATION_NAME.ChangeStore ||
+      routeName === NAVIGATION_NAME.ChangePassword
+    ) {
       return false;
     }
     return true;
@@ -67,8 +66,19 @@ const BottomTabNavigator = () => {
           gestureEnabled: false,
           animationEnabled: true,
         }}
-        initialRouteName="HomeScreen">
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        initialRouteName={NAVIGATION_NAME.HomeScreen}>
+        <Stack.Screen
+          name={NAVIGATION_NAME.HomeScreen}
+          component={HomeScreen}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.PurchaseOrder}
+          component={PurchaseOrder}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.SearchProductScreen}
+          component={SearchProductScreen}
+        />
       </Stack.Navigator>
     );
   };
@@ -81,10 +91,19 @@ const BottomTabNavigator = () => {
           gestureEnabled: false,
           animationEnabled: true,
         }}
-        initialRouteName="MainAccount">
-        <Stack.Screen name="MainAccount" component={MainAccount} />
-        <Stack.Screen name="ChangeChannel" component={ChangeChannel} />
-        <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        initialRouteName={NAVIGATION_NAME.MainAccount}>
+        <Stack.Screen
+          name={NAVIGATION_NAME.MainAccount}
+          component={MainAccount}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.ChangeStore}
+          component={ChangeStore}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.ChangePassword}
+          component={ChangePassword}
+        />
       </Stack.Navigator>
     );
   };
@@ -182,7 +201,7 @@ const BottomTabNavigator = () => {
                 <Text
                   style={{
                     color: isFocused ? Colors.PRIMARY : Colors.GRAY,
-                    marginTop: 8,
+                    marginTop: 4,
                     fontSize: FONT_SIZE_10,
                   }}>
                   {label}
@@ -200,7 +219,9 @@ const BottomTabNavigator = () => {
 
   return (
     <Tab.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{
+        headerShown: false,
+      }}
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen
         name={trans('home')}

@@ -11,25 +11,27 @@ export const RESET_COMPANY = 'RESET_COMPANY';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const SET_COOKIES = 'SET_COOKIES';
 export const GET_PROFILE = 'GET_PROFILE';
+export const SET_DOMAIN = 'SET_DOMAIN';
 
 const login = reduxHelper.generateActions(LOGIN);
 const logout = reduxHelper.generateActions(LOGOUT);
-const getDomain = reduxHelper.generateActions(GET_DOMAIN);
+
 const getProfile = reduxHelper.generateActions(GET_PROFILE);
 const getLocation = createAction(GET_LOCATION);
 const getAccount = createAction(GET_ACCOUNT);
 const resetCompany = createAction(RESET_COMPANY);
 const loginSuccess = createAction(LOGIN_SUCCESS);
 const setCookies = createAction(SET_COOKIES);
+const setDomain = createAction(SET_DOMAIN);
 
 export {
   login,
   logout,
-  getDomain,
   getLocation,
   getAccount,
   resetCompany,
   loginSuccess,
   setCookies,
   getProfile,
+  setDomain,
 };

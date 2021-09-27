@@ -13,40 +13,34 @@ import {FONT_SIZE_14} from '../../styles/Typography';
 
 // const defaultValue = [{label: 'Chọn giá trị', value: -1}];
 const AppDropDown = props => {
-  // const [value, setValue] = useState(props.value || '');
-  // const [data, setData] = useState();
-  // const onChangeItems = item => {
-  //   // setValue(item.value);
-  //   props.onChangeItem(item);
-  // };
+  const {title} = props;
 
-  // useEffect(() => {
-  //   setData([...props.items]);
-  // }, [props.items]);
-
-  // useEffect(() => {
-  //   setValue(props.value);
-  // }, [props.value]);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Apple', value: 'apple'},
+    {label: 'Banana', value: 'banana'},
+  ]);
 
   return (
     <>
-      {props.title && (
-        <AppText style={styles.txtTitle}>{props.title} :</AppText>
-      )}
+      {title && <AppText style={styles.txtTitle}>{title} :</AppText>}
       <DropDownPicker
         {...props}
-        // searchable
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
         arrowSize={20}
         arrowColor="#90A1B5"
         placeholderStyle={styles.placeholderStyle}
-        // items={data}
-        // defaultValue={value}
         style={styles.styleDropdown}
         containerStyle={styles.containerStyle}
         labelStyle={styles.labelStyle}
         itemStyle={styles.itemStyle}
         dropDownStyle={styles.dropDownStyle}
-        // onChangeItem={onChangeItems}
         activeLabelStyle={styles.activeLabelStyle}
         activeItemStyle={styles.activeItemStyle}
       />
@@ -79,18 +73,17 @@ const styles = {
     backgroundColor: Colors.WHITE,
   },
   styleDropdown: {
-    borderTopLeftRadius: Mixin.moderateSize(4),
-    borderTopRightRadius: Mixin.moderateSize(4),
-    borderBottomLeftRadius: Mixin.moderateSize(4),
-    borderBottomRightRadius: Mixin.moderateSize(4),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 1,
+    borderRadius: Mixin.moderateSize(4),
+    height: Mixin.moderateSize(40),
+
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.23,
+    // shadowRadius: 2.62,
+    // elevation: 1,
   },
   placeholderStyle: {
     color: 'transparent',

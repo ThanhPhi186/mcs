@@ -6,11 +6,20 @@ const styles = {
     flex: 1,
   },
   btn: {
-    height: Mixin.moderateSize(50),
     backgroundColor: Colors.WHITE,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    height: Mixin.moderateSize(60),
     justifyContent: 'center',
     paddingHorizontal: Mixin.moderateSize(12),
-    marginTop: Mixin.moderateSize(8),
+    marginTop: Mixin.moderateSize(16),
+    borderRadius: Mixin.moderateSize(12),
   },
   storeName: {
     fontWeight: 'bold',

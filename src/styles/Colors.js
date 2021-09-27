@@ -1,4 +1,6 @@
-export const PRIMARY = '#0087DD';
+// export const PRIMARY = '#0087DD';
+export const PRIMARY = '#0F49AD';
+
 export const BACKGROUND_COLOR = '#F6F7FB';
 export const LOGIN_BACKGROUND = '#009CE3';
 export const BUTTON_HIGTH = '#00B2E3';
