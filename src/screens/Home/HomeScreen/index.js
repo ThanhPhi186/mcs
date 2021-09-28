@@ -2,6 +2,7 @@ import React from 'react';
 import {StatusBar, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {SliderBox} from 'react-native-image-slider-box';
+import {useSelector} from 'react-redux';
 import {images} from '../../../assets';
 import {AppText} from '../../../components/atoms';
 import {NAVIGATION_NAME} from '../../../navigations/NavigationName';
@@ -11,6 +12,8 @@ import {device_width, statusBar} from '../../../styles/Mixin';
 import ItemHomeMenu from '../component/ItemHomeMenu';
 
 const HomeScreen = ({navigation}) => {
+  const store = useSelector(state => state.StoreReducer.store);
+
   const imagesSlider = [
     'https://source.unsplash.com/1024x768/?nature',
     'https://source.unsplash.com/1024x768/?water',
@@ -41,7 +44,7 @@ const HomeScreen = ({navigation}) => {
           />
           <View>
             <AppText style={titleBold}>Nguyễn Thành Phi</AppText>
-            <AppText>Cửa hàng 26 Nguyễn Văn Ni</AppText>
+            <AppText>{store.storeName}</AppText>
           </View>
         </View>
         <FastImage

@@ -6,15 +6,16 @@ import LoginNavigator from './LoginNavigator';
 import CompanyNavigator from './CompanyNavigator';
 
 const MainNavigator = () => {
-  const authReducer = useSelector(state => state.AuthenOverallReducer);
-
-  console.log('authReducer', authReducer);
+  const domain = useSelector(state => state.AuthenOverallReducer.domain);
+  const userAuthen = useSelector(
+    state => state.AuthenOverallReducer.userAuthen,
+  );
 
   return (
     <NavigationContainer>
-      {!authReducer.domain ? (
+      {!domain ? (
         <CompanyNavigator />
-      ) : authReducer.userAuthen._LOGIN_PASSED_ ? (
+      ) : userAuthen._LOGIN_PASSED_ ? (
         <BottomTabNavigator />
       ) : (
         <LoginNavigator />

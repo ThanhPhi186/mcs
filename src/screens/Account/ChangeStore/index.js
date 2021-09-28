@@ -13,15 +13,10 @@ import {Colors} from '../../../styles';
 import {ServiceHandle} from '../../../services';
 
 const ChangeStore = ({navigation}) => {
-  // const listStore = useSelector(state => state.StoreReducer.listStore);
   const store = useSelector(state => state.StoreReducer.store);
   const dispatch = useDispatch();
 
   const [listStore, setListStore] = useState([]);
-
-  // useEffect(() => {
-  //   dispatch(StoreRedux.Actions.getListStore.request());
-  // }, [dispatch]);
 
   useEffect(() => {
     ServiceHandle.post(Const.API.GetListProductStoreMobileMcs).then(res => {
@@ -32,7 +27,7 @@ const ChangeStore = ({navigation}) => {
   }, []);
 
   const onChangeStore = item => {
-    dispatch(StoreRedux.Actions.changeStore(item.productStoreId));
+    dispatch(StoreRedux.Actions.changeStore(item));
     // navigation.reset({
     //   index: 0,
     //   routes: [{name: 'HomeScreen'}],
@@ -42,16 +37,16 @@ const ChangeStore = ({navigation}) => {
   const renderItem = elm => {
     return (
       <TouchableOpacity
-        disabled={store === elm.productStoreId}
+        disabled={store.productStoreId === elm.productStoreId}
         style={
-          store === elm.productStoreId
+          store.productStoreId === elm.productStoreId
             ? {...styles.btn, backgroundColor: Colors.PRIMARY}
             : styles.btn
         }
         onPress={() => onChangeStore(elm)}>
         <AppText
           style={
-            store === elm.productStoreId
+            store.productStoreId === elm.productStoreId
               ? {...styles.storeName, color: Colors.WHITE}
               : styles.storeName
           }>
@@ -59,7 +54,7 @@ const ChangeStore = ({navigation}) => {
         </AppText>
         <AppText
           style={
-            store === elm.productStoreId
+            store.productStoreId === elm.productStoreId
               ? {...styles.storeCode, color: Colors.WHITE}
               : styles.storeCode
           }>
