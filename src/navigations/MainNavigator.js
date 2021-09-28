@@ -7,11 +7,12 @@ import CompanyNavigator from './CompanyNavigator';
 
 const MainNavigator = () => {
   const authReducer = useSelector(state => state.AuthenOverallReducer);
-  const domain = useSelector(state => state.AuthenOverallReducer.domain);
+
+  console.log('authReducer', authReducer);
 
   return (
     <NavigationContainer>
-      {!domain ? (
+      {!authReducer.domain ? (
         <CompanyNavigator />
       ) : authReducer.userAuthen._LOGIN_PASSED_ ? (
         <BottomTabNavigator />

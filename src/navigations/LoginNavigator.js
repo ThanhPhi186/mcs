@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {LoginScreen, ChangePassword} from '../screens';
+import {LoginScreen, ChangeStore} from '../screens';
 
 const Stack = createStackNavigator();
 const LoginNavigator = () => {
@@ -12,7 +12,7 @@ const LoginNavigator = () => {
         animationEnabled: true,
       }}>
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
-      <Stack.Screen name="ForgotPassword" component={ChangePassword} />
+      <Stack.Screen name="ChangeStore" component={ChangeStore} />
     </Stack.Navigator>
   );
 };

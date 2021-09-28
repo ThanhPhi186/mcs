@@ -15,6 +15,7 @@ import BannerBehind from '../component/BannerBehind';
 import {images} from '../../../assets';
 import {AppDialog} from '../../../components/molecules';
 import {NAVIGATION_NAME} from '../../../navigations/NavigationName';
+import CookieManager from '@react-native-cookies/cookies';
 
 const MainAccount = ({navigation}) => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const MainAccount = ({navigation}) => {
 
   const logout = () => {
     dispatch(AuthenOverallRedux.Actions.logout.request());
+    // CookieManager.clearAll().then(success => {
+    //   console.log('CookieManager.clearAll =>', success);
+    // });
   };
 
   const changeCompany = () => {

@@ -16,17 +16,15 @@ import AppText from '../../components/atoms/AppText';
 import {AppDialog} from '../../components/molecules';
 import {AppLoading} from '../../components/atoms';
 import {Mixin} from '../../styles';
-import ServiceHandle from '../../services/ServiceHandle';
 import {Const} from '../../utils';
 import CookieManager from '@react-native-cookies/cookies';
-import axios from 'axios';
-import {set} from 'lodash';
+import {ServiceHandle} from '../../services';
+import SimpleToast from 'react-native-simple-toast';
+import {NAVIGATION_NAME} from '../../navigations/NavigationName';
 
 const LoginScreen = ({navigation}) => {
   const [employeeCode, setEmployeeCode] = useState();
   const [password, setPassword] = useState();
-  const [message, setMessage] = useState();
-  const [modalError, setModalError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -58,25 +56,23 @@ const LoginScreen = ({navigation}) => {
         PASSWORD: password,
       };
       ServiceHandle.post(Const.API.Login, params).then(response => {
-        if (!response.data._ERROR_MESSAGE_) {
+        if (response.ok) {
           CookieManager.get(domain + Const.API.Login).then(cookies => {
             ServiceHandle.setHeader(cookies.JSESSIONID.value);
             dispatch(AuthenOverallRedux.Actions.getAccount(params));
             dispatch(AuthenOverallRedux.Actions.loginSuccess(response.data));
           });
-
           setLoading(false);
+          // navigation.navigate(NAVIGATION_NAME.ChangeStore);
         } else {
-          setMessage(response.data._ERROR_MESSAGE_);
           setLoading(false);
           setTimeout(() => {
-            setModalError(true);
+            SimpleToast.show(response.error, SimpleToast.SHORT);
           }, 700);
         }
       });
     } else {
-      setModalError(true);
-      setMessage(trans('accountAndPassNotEmpty'));
+      SimpleToast.show(trans('accountAndPassNotEmpty'), SimpleToast.SHORT);
     }
   };
 
@@ -180,11 +176,6 @@ const LoginScreen = ({navigation}) => {
         {renderTitleAnimation()}
         {renderMoveHorizontal()}
         {renderSpinChangeCom()}
-        <AppDialog
-          content={message}
-          isVisible={modalError}
-          onPressClose={() => setModalError(false)}
-        />
       </View>
     </TouchableWithoutFeedback>
   );

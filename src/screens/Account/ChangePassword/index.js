@@ -5,7 +5,8 @@ import SimpleToast from 'react-native-simple-toast';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDialog, Button} from '../../../components/molecules';
 import {AuthenOverallRedux} from '../../../redux/authen';
-import ServiceHandle, {post} from '../../../services/ServiceHandle';
+import {ServiceHandle} from '../../../services';
+
 import {Colors} from '../../../styles';
 import {Const, trans} from '../../../utils';
 

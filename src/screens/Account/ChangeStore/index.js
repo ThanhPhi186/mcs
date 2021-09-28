@@ -5,12 +5,12 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import styles from './styles';
 
-import ServiceHandle, {post} from '../../../services/ServiceHandle';
 import {Const, trans} from '../../../utils';
 import {StoreRedux} from '../../../redux';
 import {AppText} from '../../../components/atoms';
 import {container} from '../../../styles/GlobalStyles';
 import {Colors} from '../../../styles';
+import {ServiceHandle} from '../../../services';
 
 const ChangeStore = ({navigation}) => {
   // const listStore = useSelector(state => state.StoreReducer.listStore);

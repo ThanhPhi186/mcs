@@ -1,10 +1,13 @@
 import React, {useEffect} from 'react';
+import {useContext} from 'react';
 import {useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
+import SimpleToast from 'react-native-simple-toast';
 import {useSelector} from 'react-redux';
+import {AppLoadingContext} from '../../../../App';
 import {Button} from '../../../components/molecules';
-import ServiceHandle, {post} from '../../../services/ServiceHandle';
+import {ServiceHandle} from '../../../services';
 import {container} from '../../../styles/GlobalStyles';
 import {FONT_SIZE_14} from '../../../styles/Typography';
 import {Const, trans} from '../../../utils';
@@ -12,18 +15,19 @@ import ComponentSearch from '../component/ComponentSearch';
 import ItemOrder from '../component/ItemOrder';
 
 const PurchaseOrder = ({navigation}) => {
-  const store = useSelector(state => state.StoreReducer.store);
-
+  const store = useSelector(state => state.AuthenOverallReducer.store);
   const [dataOrder, setDataOrder] = useState([]);
   const [displaySearch, setDisplaySearch] = useState(false);
 
   useEffect(() => {
     const params = {
-      productStoreId: store,
+      productStore: store.productStoreId,
     };
     ServiceHandle.post(Const.API.GetListPOMobilemcs, params).then(res => {
       if (res.ok) {
         setDataOrder(res.data.listOrders);
+      } else {
+        SimpleToast.show(res.error);
       }
     });
   }, []);

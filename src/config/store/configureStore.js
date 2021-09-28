@@ -10,7 +10,7 @@ import moment from 'moment';
 
 import {AuthenOverallRedux} from '../../redux';
 import SimpleToast from 'react-native-simple-toast';
-import ServiceHandle from '../../services/ServiceHandle';
+import {ServiceHandle} from '../../services';
 
 const config = {
   key: 'root',

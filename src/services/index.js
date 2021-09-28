@@ -1,3 +1,3 @@
-import ServiceHandle from './ServiceHandle';
+import * as ServiceHandle from './ServiceHandle';
 
 export {ServiceHandle};

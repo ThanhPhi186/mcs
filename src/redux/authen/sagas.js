@@ -1,30 +1,12 @@
 import {put, call, takeEvery, select} from 'redux-saga/effects';
-import ServiceHandle from '../../services/ServiceHandle';
+import {ServiceHandle} from '../../services';
 import {Const} from '../../utils';
-import {getProfile, logout} from './action';
-
-const getBaseUrl = state => state.AuthenOverallReducer.domain;
-
-function* getProfileAsync(action) {
-  try {
-    const url = Const.API.baseURL + Const.API.CheckAuth;
-    const response = yield call(ServiceHandle.get, url);
-    if (response.ok) {
-      yield put(getProfile.success(response.data.data));
-    } else {
-      yield put(getProfile.failed(response.error));
-    }
-  } catch (error) {
-    yield put(getProfile.failed(error));
-  }
-}
+import {logout} from './action';
 
 function* logoutAsync(action) {
   try {
-    const baseURL = yield select(getBaseUrl);
-
-    const url = baseURL + Const.API.Logout;
-    const response = yield call(ServiceHandle.post, url);
+    const response = yield call(ServiceHandle.post, Const.API.Logout);
+    console.log('response', response);
     if (response.ok) {
       yield put(logout.success(response.data));
     } else {
@@ -36,6 +18,5 @@ function* logoutAsync(action) {
 }
 
 export function* AuthenOverallWatcher() {
-  [yield takeEvery(getProfile.requestName, getProfileAsync)];
   [yield takeEvery(logout.requestName, logoutAsync)];
 }

@@ -187,4 +187,6 @@ export default {
   orderList: 'Danh sách đơn hàng',
   noProduct: 'Chưa có sản phẩm nào',
   changeStore: 'Thay đổi cửa hàng',
+  notStore: 'Chưa có cửa hàng',
+  networkError: 'Có lỗi xảy ra, vui lòng kiểm tra đường truyền mạng',
 };

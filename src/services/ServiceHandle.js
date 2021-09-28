@@ -1,59 +1,62 @@
-import {Const} from '../utils';
-// import axios from 'axios';
-import qs from 'querystring';
+import {trans} from '../utils';
 import {create} from 'apisauce';
+import qs from 'querystring';
 
-class serviceHandle {
-  constructor() {
-    this.api = create({
-      baseURL: Const.API.baseURL,
-      timeout: 20000,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    });
-  }
+const api = create({
+  timeout: 20000,
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+});
 
-  returnData(response) {
-    console.log('response =====>', response);
-    if (response.status === Const.RESPONSE_CODES.SUCCESS.SUCCESS) {
+const returnData = response => {
+  console.log('response =====>', response);
+  if (response.data) {
+    if (response.data._ERROR_MESSAGE_ || response.data._ERROR_MESSAGE_LIST_) {
       return {
-        data: response.data,
-        ok: true,
+        ok: false,
+        error:
+          response.data._ERROR_MESSAGE_ ||
+          response.data._ERROR_MESSAGE_LIST_[0],
       };
     } else {
       return {
-        ok: false,
-        error: 'Error',
+        data: response.data,
+        headers: response.headers,
+        ok: true,
       };
     }
+  } else {
+    return {
+      ok: false,
+      error: trans('networkError'),
+    };
   }
+};
 
-  setHeader = cookies => {
-    this.api.setHeader('Cookie', `JSESSIONID=${cookies}`);
-  };
+const setHeader = cookies => {
+  api.setHeader('Cookie', `JSESSIONID=${cookies}`);
+};
 
-  setBaseUrl = url => {
-    this.api.setBaseURL(url);
-  };
+const setBaseUrl = url => {
+  api.setBaseURL(url);
+};
 
-  get = async (url, params) => {
-    const response = await this.api.get(url, params);
-    return this.returnData(response);
-  };
-  post = async (url, payload) => {
-    const response = await this.api.post(url, qs.stringify(payload));
-    return this.returnData(response);
-  };
+const get = async (url, params) => {
+  const response = await api.get(url, params);
+  return returnData(response);
+};
+const post = async (url, payload) => {
+  const response = await api.post(url, qs.stringify(payload));
+  return returnData(response);
+};
+const put = async (url, payload) => {
+  const response = await api.put(url, payload);
+  return returnData(response);
+};
+const deleteApi = async (url, payload) => {
+  const response = await api.delete(url, payload);
+  return returnData(response);
+};
 
-  put = async (url, payload) => {
-    const response = await this.api.put(url, payload);
-    return this.returnData(response);
-  };
-  delete = async (url, payload) => {
-    const response = await this.api.delete(url, payload);
-    return this.returnData(response);
-  };
-}
-var ServiceHandle = new serviceHandle();
-export default ServiceHandle;
+export {setHeader, setBaseUrl, get, post, put, deleteApi};
