@@ -8,6 +8,7 @@ export default {
     GetListProductStoreMobileMcs: '/getListProductStoreMobileMcs',
     GetAllProductStores: '/mGetAllProductStores',
     GetListPOMobilemcs: '/getListPOMobilemcs',
+    GetListSupplierMobilemcs: '/getListSupplierMobilemcs',
   },
   RESPONSE_CODES: {
     SUCCESS: {

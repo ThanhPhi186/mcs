@@ -5,12 +5,9 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducers from './rootReducer';
 import sagas from './rootSagas';
 import AsyncStorage from '@react-native-community/async-storage';
-
-import moment from 'moment';
-
 import {AuthenOverallRedux} from '../../redux';
-import SimpleToast from 'react-native-simple-toast';
 import {ServiceHandle} from '../../services';
+import {setHeader} from '../../services/ServiceHandle';
 
 const config = {
   key: 'root',
@@ -25,25 +22,9 @@ const sagaMiddleware = createSagaMiddleware();
 
 // const checkCookiesExpirationMiddleware = store => next => action => {
 //   const stateData = store.getState();
-//   // console.log('checkCookiesExpirationMiddleware', stateData);
-//   // if (action.type === AuthenOverallRedux.Actions.LOGIN_SUCCESS) {
-//   //   setToken(action.payload.access_token);
-//   // }
-//   if (stateData.AuthenOverallReducer.cookies) {
-//     if (
-//       moment(stateData.AuthenOverallReducer.cookies.route.expires).unix() <
-//       moment.now() / 1000
-//     ) {
-//       console.log(
-//         'aaaa',
-//         stateData?.AuthenOverallReducer?.cookies?.route?.expires,
-//       );
-//       SimpleToast.show('Phiên đăng nhập hết hạn');
-//     } else {
-//       console.log('bbbb');
-//     }
+//   if (action.type === AuthenOverallRedux.Actions.LOGIN_SUCCESS) {
+//     setHeader(action.payload.access_token);
 //   }
-//   next(action);
 // };
 
 middleware.push(

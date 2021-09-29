@@ -16,11 +16,6 @@ const AppDropDown = props => {
   const {title} = props;
 
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple'},
-    {label: 'Banana', value: 'banana'},
-  ]);
 
   return (
     <>
@@ -28,11 +23,7 @@ const AppDropDown = props => {
       <DropDownPicker
         {...props}
         open={open}
-        value={value}
-        items={items}
         setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
         arrowSize={20}
         arrowColor="#90A1B5"
         placeholderStyle={styles.placeholderStyle}

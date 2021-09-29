@@ -1,6 +1,7 @@
 import {trans} from '../utils';
 import {create} from 'apisauce';
 import qs from 'querystring';
+import SimpleToast from 'react-native-simple-toast';
 
 const api = create({
   timeout: 20000,
@@ -8,6 +9,27 @@ const api = create({
     'Content-Type': 'application/x-www-form-urlencoded',
   },
 });
+
+api.addMonitor(res => {
+  console.log('addMonitor', res);
+  if (res.data._USER_HAS_LOGOUT === 'Y') {
+    SimpleToast.show(trans('expiredToken'), SimpleToast.SHORT);
+  }
+});
+
+// api.axiosInstance.interceptors.request.use(
+//   (config) => {
+//     const token = JSON.parse(localStorage?.getItem('token')) || {};
+//     if (token) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     // config.headers['Content-Type'] = 'application/json';
+//     return config;
+//   },
+//   (error) => {
+//     Promise.reject(error);
+//   },
+// );
 
 const returnData = response => {
   console.log('response =====>', response);
