@@ -6,7 +6,18 @@ const styles = {
     flex: 1,
   },
   content: {
-    ...Mixin.padding(12, 20, 0, 20),
+    borderRadius: 12,
+    ...Mixin.padding(12, 20, 12, 20),
+    ...Mixin.margin(12),
+    backgroundColor: Colors.WHITE,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   viewProductName: {
     borderBottomWidth: 1,

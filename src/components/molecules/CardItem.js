@@ -16,7 +16,6 @@ const CardItem = props => {
     addQuantityProps,
     lessQuantityProps,
     styleProps,
-    expDate,
     chooseExpDate,
     changeQuantityProps,
   } = props;

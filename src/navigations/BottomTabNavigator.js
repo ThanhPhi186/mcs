@@ -8,6 +8,11 @@ import {
   ChangeStore,
   PurchaseOrder,
   SearchProductScreen,
+  ListPriceChange,
+  ListPricePolicy,
+  DetailPricePolicy,
+  CancelOrderStatistic,
+  CashierLoginHistory,
 } from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
@@ -30,7 +35,12 @@ const BottomTabNavigator = () => {
 
     if (
       routeName === NAVIGATION_NAME.PurchaseOrder ||
-      routeName === NAVIGATION_NAME.SearchProductScreen
+      routeName === NAVIGATION_NAME.SearchProductScreen ||
+      routeName === NAVIGATION_NAME.ListPriceChange ||
+      routeName === NAVIGATION_NAME.ListPricePolicy ||
+      routeName === NAVIGATION_NAME.DetailPricePolicy ||
+      routeName === NAVIGATION_NAME.CancelOrderStatistic ||
+      routeName === NAVIGATION_NAME.CashierLoginHistory
     ) {
       return false;
     }
@@ -78,6 +88,26 @@ const BottomTabNavigator = () => {
         <Stack.Screen
           name={NAVIGATION_NAME.SearchProductScreen}
           component={SearchProductScreen}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.ListPriceChange}
+          component={ListPriceChange}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.ListPricePolicy}
+          component={ListPricePolicy}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.DetailPricePolicy}
+          component={DetailPricePolicy}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.CancelOrderStatistic}
+          component={CancelOrderStatistic}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.CashierLoginHistory}
+          component={CashierLoginHistory}
         />
       </Stack.Navigator>
     );

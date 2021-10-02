@@ -9,6 +9,14 @@ export default {
     GetAllProductStores: '/mGetAllProductStores',
     GetListPOMobilemcs: '/getListPOMobilemcs',
     GetListSupplierMobilemcs: '/getListSupplierMobilemcs',
+    FindProductInfoMobilemcs: '/findProductInfoMobilemcs',
+    FindProducts: '/mFindProducts',
+    GetProductInfoMobilemcs: '/getProductInfoMobilemcs',
+    GetListPriceChangeMobilemcs: '/getListPriceChangeMobilemcs',
+    GetListQuotationsMobilemcs: '/getListQuotationsMobilemcs',
+    GetQuotationInfoMobilemcs: '/getQuotationInfoMobilemcs',
+    GetListSalesTrackMobilemcs: '/getListSalesTrackMobilemcs',
+    GetListLoginPosHistoryMobilemcs: '/getListLoginPosHistoryMobilemcs',
   },
   RESPONSE_CODES: {
     SUCCESS: {

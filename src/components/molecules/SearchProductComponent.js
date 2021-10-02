@@ -1,3 +1,4 @@
+import {isEmpty} from 'lodash';
 import React, {useState} from 'react';
 import {FlatList, Keyboard, Platform, View} from 'react-native';
 import {Searchbar} from 'react-native-paper';
@@ -9,14 +10,6 @@ import CardItem from './CardItem';
 const SearchProductComponent = props => {
   const {data, selectProduct} = props;
   const [isVisible, setIsVisible] = useState(false);
-  const [dataProduct, setDataProduct] = useState(data);
-
-  const onChangeSearch = txt => {
-    const searchData = data.filter(elm => {
-      return removeDiacritics(elm.productName).includes(removeDiacritics(txt));
-    });
-    setDataProduct(searchData);
-  };
 
   const renderItem = item => {
     return (
@@ -39,15 +32,14 @@ const SearchProductComponent = props => {
           placeholder={trans('searchProduct')}
           style={styles.containerSearch}
           inputStyle={styles.input}
-          onChangeText={onChangeSearch}
           onFocus={() => setIsVisible(true)}
           onBlur={() => setIsVisible(false)}
         />
       </View>
-      {isVisible && (
+      {isVisible && !isEmpty(data) && (
         <View style={styles.containerListSearch}>
           <FlatList
-            data={dataProduct}
+            data={data}
             renderItem={({item}) => renderItem(item)}
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}

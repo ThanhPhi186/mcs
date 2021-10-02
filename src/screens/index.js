@@ -1,6 +1,15 @@
 import LoginScreen from './Login';
 import LoginCompanyScreen from './LoginCompany';
-import {HomeScreen, PurchaseOrder, SearchProductScreen} from './Home';
+import {
+  HomeScreen,
+  PurchaseOrder,
+  SearchProductScreen,
+  ListPriceChange,
+  DetailPricePolicy,
+  ListPricePolicy,
+  CancelOrderStatistic,
+  CashierLoginHistory,
+} from './Home';
 import {MainAccount, ChangePassword, ChangeStore} from './Account';
 
 export {
@@ -12,4 +21,9 @@ export {
   ChangeStore,
   PurchaseOrder,
   SearchProductScreen,
+  ListPriceChange,
+  DetailPricePolicy,
+  ListPricePolicy,
+  CancelOrderStatistic,
+  CashierLoginHistory,
 };

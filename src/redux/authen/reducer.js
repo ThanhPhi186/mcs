@@ -35,13 +35,18 @@ const overallReducer = createReducer(initialState, {
 
   //logout
   [Actions.logout.success]: (state, action) => {
-    state.userAuthen = initialState;
+    state.userAuthen = {};
     state.accountUser = null;
   },
 
   // reset Company
   [Actions.resetCompany]: (state, action) => {
     state.domain = '';
+  },
+
+  //handleLogout
+  [Actions.handleLogout]: (state, action) => {
+    state.userAuthen = {};
   },
 });
 

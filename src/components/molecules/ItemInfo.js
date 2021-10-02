@@ -2,13 +2,14 @@ import React from 'react';
 import {Linking, View} from 'react-native';
 import {Colors, Mixin} from '../../styles';
 import {AppText} from '../atoms';
+import numeral from 'numeral';
 
 // interface ItemCustomerProps {
 //   title: string;
 //   value: string
 // }
 const ItemInfo = props => {
-  const {title, value, phone} = props;
+  const {title, value, phone, price} = props;
   return (
     <View style={styles.container}>
       <AppText style={styles.title} containerStyle={styles.viewTitle}>
@@ -26,7 +27,7 @@ const ItemInfo = props => {
         </AppText>
       ) : (
         <AppText style={styles.value} containerStyle={styles.viewValue}>
-          {value}
+          {price ? `${numeral(value).format()} đ` : value}
         </AppText>
       )}
     </View>
@@ -39,7 +40,7 @@ const styles = {
     justifyContent: 'space-between',
     borderBottomWidth: 1,
     paddingVertical: Mixin.moderateSize(8),
-    borderColor: Colors.WHITE_SMOKE,
+    borderColor: Colors.LIGHT_GREY,
   },
   viewTitle: {
     flex: 1,

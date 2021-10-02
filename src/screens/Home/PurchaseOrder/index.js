@@ -35,8 +35,6 @@ const PurchaseOrder = ({navigation}) => {
   const [supplierId, setSupplierId] = useState(null);
   const [supplierList, setSupplierList] = useState([]);
 
-  console.log('supplierApprovedData', isSupplierApproved);
-
   useEffect(() => {
     const params = {
       productStoreId: store.productStoreId,
@@ -48,8 +46,6 @@ const PurchaseOrder = ({navigation}) => {
     };
     getListOrderPO(params);
   }, [store.productStoreId, statusId, supplierId, isSupplierApproved]);
-
-  console.log('statusId', statusId);
 
   useEffect(() => {
     const params = {

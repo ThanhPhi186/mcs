@@ -1,21 +1,65 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {Appbar} from 'react-native-paper';
+import SimpleToast from 'react-native-simple-toast';
+import {useSelector} from 'react-redux';
 import {AppText} from '../../../components/atoms';
 import {ItemInfo, SearchProductComponent} from '../../../components/molecules';
+import {ServiceHandle} from '../../../services';
 import {container} from '../../../styles/GlobalStyles';
-import {trans} from '../../../utils';
+import {Const, trans} from '../../../utils';
 import styles from './styles';
 
 const SearchProductScreen = ({navigation}) => {
+  const store = useSelector(state => state.StoreReducer.store);
   const [dataProduct, setDataProduct] = useState();
+  const [txtSearch, setTxtSearch] = useState('');
+  const [dataSearch, setDataSearch] = useState([]);
+
+  useEffect(() => {
+    const params = {searchString: txtSearch};
+
+    const searchProduct = () => {
+      ServiceHandle.post(Const.API.FindProductInfoMobilemcs, params).then(
+        res => {
+          if (res.ok) {
+            setDataSearch(res.data.listProducts);
+          } else {
+            setDataSearch([]);
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }
+        },
+      );
+    };
+    txtSearch && searchProduct();
+  }, [txtSearch]);
+
+  const getInfoProduct = (productId, salesUomId) => {
+    const params = {
+      productStoreId: store.productStoreId,
+      productId,
+      salesUomId,
+    };
+    ServiceHandle.post(Const.API.GetProductInfoMobilemcs, params).then(res => {
+      if (res.ok) {
+        setDataProduct(res.data);
+      } else {
+        SimpleToast.show(res.error, SimpleToast.SHORT);
+      }
+    });
+  };
+
   return (
     <View style={container}>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('searchProduct')} />
       </Appbar.Header>
-      <SearchProductComponent />
+      <SearchProductComponent
+        data={dataSearch}
+        onChangeText={txt => setTxtSearch(txt)}
+        selectProduct={item => getInfoProduct(item.productId, item.salesUomId)}
+      />
       <View style={styles.contentContainer}>
         {dataProduct ? (
           <View style={styles.content}>
@@ -27,29 +71,36 @@ const SearchProductScreen = ({navigation}) => {
               </AppText>
             </View>
             <ItemInfo
-              title={trans('nameList')}
-              value={dataProduct.categoryName}
+              title={trans('shortenedName')}
+              value={dataProduct.internalName}
             />
             <ItemInfo
               title={trans('productCode')}
               value={dataProduct.productCode}
             />
             <ItemInfo
-              title={trans('defaultPrice')}
-              value={dataProduct.productDefaultPriceValue}
+              title={trans('productPrice')}
+              value={dataProduct.listPriceTax}
+              price
             />
             <ItemInfo
               title={trans('listedPrice')}
-              value={dataProduct.productListPriceValue}
+              value={dataProduct.priceTax}
+              price
             />
             <ItemInfo
-              title={trans('unit')}
-              value={dataProduct.quantityUomDesc}
+              title={trans('costPrice')}
+              value={dataProduct.unitCost}
+              price
             />
-            <ItemInfo title={trans('taxApplicable')} value="" />
+            <ItemInfo title={trans('upc')} value="" />
             <ItemInfo
-              title={trans('productType')}
+              title={trans('inventory')}
               value={dataProduct.productTypeId}
+            />
+            <ItemInfo
+              title={trans('taxApplicable')}
+              value={`${dataProduct.taxPercentage} %`}
             />
           </View>
         ) : (

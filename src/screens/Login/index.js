@@ -58,6 +58,7 @@ const LoginScreen = ({navigation}) => {
       ServiceHandle.post(Const.API.Login, params).then(response => {
         if (response.ok) {
           CookieManager.get(domain + Const.API.Login).then(cookies => {
+            console.log('CookieManager', cookies);
             ServiceHandle.setHeader(cookies.JSESSIONID.value);
             dispatch(AuthenOverallRedux.Actions.setCookies(cookies));
             dispatch(AuthenOverallRedux.Actions.getAccount(params));

@@ -55,7 +55,6 @@ const HomeScreen = ({navigation}) => {
       </View>
     </View>
   );
-
   const renderImageSlider = (
     <SliderBox
       images={imagesSlider}
@@ -102,7 +101,7 @@ const HomeScreen = ({navigation}) => {
         />
         <ItemHomeMenu
           iconName="shopping-search"
-          title={`Tìm kiếm ${'\n'} sản phẩm`}
+          title={`Tra cứu ${'\n'} sản phẩm`}
           onPress={() =>
             navigation.navigate(NAVIGATION_NAME.SearchProductScreen)
           }
@@ -118,9 +117,20 @@ const HomeScreen = ({navigation}) => {
         <ItemHomeMenu
           iconName="currency-usd-circle"
           title={'Danh sách chính sách giá'}
+          onPress={() => navigation.navigate(NAVIGATION_NAME.ListPricePolicy)}
         />
-        <ItemHomeMenu iconName="file-edit" title={'Danh sách giá thay đổi'} />
-        <ItemHomeMenu iconName="file-remove" title={'Danh sách huỷ hàng'} />
+        <ItemHomeMenu
+          iconName="file-edit"
+          title={'Danh sách giá thay đổi'}
+          onPress={() => navigation.navigate(NAVIGATION_NAME.ListPriceChange)}
+        />
+        <ItemHomeMenu
+          iconName="file-remove"
+          title={'Thống kê huỷ hàng'}
+          onPress={() =>
+            navigation.navigate(NAVIGATION_NAME.CancelOrderStatistic)
+          }
+        />
       </View>
       <View
         style={{
@@ -128,7 +138,13 @@ const HomeScreen = ({navigation}) => {
           justifyContent: 'space-between',
           marginTop: 16,
         }}>
-        <ItemHomeMenu iconName="history" title={`Lịch sử ${'\n'} đăng nhập`} />
+        <ItemHomeMenu
+          iconName="history"
+          title={`Lịch sử ${'\n'} đăng nhập`}
+          onPress={() =>
+            navigation.navigate(NAVIGATION_NAME.CashierLoginHistory)
+          }
+        />
       </View>
     </View>
   );
