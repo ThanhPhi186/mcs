@@ -52,7 +52,7 @@ const PurchaseOrder = ({navigation}) => {
       viewSize: 0,
       viewIndex: 0,
     };
-    ServiceHandle.get(Const.API.GetListSupplierMobilemcs, params).then(res => {
+    ServiceHandle.post(Const.API.GetListSupplierMobilemcs, params).then(res => {
       if (res.ok) {
         const convertSupplier = res.data.listSuppliers.map(elm => {
           return {
@@ -119,7 +119,7 @@ const PurchaseOrder = ({navigation}) => {
         setItems={setSupplierApprovedData}
       />
 
-      <View style={styles.viewBtn}>
+      {/* <View style={styles.viewBtn}>
         <Button
           title="Bỏ tìm kiếm"
           containerStyle={styles.btnSearch}
@@ -131,7 +131,7 @@ const PurchaseOrder = ({navigation}) => {
           containerStyle={styles.btnSearch}
           titleStyle={styles.txtBtnSearch}
         />
-      </View>
+      </View> */}
     </View>
   );
 
@@ -141,7 +141,7 @@ const PurchaseOrder = ({navigation}) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('orderList')} />
         <Appbar.Action
-          icon="magnify"
+          icon={displaySearch ? 'close' : 'magnify'}
           onPress={() => setDisplaySearch(!displaySearch)}
         />
       </Appbar.Header>

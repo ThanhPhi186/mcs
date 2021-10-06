@@ -15,6 +15,7 @@ import BannerBehind from '../component/BannerBehind';
 import {images} from '../../../assets';
 import {AppDialog} from '../../../components/molecules';
 import {NAVIGATION_NAME} from '../../../navigations/NavigationName';
+import CookieManager from '@react-native-cookies/cookies';
 
 const MainAccount = ({navigation}) => {
   const dispatch = useDispatch();
@@ -25,8 +26,12 @@ const MainAccount = ({navigation}) => {
   const [modalChangeCompany, setModalChangeCompany] = useState(false);
 
   const logout = () => {
-    dispatch(AuthenOverallRedux.Actions.handleLogout());
-    // dispatch(AuthenOverallRedux.Actions.logout.request());
+    CookieManager.clearAll().then(success => {
+      console.log('CookieManager.clearAll =>', success);
+    });
+
+    dispatch(AuthenOverallRedux.Actions.logout.request());
+    // dispatch(AuthenOverallRedux.Actions.handleLogout());
   };
 
   const changeCompany = () => {

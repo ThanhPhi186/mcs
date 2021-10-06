@@ -62,6 +62,7 @@ const CashierLoginHistory = ({navigation}) => {
     </View>
   );
 };
+
 export default CashierLoginHistory;
 
 const styles = {

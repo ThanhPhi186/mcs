@@ -13,6 +13,9 @@ import {
   DetailPricePolicy,
   CancelOrderStatistic,
   CashierLoginHistory,
+  SelectSupplier,
+  SelectProduct,
+  ConfirmOrder,
 } from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
@@ -40,7 +43,10 @@ const BottomTabNavigator = () => {
       routeName === NAVIGATION_NAME.ListPricePolicy ||
       routeName === NAVIGATION_NAME.DetailPricePolicy ||
       routeName === NAVIGATION_NAME.CancelOrderStatistic ||
-      routeName === NAVIGATION_NAME.CashierLoginHistory
+      routeName === NAVIGATION_NAME.CashierLoginHistory ||
+      routeName === NAVIGATION_NAME.SelectSupplier ||
+      routeName === NAVIGATION_NAME.SelectProduct ||
+      routeName === NAVIGATION_NAME.ConfirmOrder
     ) {
       return false;
     }
@@ -108,6 +114,18 @@ const BottomTabNavigator = () => {
         <Stack.Screen
           name={NAVIGATION_NAME.CashierLoginHistory}
           component={CashierLoginHistory}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.SelectSupplier}
+          component={SelectSupplier}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.SelectProduct}
+          component={SelectProduct}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.ConfirmOrder}
+          component={ConfirmOrder}
         />
       </Stack.Navigator>
     );

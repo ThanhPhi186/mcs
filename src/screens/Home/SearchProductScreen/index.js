@@ -17,22 +17,25 @@ const SearchProductScreen = ({navigation}) => {
   const [dataSearch, setDataSearch] = useState([]);
 
   useEffect(() => {
-    const params = {searchString: txtSearch};
+    const params = {
+      productStoreId: store.productStoreId,
+      searchString: txtSearch,
+      viewIndex: 0,
+      viewSize: 0,
+    };
 
     const searchProduct = () => {
-      ServiceHandle.post(Const.API.FindProductInfoMobilemcs, params).then(
-        res => {
-          if (res.ok) {
-            setDataSearch(res.data.listProducts);
-          } else {
-            setDataSearch([]);
-            SimpleToast.show(res.error, SimpleToast.SHORT);
-          }
-        },
-      );
+      ServiceHandle.post(Const.API.FindProductMobilemcs, params).then(res => {
+        if (res.ok) {
+          setDataSearch(res.data.listProducts);
+        } else {
+          setDataSearch([]);
+          SimpleToast.show(res.error, SimpleToast.SHORT);
+        }
+      });
     };
     txtSearch && searchProduct();
-  }, [txtSearch]);
+  }, [txtSearch, store.productStoreId]);
 
   const getInfoProduct = (productId, salesUomId) => {
     const params = {
@@ -93,7 +96,10 @@ const SearchProductScreen = ({navigation}) => {
               value={dataProduct.unitCost}
               price
             />
-            <ItemInfo title={trans('upc')} value="" />
+            <ItemInfo
+              title={trans('upc')}
+              value={dataProduct.goodIdentificationId}
+            />
             <ItemInfo
               title={trans('inventory')}
               value={dataProduct.productTypeId}

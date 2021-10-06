@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Alert, TextInput, TouchableOpacity, View} from 'react-native';
+import React from 'react';
+import {TextInput, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {images} from '../../assets';
 import {Colors, Mixin} from '../../styles';
@@ -13,11 +13,11 @@ const CardItem = props => {
   const {
     type,
     item,
-    addQuantityProps,
-    lessQuantityProps,
+    addAmountProps,
+    lessAmountProps,
     styleProps,
     chooseExpDate,
-    changeQuantityProps,
+    changeAmountProps,
   } = props;
 
   return (
@@ -43,8 +43,8 @@ const CardItem = props => {
         <AppText style={styles.nameProduct}>{item.productName}</AppText>
         <AppText style={styles.info}>
           {item.productCode}{' '}
-          {(item.uomDescription || item.abbreviation) &&
-            `(${item.uomDescription || item.abbreviation})`}
+          {(item.uomId || item.abbreviation) &&
+            `(${item.uomId || item.abbreviation})`}
         </AppText>
         {chooseExpDate ? (
           <TouchableOpacity onPress={chooseExpDate}>
@@ -60,23 +60,18 @@ const CardItem = props => {
       </View>
       {type === 'choose' && (
         <>
-          <TextInput
-            style={styles.boxAmount}
-            value={(
-              item.quantity ||
-              item.qtyInInventory ||
-              item.qtyExpInventory ||
-              ''
-            ).toString()}
-            keyboardType="number-pad"
-            onChangeText={valueInput => changeQuantityProps(valueInput, item)}
-          />
           <View style={styles.viewQuantity}>
-            <TouchableOpacity onPress={() => addQuantityProps(item)}>
-              <Icon name="menu-up" size={40} color={Colors.PRIMARY} />
+            <TouchableOpacity onPress={() => lessAmountProps(item)}>
+              <Icon name="minus-circle" size={28} color={Colors.PRIMARY} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => lessQuantityProps(item)}>
-              <Icon name="menu-down" size={40} color={Colors.PRIMARY} />
+            <TextInput
+              style={styles.boxAmount}
+              value={item.amount.toString()}
+              keyboardType="number-pad"
+              onChangeText={valueInput => changeAmountProps(valueInput, item)}
+            />
+            <TouchableOpacity onPress={() => addAmountProps(item)}>
+              <Icon name="plus-circle" size={28} color={Colors.PRIMARY} />
             </TouchableOpacity>
           </View>
         </>
@@ -87,7 +82,7 @@ const CardItem = props => {
             styles.boxAmount,
             {marginRight: Mixin.moderateSize(16)},
           ]}>
-          {item.quantity}
+          {item.amount}
         </AppText>
       )}
     </TouchableOpacity>
@@ -109,6 +104,7 @@ const styles = {
     justifyContent: 'center',
     borderColor: Colors.PRIMARY,
     textAlign: 'center',
+    color: Colors.BLACK,
   },
   viewImg: {
     flex: 1,
@@ -130,6 +126,10 @@ const styles = {
     fontStyle: 'italic',
   },
   viewQuantity: {
-    marginHorizontal: 8,
+    width: '32%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: Mixin.moderateSize(12),
   },
 };

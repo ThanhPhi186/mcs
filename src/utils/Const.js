@@ -17,6 +17,12 @@ export default {
     GetQuotationInfoMobilemcs: '/getQuotationInfoMobilemcs',
     GetListSalesTrackMobilemcs: '/getListSalesTrackMobilemcs',
     GetListLoginPosHistoryMobilemcs: '/getListLoginPosHistoryMobilemcs',
+    FindSupplierInfoMobilemcs: '/findSupplierInfoMobilemcs',
+    GetListProductsMobilemcs: '/getListProductsMobilemcs',
+    FindProductMobilemcs: '/findProductMobilemcs',
+    GetProductBySupplierMobilemcs: '/getProductBySupplierMobilemcs',
+    CalculatePOMobilemcs: '/calculatePOMobilemcs',
+    CreateOrderPurchaseMobilemcs: '/createOrderPurchaseMobilemcs',
   },
   RESPONSE_CODES: {
     SUCCESS: {

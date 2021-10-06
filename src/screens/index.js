@@ -9,6 +9,9 @@ import {
   ListPricePolicy,
   CancelOrderStatistic,
   CashierLoginHistory,
+  ConfirmOrder,
+  SelectProduct,
+  SelectSupplier,
 } from './Home';
 import {MainAccount, ChangePassword, ChangeStore} from './Account';
 
@@ -26,4 +29,7 @@ export {
   ListPricePolicy,
   CancelOrderStatistic,
   CashierLoginHistory,
+  ConfirmOrder,
+  SelectProduct,
+  SelectSupplier,
 };

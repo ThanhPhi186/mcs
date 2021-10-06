@@ -203,4 +203,9 @@ export default {
   applicableCategory: 'Danh mục áp dụng',
   CancelOrderStatistic: 'Thống kê huỷ hàng',
   CashierLoginHistory: 'Lịch sử đăng nhập thu ngân',
+  selectSupplier: 'Chọn nhà cung cấp',
+  searchSupplier: 'Tìm kiếm nhà cung cấp',
+  purchaseOrder: 'Đơn hàng mua',
+  cancelOrder: 'Huỷ đơn',
+  totalPayment: 'Tổng thanh toán',
 };

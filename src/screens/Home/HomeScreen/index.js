@@ -10,6 +10,7 @@ import {Colors} from '../../../styles';
 import {container, titleBold, viewRow} from '../../../styles/GlobalStyles';
 import {device_width, statusBar} from '../../../styles/Mixin';
 import ItemHomeMenu from '../component/ItemHomeMenu';
+import Toast from 'react-native-toast-message';
 
 const HomeScreen = ({navigation}) => {
   const store = useSelector(state => state.StoreReducer.store);
@@ -21,25 +22,21 @@ const HomeScreen = ({navigation}) => {
     'https://source.unsplash.com/1024x768/?tree',
   ];
 
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Tạo đơn hàng thành công 👋',
+      style: {height: 200},
+    });
+  };
+
   const renderHeader = (
-    <View style={{overflow: 'hidden', paddingBottom: 4}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          padding: 12,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          shadowColor: '#000',
-          shadowOffset: {width: 1, height: 1},
-          shadowOpacity: 0.2,
-          shadowRadius: 1.41,
-          elevation: 2,
-          backgroundColor: 'white',
-        }}>
+    <View style={styles.headerContainer}>
+      <View style={styles.headerContent}>
         <View style={viewRow}>
           <FastImage
             source={images.avatar}
-            style={{width: 48, height: 48, marginRight: 12}}
+            style={styles.avatar}
             resizeMode="contain"
           />
           <View>
@@ -49,7 +46,7 @@ const HomeScreen = ({navigation}) => {
         </View>
         <FastImage
           source={images.logoVertical}
-          style={{width: 80, height: 40}}
+          style={styles.logoCompany}
           resizeMode="contain"
         />
       </View>
@@ -63,41 +60,18 @@ const HomeScreen = ({navigation}) => {
       autoplay
       inactiveDotColor="#90A4AE"
       circleLoop
-      ImageComponentStyle={{
-        borderRadius: 16,
-        width: device_width - 24,
-        marginTop: 12,
-      }}
+      ImageComponentStyle={styles.itemImageSlider}
     />
   );
 
   const renderItem = (
-    <View
-      style={{
-        padding: 12,
-        backgroundColor: 'white',
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 1,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-        marginTop: 12,
-        marginHorizontal: 12,
-        borderRadius: 12,
-      }}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginTop: 16,
-        }}>
+    <View style={styles.containerItem}>
+      <View style={styles.viewRowItem}>
         <ItemHomeMenu
           iconName="cart"
           title={`Đơn hàng ${'\n'} mua`}
           onPress={() => navigation.navigate(NAVIGATION_NAME.PurchaseOrder)}
+          // onPress={showToast}
         />
         <ItemHomeMenu
           iconName="shopping-search"
@@ -108,12 +82,7 @@ const HomeScreen = ({navigation}) => {
         />
         <ItemHomeMenu iconName="bag-personal" title="Kiểm kê" />
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginTop: 16,
-        }}>
+      <View style={styles.viewRowItem}>
         <ItemHomeMenu
           iconName="currency-usd-circle"
           title={'Danh sách chính sách giá'}
@@ -132,12 +101,7 @@ const HomeScreen = ({navigation}) => {
           }
         />
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginTop: 16,
-        }}>
+      <View style={styles.viewRowItem}>
         <ItemHomeMenu
           iconName="history"
           title={`Lịch sử ${'\n'} đăng nhập`}
@@ -145,6 +109,12 @@ const HomeScreen = ({navigation}) => {
             navigation.navigate(NAVIGATION_NAME.CashierLoginHistory)
           }
         />
+        <ItemHomeMenu
+          iconName="file-plus"
+          title={`Lên đơn ${'\n'} PO`}
+          onPress={() => navigation.navigate(NAVIGATION_NAME.SelectSupplier)}
+        />
+        <ItemHomeMenu />
       </View>
     </View>
   );
@@ -166,3 +136,56 @@ const HomeScreen = ({navigation}) => {
 };
 
 export default HomeScreen;
+
+const styles = {
+  headerContainer: {
+    overflow: 'hidden',
+    paddingBottom: 4,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    padding: 12,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+    backgroundColor: 'white',
+  },
+  avatar: {
+    width: 48,
+    height: 48,
+    marginRight: 12,
+  },
+  logoCompany: {
+    width: 80,
+    height: 40,
+  },
+  itemImageSlider: {
+    borderRadius: 16,
+    width: device_width - 24,
+    marginTop: 12,
+  },
+  containerItem: {
+    padding: 12,
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginTop: 12,
+    marginHorizontal: 12,
+    borderRadius: 12,
+  },
+  viewRowItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 16,
+  },
+};

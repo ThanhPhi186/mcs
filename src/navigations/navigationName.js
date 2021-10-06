@@ -12,6 +12,9 @@ const NAVIGATION_NAME = {
   DetailPricePolicy: 'DetailPricePolicy',
   CancelOrderStatistic: 'CancelOrderStatistic',
   CashierLoginHistory: 'CashierLoginHistory',
+  ConfirmOrder: 'ConfirmOrder',
+  SelectProduct: 'SelectProduct',
+  SelectSupplier: 'SelectSupplier',
 };
 
 export {NAVIGATION_NAME};
