@@ -5,7 +5,6 @@ const NAVIGATION_NAME = {
   ChangeStore: 'ChangeStore',
   ChangePassword: 'ChangePassword',
   HomeScreen: 'HomeScreen',
-  PurchaseOrder: 'PurchaseOrder',
   SearchProductScreen: 'SearchProductScreen',
   ListPriceChange: 'ListPriceChange',
   ListPricePolicy: 'ListPricePolicy',
@@ -15,6 +14,8 @@ const NAVIGATION_NAME = {
   ConfirmOrder: 'ConfirmOrder',
   SelectProduct: 'SelectProduct',
   SelectSupplier: 'SelectSupplier',
+  ListPO: 'ListPO',
+  DetailPO: 'DetailPO',
 };
 
 export {NAVIGATION_NAME};

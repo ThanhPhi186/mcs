@@ -23,6 +23,7 @@ export default {
     GetProductBySupplierMobilemcs: '/getProductBySupplierMobilemcs',
     CalculatePOMobilemcs: '/calculatePOMobilemcs',
     CreateOrderPurchaseMobilemcs: '/createOrderPurchaseMobilemcs',
+    GetDetailPOMobilemcs: '/getDetailPOMobilemcs',
   },
   RESPONSE_CODES: {
     SUCCESS: {

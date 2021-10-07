@@ -42,7 +42,6 @@ export default {
   orderValue: 'Giá trị đơn hàng',
   discount: 'Chiết khấu',
   tax: 'Thuế',
-  totalPayable: 'Tổng tiền phải trả',
   itemsList: 'Danh sách mặt hàng',
   lookUpProduct: 'Tra cứu sản phẩm',
   listPriceChangeOfProduct: 'Danh sách giá thay đổi của sản phẩm',
@@ -208,4 +207,8 @@ export default {
   purchaseOrder: 'Đơn hàng mua',
   cancelOrder: 'Huỷ đơn',
   totalPayment: 'Tổng thanh toán',
+  supplierName: 'Tên nhà cung cấp',
+  supplierId: 'Mã nhà cung cấp',
+  creationTime: 'Thời gian tạo',
+  createBy: 'Tạo bởi',
 };

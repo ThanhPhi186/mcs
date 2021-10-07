@@ -28,7 +28,7 @@ const SelectProduct = ({navigation, route}) => {
   const [searchString, setSearchString] = useState('');
 
   const [startDate, setStartDate] = useState(
-    moment().subtract(1, 'months').format('DD/MM/YYYY'),
+    moment().subtract(3, 'day').format('DD/MM/YYYY'),
   );
 
   const [endDate, setEndDate] = useState(moment().format('DD/MM/YYYY'));
@@ -69,7 +69,7 @@ const SelectProduct = ({navigation, route}) => {
         .includes(item.id)
     ) {
       const newList = [...listChooseProduct];
-      newList.push({...item, ...{amount: 1}});
+      newList.push({...item, ...{quantity: 1}});
       setListChooseProduct(newList);
     }
   };
@@ -77,7 +77,7 @@ const SelectProduct = ({navigation, route}) => {
   const addAmount = item => {
     const newData = [...listChooseProduct].map(elm => {
       if (elm?.id === item?.id) {
-        elm.amount += 1;
+        elm.quantity += 1;
       }
       return elm;
     });
@@ -85,10 +85,10 @@ const SelectProduct = ({navigation, route}) => {
   };
 
   const lessAmount = item => {
-    if (item.amount > 1) {
+    if (item.quantity > 1) {
       const newData = [...listChooseProduct].map(elm => {
         if (elm?.id === item?.id) {
-          elm.amount -= 1;
+          elm.quantity -= 1;
         }
         return elm;
       });
@@ -99,7 +99,7 @@ const SelectProduct = ({navigation, route}) => {
   const changeAmount = (valueInput, item) => {
     const newData = [...listChooseProduct].map(elm => {
       if (elm?.id === item?.id) {
-        elm.amount = Number(valueInput);
+        elm.quantity = Number(valueInput);
       }
       return elm;
     });
@@ -111,8 +111,8 @@ const SelectProduct = ({navigation, route}) => {
       return {
         productId: elm.productId,
         uomId: elm.isKg === 'Y' ? elm.weightUomId : elm.quantityUomId,
-        quantity: elm.amount,
-        lastPrice: elm.lastPrice,
+        quantity: elm.quantity.toString(),
+        lastPrice: elm.lastPrice.toString(),
       };
     });
 

@@ -2,7 +2,8 @@ import LoginScreen from './Login';
 import LoginCompanyScreen from './LoginCompany';
 import {
   HomeScreen,
-  PurchaseOrder,
+  ListPO,
+  DetailPO,
   SearchProductScreen,
   ListPriceChange,
   DetailPricePolicy,
@@ -22,7 +23,8 @@ export {
   MainAccount,
   ChangePassword,
   ChangeStore,
-  PurchaseOrder,
+  ListPO,
+  DetailPO,
   SearchProductScreen,
   ListPriceChange,
   DetailPricePolicy,

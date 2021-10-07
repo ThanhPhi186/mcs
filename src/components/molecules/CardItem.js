@@ -82,7 +82,7 @@ const CardItem = props => {
             styles.boxAmount,
             {marginRight: Mixin.moderateSize(16)},
           ]}>
-          {item.amount}
+          {item.quantity}
         </AppText>
       )}
     </TouchableOpacity>

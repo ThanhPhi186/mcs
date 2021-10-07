@@ -70,7 +70,7 @@ const HomeScreen = ({navigation}) => {
         <ItemHomeMenu
           iconName="cart"
           title={`Đơn hàng ${'\n'} mua`}
-          onPress={() => navigation.navigate(NAVIGATION_NAME.PurchaseOrder)}
+          onPress={() => navigation.navigate(NAVIGATION_NAME.ListPO)}
           // onPress={showToast}
         />
         <ItemHomeMenu

@@ -6,7 +6,7 @@ import {
   ChangePassword,
   MainAccount,
   ChangeStore,
-  PurchaseOrder,
+  ListPO,
   SearchProductScreen,
   ListPriceChange,
   ListPricePolicy,
@@ -16,6 +16,7 @@ import {
   SelectSupplier,
   SelectProduct,
   ConfirmOrder,
+  DetailPO,
 } from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
@@ -37,7 +38,7 @@ const BottomTabNavigator = () => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeScreen';
 
     if (
-      routeName === NAVIGATION_NAME.PurchaseOrder ||
+      routeName === NAVIGATION_NAME.ListPO ||
       routeName === NAVIGATION_NAME.SearchProductScreen ||
       routeName === NAVIGATION_NAME.ListPriceChange ||
       routeName === NAVIGATION_NAME.ListPricePolicy ||
@@ -46,7 +47,8 @@ const BottomTabNavigator = () => {
       routeName === NAVIGATION_NAME.CashierLoginHistory ||
       routeName === NAVIGATION_NAME.SelectSupplier ||
       routeName === NAVIGATION_NAME.SelectProduct ||
-      routeName === NAVIGATION_NAME.ConfirmOrder
+      routeName === NAVIGATION_NAME.ConfirmOrder ||
+      routeName === NAVIGATION_NAME.DetailPO
     ) {
       return false;
     }
@@ -87,10 +89,8 @@ const BottomTabNavigator = () => {
           name={NAVIGATION_NAME.HomeScreen}
           component={HomeScreen}
         />
-        <Stack.Screen
-          name={NAVIGATION_NAME.PurchaseOrder}
-          component={PurchaseOrder}
-        />
+        <Stack.Screen name={NAVIGATION_NAME.ListPO} component={ListPO} />
+        <Stack.Screen name={NAVIGATION_NAME.DetailPO} component={DetailPO} />
         <Stack.Screen
           name={NAVIGATION_NAME.SearchProductScreen}
           component={SearchProductScreen}

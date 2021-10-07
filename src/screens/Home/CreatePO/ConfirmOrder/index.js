@@ -21,7 +21,7 @@ const ConfirmOrder = ({navigation, route}) => {
       if (res.ok) {
         setOrderValue(res.data);
       } else {
-        SimpleToast.show(res.error, SimpleToast.show);
+        SimpleToast.show(res.error, SimpleToast.SHORT);
       }
     });
   }, [params]);
@@ -29,6 +29,7 @@ const ConfirmOrder = ({navigation, route}) => {
   const submitOrder = () => {
     ServiceHandle.post(Const.API.CreateOrderPurchaseMobilemcs, params).then(
       res => {
+        console.log('params', params);
         if (res.ok) {
           Toast.show({
             type: 'success',
