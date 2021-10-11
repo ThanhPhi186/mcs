@@ -66,7 +66,7 @@ const CardItem = props => {
             </TouchableOpacity>
             <TextInput
               style={styles.boxAmount}
-              value={item.amount.toString()}
+              value={item.quantity.toString()}
               keyboardType="number-pad"
               onChangeText={valueInput => changeAmountProps(valueInput, item)}
             />

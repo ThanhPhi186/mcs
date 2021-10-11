@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import numeral from 'numeral';
-import moment from 'moment';
 import {Colors, Mixin} from '../../../styles';
 import {trans} from '../../../utils';
 import {AppText} from '../../../components/atoms';

@@ -211,4 +211,5 @@ export default {
   supplierId: 'Mã nhà cung cấp',
   creationTime: 'Thời gian tạo',
   createBy: 'Tạo bởi',
+  approve: 'Duyệt',
 };
