@@ -1,5 +1,5 @@
 import HomeScreen from './HomeScreen';
-import {ListPO, DetailPO} from './PurchaseOrder';
+import {ListPO, DetailPO, EditPO} from './PurchaseOrder';
 import SearchProductScreen from './SearchProductScreen';
 import ListPriceChange from './ListPriceChange';
 import {ListPricePolicy, DetailPricePolicy} from './PricePolicy';
@@ -20,4 +20,5 @@ export {
   ConfirmOrder,
   SelectProduct,
   SelectSupplier,
+  EditPO,
 };

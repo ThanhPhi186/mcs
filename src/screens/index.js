@@ -13,6 +13,7 @@ import {
   ConfirmOrder,
   SelectProduct,
   SelectSupplier,
+  EditPO,
 } from './Home';
 import {MainAccount, ChangePassword, ChangeStore} from './Account';
 
@@ -34,4 +35,5 @@ export {
   ConfirmOrder,
   SelectProduct,
   SelectSupplier,
+  EditPO,
 };

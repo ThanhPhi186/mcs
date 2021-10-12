@@ -9,6 +9,7 @@ import {Colors, Mixin} from '../../../../styles';
 import {ServiceHandle} from '../../../../services';
 import SimpleToast from 'react-native-simple-toast';
 import {isIphoneX} from '../../../../helpers/iphoneXHelper';
+import {NAVIGATION_NAME} from '../../../../navigations/NavigationName';
 
 const DetailPO = ({navigation, route}) => {
   const {orderId} = route.params;
@@ -33,6 +34,14 @@ const DetailPO = ({navigation, route}) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('detailOrder')} />
+        <Appbar.Action
+          icon="pencil"
+          onPress={() =>
+            navigation.navigate(NAVIGATION_NAME.EditPO, {
+              orderDetail: dataDetail,
+            })
+          }
+        />
       </Appbar.Header>
       <View style={styles.contentContainer}>
         <AppText style={styles.txtStatus}>{dataDetail?.statusId}</AppText>

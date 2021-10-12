@@ -26,12 +26,12 @@ const MainAccount = ({navigation}) => {
   const [modalChangeCompany, setModalChangeCompany] = useState(false);
 
   const logout = () => {
-    CookieManager.clearAll().then(success => {
-      console.log('CookieManager.clearAll =>', success);
-    });
+    // CookieManager.clearAll().then(success => {
+    //   console.log('CookieManager.clearAll =>', success);
+    // });
 
-    dispatch(AuthenOverallRedux.Actions.logout.request());
-    // dispatch(AuthenOverallRedux.Actions.handleLogout());
+    // dispatch(AuthenOverallRedux.Actions.logout.request());
+    dispatch(AuthenOverallRedux.Actions.handleLogout());
   };
 
   const changeCompany = () => {

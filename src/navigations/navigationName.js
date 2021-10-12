@@ -16,6 +16,7 @@ const NAVIGATION_NAME = {
   SelectSupplier: 'SelectSupplier',
   ListPO: 'ListPO',
   DetailPO: 'DetailPO',
+  EditPO: 'EditPO',
 };
 
 export {NAVIGATION_NAME};

@@ -24,6 +24,8 @@ export default {
     CalculatePOMobilemcs: '/calculatePOMobilemcs',
     CreateOrderPurchaseMobilemcs: '/createOrderPurchaseMobilemcs',
     GetDetailPOMobilemcs: '/getDetailPOMobilemcs',
+    GetOrderItemEditableMobilemcs: '/getOrderItemEditableMobilemcs',
+    UpdatePOMobilemcs: '/updatePOMobilemcs',
   },
   RESPONSE_CODES: {
     SUCCESS: {

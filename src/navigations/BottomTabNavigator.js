@@ -17,6 +17,7 @@ import {
   SelectProduct,
   ConfirmOrder,
   DetailPO,
+  EditPO,
 } from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
@@ -48,7 +49,8 @@ const BottomTabNavigator = () => {
       routeName === NAVIGATION_NAME.SelectSupplier ||
       routeName === NAVIGATION_NAME.SelectProduct ||
       routeName === NAVIGATION_NAME.ConfirmOrder ||
-      routeName === NAVIGATION_NAME.DetailPO
+      routeName === NAVIGATION_NAME.DetailPO ||
+      routeName === NAVIGATION_NAME.EditPO
     ) {
       return false;
     }
@@ -91,6 +93,7 @@ const BottomTabNavigator = () => {
         />
         <Stack.Screen name={NAVIGATION_NAME.ListPO} component={ListPO} />
         <Stack.Screen name={NAVIGATION_NAME.DetailPO} component={DetailPO} />
+        <Stack.Screen name={NAVIGATION_NAME.EditPO} component={EditPO} />
         <Stack.Screen
           name={NAVIGATION_NAME.SearchProductScreen}
           component={SearchProductScreen}

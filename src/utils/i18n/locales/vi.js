@@ -212,4 +212,6 @@ export default {
   creationTime: 'Thời gian tạo',
   createBy: 'Tạo bởi',
   approve: 'Duyệt',
+  editOrder: 'Chỉnh sửa đơn hàng',
+  updateOrder: 'Cập nhật đơn hàng',
 };
