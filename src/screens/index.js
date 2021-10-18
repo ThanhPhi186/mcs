@@ -14,6 +14,9 @@ import {
   SelectProduct,
   SelectSupplier,
   EditPO,
+  ListInventoryPeriod,
+  DetailInventoryPeriod,
+  ListLocation,
 } from './Home';
 import {MainAccount, ChangePassword, ChangeStore} from './Account';
 
@@ -36,4 +39,7 @@ export {
   SelectProduct,
   SelectSupplier,
   EditPO,
+  ListInventoryPeriod,
+  DetailInventoryPeriod,
+  ListLocation,
 };

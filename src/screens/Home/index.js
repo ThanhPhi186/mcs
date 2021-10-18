@@ -6,6 +6,11 @@ import {ListPricePolicy, DetailPricePolicy} from './PricePolicy';
 import CancelOrderStatistic from './CancelOrderStatistic';
 import CashierLoginHistory from './CashierLoginHistory';
 import {ConfirmOrder, SelectProduct, SelectSupplier} from './CreatePO';
+import {
+  ListInventoryPeriod,
+  DetailInventoryPeriod,
+  ListLocation,
+} from './Inventory';
 
 export {
   HomeScreen,
@@ -21,4 +26,7 @@ export {
   SelectProduct,
   SelectSupplier,
   EditPO,
+  ListInventoryPeriod,
+  DetailInventoryPeriod,
+  ListLocation,
 };

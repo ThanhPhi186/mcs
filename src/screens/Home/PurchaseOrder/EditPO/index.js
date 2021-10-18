@@ -1,7 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Animated, FlatList, StyleSheet, View} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {Animated, StyleSheet, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
-import {AppText} from '../../../../components/atoms';
+import {AppLoading, AppText} from '../../../../components/atoms';
 import {container} from '../../../../styles/GlobalStyles';
 import {Const, trans} from '../../../../utils';
 import SelectDate from '../../component/SelectDate';
@@ -12,9 +12,11 @@ import SimpleToast from 'react-native-simple-toast';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {Button, CardItem} from '../../../../components/molecules';
 import {getBottomSpace} from '../../../../helpers/iphoneXHelper';
+import Toast from 'react-native-toast-message';
 
 const EditPO = ({navigation, route}) => {
   const {orderDetail} = route.params;
+  const [loading, setLoading] = useState(false);
   const [startDate, setStartDate] = useState(
     moment(orderDetail?.shipAfterDate).format('DD/MM/YYYY'),
   );
@@ -35,14 +37,13 @@ const EditPO = ({navigation, route}) => {
 
   const animationIsRunning = useRef(false);
 
-  console.log('orderDetail', orderDetail);
-
   const confirmEditOrder = () => {
+    setLoading(true);
     const products = listChooseProduct?.map(elm => {
       return {
         productId: elm.productId,
         quantity: elm.quantity.toString(),
-        lastPrice: elm.lastPrice.toString(),
+        lastPrice: elm.unitPrice.toString(),
         quantityUomId: elm.uomId,
         orderItemSeqId: elm.orderItemSeqId,
         itemComment: '',
@@ -51,17 +52,25 @@ const EditPO = ({navigation, route}) => {
 
     const params = {
       orderId: orderDetail.orderId,
-      listOrderItemDelete: JSON.stringify(products),
-      listOrderItemUpdate: JSON.stringify(),
+      listOrderItemDelete: JSON.stringify([]),
+      listOrderItemUpdate: JSON.stringify(products),
       shipAfterDate: moment(startDate, 'DD/MM/YYYY').valueOf(),
       shipBeforeDate: moment(endDate, 'DD/MM/YYYY').valueOf(),
     };
-    ServiceHandle.post(Const.API.UpdatePOMobilemcs, params).then(res => {
-      if (res.ok) {
-      } else {
-        SimpleToast.show(res.error, SimpleToast.SHORT);
-      }
-    });
+    ServiceHandle.post(Const.API.UpdatePOMobilemcs, params)
+      .then(res => {
+        if (res.ok) {
+          route.params.onGoBack();
+          Toast.show({
+            type: 'success',
+            text1: trans('editOrderSuccess'),
+            visibilityTime: 2000,
+          });
+        } else {
+          SimpleToast.show(res.error, SimpleToast.SHORT);
+        }
+      })
+      .finally(() => setLoading(false));
   };
 
   //   const checkForUpdate = () => {
@@ -155,6 +164,7 @@ const EditPO = ({navigation, route}) => {
 
   return (
     <View style={container}>
+      <AppLoading isVisible={loading} />
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('editOrder')} />

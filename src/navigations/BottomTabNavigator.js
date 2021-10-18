@@ -18,6 +18,9 @@ import {
   ConfirmOrder,
   DetailPO,
   EditPO,
+  ListInventoryPeriod,
+  DetailInventoryPeriod,
+  ListLocation,
 } from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
@@ -50,7 +53,10 @@ const BottomTabNavigator = () => {
       routeName === NAVIGATION_NAME.SelectProduct ||
       routeName === NAVIGATION_NAME.ConfirmOrder ||
       routeName === NAVIGATION_NAME.DetailPO ||
-      routeName === NAVIGATION_NAME.EditPO
+      routeName === NAVIGATION_NAME.EditPO ||
+      routeName === NAVIGATION_NAME.ListInventoryPeriod ||
+      routeName === NAVIGATION_NAME.DetailInventoryPeriod ||
+      routeName === NAVIGATION_NAME.ListLocation
     ) {
       return false;
     }
@@ -129,6 +135,18 @@ const BottomTabNavigator = () => {
         <Stack.Screen
           name={NAVIGATION_NAME.ConfirmOrder}
           component={ConfirmOrder}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.ListInventoryPeriod}
+          component={ListInventoryPeriod}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.DetailInventoryPeriod}
+          component={DetailInventoryPeriod}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.ListLocation}
+          component={ListLocation}
         />
       </Stack.Navigator>
     );

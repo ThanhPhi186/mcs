@@ -13,14 +13,12 @@ import styles from './styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthenOverallRedux} from '../../redux';
 import AppText from '../../components/atoms/AppText';
-import {AppDialog} from '../../components/molecules';
 import {AppLoading} from '../../components/atoms';
 import {Mixin} from '../../styles';
 import {Const} from '../../utils';
 import CookieManager from '@react-native-cookies/cookies';
 import {ServiceHandle} from '../../services';
 import SimpleToast from 'react-native-simple-toast';
-import {NAVIGATION_NAME} from '../../navigations/NavigationName';
 
 const LoginScreen = ({navigation}) => {
   const [employeeCode, setEmployeeCode] = useState();
@@ -54,25 +52,30 @@ const LoginScreen = ({navigation}) => {
       const params = {
         USERNAME: employeeCode,
         PASSWORD: password,
+
+        //fake
+        posTerminalId: 'NVN1',
+        isMobile: 'Y',
+        //end
       };
-      ServiceHandle.post(Const.API.Login, params).then(response => {
-        if (response.ok) {
-          CookieManager.get(domain + Const.API.Login).then(cookies => {
-            console.log('CookieManager', cookies);
-            ServiceHandle.setHeader(cookies.JSESSIONID.value);
-            dispatch(AuthenOverallRedux.Actions.setCookies(cookies));
-            dispatch(AuthenOverallRedux.Actions.getAccount(params));
-            dispatch(AuthenOverallRedux.Actions.loginSuccess(response.data));
-          });
-          setLoading(false);
-          // navigation.navigate(NAVIGATION_NAME.ChangeStore);
-        } else {
-          setLoading(false);
-          setTimeout(() => {
-            SimpleToast.show(response.error, SimpleToast.SHORT);
-          }, 700);
-        }
-      });
+      ServiceHandle.post(Const.API.Login, params)
+        .then(response => {
+          if (response.ok) {
+            CookieManager.get(domain + Const.API.Login).then(cookies => {
+              console.log('CookieManager', cookies);
+              ServiceHandle.setHeader(cookies.JSESSIONID.value);
+              dispatch(AuthenOverallRedux.Actions.setCookies(cookies));
+              dispatch(AuthenOverallRedux.Actions.getAccount(params));
+              dispatch(AuthenOverallRedux.Actions.loginSuccess(response.data));
+            });
+            // navigation.navigate(NAVIGATION_NAME.ChangeStore);
+          } else {
+            setTimeout(() => {
+              SimpleToast.show(response.error, SimpleToast.SHORT);
+            }, 700);
+          }
+        })
+        .finally(() => setLoading(false));
     } else {
       SimpleToast.show(trans('accountAndPassNotEmpty'), SimpleToast.SHORT);
     }

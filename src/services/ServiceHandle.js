@@ -13,7 +13,9 @@ const api = create({
 api.addMonitor(res => {
   console.log('addMonitor', res);
   if (res.data._USER_HAS_LOGOUT === 'Y') {
-    SimpleToast.show(trans('expiredToken'), SimpleToast.SHORT);
+    setTimeout(() => {
+      SimpleToast.show(trans('expiredToken'), SimpleToast.SHORT);
+    }, 700);
   }
 });
 
@@ -32,7 +34,7 @@ api.addMonitor(res => {
 // );
 
 const returnData = response => {
-  console.log('response =====>', response);
+  // console.log('response =====>', response);
   if (response.data) {
     if (response.data._ERROR_MESSAGE_ || response.data._ERROR_MESSAGE_LIST_) {
       return {

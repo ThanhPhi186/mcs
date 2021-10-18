@@ -17,6 +17,9 @@ const NAVIGATION_NAME = {
   ListPO: 'ListPO',
   DetailPO: 'DetailPO',
   EditPO: 'EditPO',
+  ListInventoryPeriod: 'ListInventoryPeriod',
+  DetailInventoryPeriod: 'DetailInventoryPeriod',
+  ListLocation: 'ListLocation',
 };
 
 export {NAVIGATION_NAME};

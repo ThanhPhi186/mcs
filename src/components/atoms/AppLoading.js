@@ -9,10 +9,12 @@ const AppLoading = props => {
 
   return (
     <Modal
+      {...props}
       isVisible={isVisible}
       backdropOpacity={0.3}
       renderToHardwareTextureAndroid
-      animationIn="fadeIn"
+      animationIn="zoomIn"
+      animationOut="zoomOut"
       hideModalContentWhileAnimating>
       <ActivityIndicator
         style={styles.indicator}

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
-import {AppText} from '../../../components/atoms';
+import {AppLoading, AppText} from '../../../components/atoms';
 import {container} from '../../../styles/GlobalStyles';
 import {Const, trans} from '../../../utils';
 import moment from 'moment';
@@ -20,7 +20,10 @@ const ListPriceChange = ({navigation}) => {
   );
   const [endDate, setEndDate] = useState(moment().format('DD/MM/YYYY'));
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     const params = {
       productStoreId: store.productStoreId,
       fromDateStr: moment(startDate, 'DD/MM/YYYY').unix() * 1000,
@@ -29,15 +32,15 @@ const ListPriceChange = ({navigation}) => {
       viewSize: 50,
     };
     const getListPriceChange = () => {
-      ServiceHandle.post(Const.API.GetListPriceChangeMobilemcs, params).then(
-        res => {
+      ServiceHandle.post(Const.API.GetListPriceChangeMobilemcs, params)
+        .then(res => {
           if (res.ok) {
             setListPriceChange(res.data.listProPriceChanges);
           } else {
             SimpleToast.show(res.error, SimpleToast.SHORT);
           }
-        },
-      );
+        })
+        .finally(res => setLoading(false));
     };
     getListPriceChange();
   }, [startDate, endDate, store.productStoreId]);
@@ -74,6 +77,7 @@ const ListPriceChange = ({navigation}) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('listPriceChange')} />
       </Appbar.Header>
+      <AppLoading isVisible={loading} />
       <View style={styles.contentContainer}>
         <View
           style={{

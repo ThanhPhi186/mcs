@@ -22,14 +22,6 @@ const HomeScreen = ({navigation}) => {
     'https://source.unsplash.com/1024x768/?tree',
   ];
 
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      text1: 'Tạo đơn hàng thành công 👋',
-      style: {height: 200},
-    });
-  };
-
   const renderHeader = (
     <View style={styles.headerContainer}>
       <View style={styles.headerContent}>
@@ -71,7 +63,6 @@ const HomeScreen = ({navigation}) => {
           iconName="cart"
           title={`Đơn hàng ${'\n'} mua`}
           onPress={() => navigation.navigate(NAVIGATION_NAME.ListPO)}
-          // onPress={showToast}
         />
         <ItemHomeMenu
           iconName="shopping-search"
@@ -80,7 +71,13 @@ const HomeScreen = ({navigation}) => {
             navigation.navigate(NAVIGATION_NAME.SearchProductScreen)
           }
         />
-        <ItemHomeMenu iconName="bag-personal" title="Kiểm kê" />
+        <ItemHomeMenu
+          iconName="bag-personal"
+          title="Kiểm kê"
+          onPress={() =>
+            navigation.navigate(NAVIGATION_NAME.ListInventoryPeriod)
+          }
+        />
       </View>
       <View style={styles.viewRowItem}>
         <ItemHomeMenu

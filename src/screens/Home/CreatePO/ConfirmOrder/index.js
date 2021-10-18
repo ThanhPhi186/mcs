@@ -34,6 +34,7 @@ const ConfirmOrder = ({navigation, route}) => {
           Toast.show({
             type: 'success',
             text1: 'Tạo đơn hàng thành công 👋',
+            visibilityTime: 2000,
           });
           navigation.popToTop();
         } else {

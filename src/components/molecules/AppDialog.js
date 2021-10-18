@@ -28,13 +28,13 @@ const AppDialog = props => {
             onPress={onPressClose}
             containerStyle={styles.btnCustom}
             titleColor={Colors.PRIMARY}
-            title={titleClose || trans('close')}
+            title={(titleClose || trans('close')).toUpperCase()}
           />
           {onPressConfirm && (
             <Button
               onPress={onPressConfirm}
               containerStyle={styles.btnCustom}
-              title={titleConfirm || trans('continue')}
+              title={titleConfirm || trans('continue').toUpperCase()}
               titleColor={Colors.PRIMARY}
             />
           )}

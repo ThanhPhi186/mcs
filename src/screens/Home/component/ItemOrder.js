@@ -4,34 +4,10 @@ import numeral from 'numeral';
 import {Colors, Mixin} from '../../../styles';
 import {trans} from '../../../utils';
 import {AppText} from '../../../components/atoms';
+import {handleStatus} from '../../../helpers/mcsHelper';
 
 const ItemOrder = props => {
   const {item} = props;
-
-  const renderStatus = status => {
-    switch (status) {
-      case 'ORDER_APPROVED': // Đã duyệt
-        return trans('approved');
-      case 'ORDER_CANCELLED': // Đã huỷ
-        return trans('canceled');
-      case 'ORDER_COMPLETED': // Đã hoàn thành
-        return trans('completed');
-      case 'ORDER_CREATED': // Đã tạo
-        return trans('created');
-      case 'ORDER_HOLD': // Đã giữ
-        return trans('hasKept');
-      case 'ORDER_IN_TRANSIT': // Đang chuyển
-        return trans('moving');
-      case 'ORDER_PROCESSING': // Processing
-        return trans('processing');
-      case 'ORDER_REJECTED': // Đã bị từ chối
-        return trans('wasRejected');
-      case 'ORDER_SADAPPROVED': // Sales Admin approved
-        return trans('salesAdminApproved');
-      case 'ORDER_DELIVERED': // Đã giao hàng
-        return trans('delivered');
-    }
-  };
 
   const renderColorStatus = status => {
     switch (status) {
@@ -76,7 +52,7 @@ const ItemOrder = props => {
             padding: 8,
             borderRadius: 8,
           }}>
-          {renderStatus(item.statusId)}
+          {handleStatus(item.statusId)}
         </AppText>
       </View>
       <AppText>

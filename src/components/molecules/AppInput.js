@@ -6,6 +6,7 @@ import {Colors, Mixin} from '../../styles';
 import {FONT_SIZE_14} from '../../styles/Typography';
 import {AppImage} from '../atoms';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {forEach} from 'lodash';
 
 const AppInput = props => {
   const {type} = props;

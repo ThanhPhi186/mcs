@@ -1,22 +1,35 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {AppText} from '../atoms';
 import {Mixin, Colors} from '../../styles';
+import {FONT_SIZE_14} from '../../styles/Typography';
 
 const Button = props => {
-  const {containerStyle, titleColor, title, titleStyle} = props;
+  const {containerStyle, titleColor, title, titleStyle, disabled} = props;
   return (
-    <TouchableOpacity {...props} style={[styles.container, containerStyle]}>
+    <TouchableOpacity
+      {...props}
+      disabled={disabled}
+      style={[styles.container, containerStyle]}>
       <AppText
-        title
-        style={[styles.title, {color: titleColor || Colors.WHITE}, titleStyle]}>
+        style={[
+          styles.title,
+          {
+            color: disabled
+              ? Colors.GRAY
+              : titleColor
+              ? titleColor
+              : Colors.WHITE,
+          },
+          titleStyle,
+        ]}>
         {title}
       </AppText>
     </TouchableOpacity>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     height: Mixin.moderateSize(50),
     borderRadius: Mixin.moderateSize(12),
@@ -29,6 +42,7 @@ const styles = {
   title: {
     fontWeight: '600',
     textAlign: 'center',
+    fontSize: FONT_SIZE_14,
   },
-};
+});
 export default Button;

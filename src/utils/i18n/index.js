@@ -6,5 +6,5 @@ I18n.translations = {
   vi,
 };
 I18n.locale = 'vi';
-export const trans = (messages) => I18n.t(messages);
+export const trans = messages => I18n.t(messages);
 export default I18n;

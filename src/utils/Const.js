@@ -5,6 +5,8 @@ export default {
     baseImgURL: 'https://testchth.olbius.com',
     Login: '/loginMobilemcs',
     Logout: '/logoutMobilemcs',
+    // Login: '/mLogin',
+    // Logout: '/mLogout',
     GetListProductStoreMobileMcs: '/getListProductStoreMobileMcs',
     GetAllProductStores: '/mGetAllProductStores',
     GetListPOMobilemcs: '/getListPOMobilemcs',
@@ -26,7 +28,14 @@ export default {
     GetDetailPOMobilemcs: '/getDetailPOMobilemcs',
     GetOrderItemEditableMobilemcs: '/getOrderItemEditableMobilemcs',
     UpdatePOMobilemcs: '/updatePOMobilemcs',
+    GetStockingEventsMobilemcs: '/getStockingEventsMobilemcs',
+    GetDetailStockingEventsMobilemcs: '/getDetailStockingEventsMobilemcs',
+    GetStockingEventItemsMobilemcs: '/getStockingEventItemsMobilemcs',
+    GetLocationsMobilemcs: '/getLocationsMobilemcs',
+    ApprovePOMobilemcs: '/approvePOMobilemcs',
+    CancelPOMobilemcs: '/cancelPOMobilemcs',
   },
+
   RESPONSE_CODES: {
     SUCCESS: {
       SUCCESS: 200,
@@ -36,5 +45,17 @@ export default {
       NOT_FOUND: 404,
     },
   },
-  GOOGLE_MAP_API: 'AIzaSyCHu4vQUKFsMnqpjk_HHjIIAU_yejvT5cs',
+
+  ORDER_STATUS: {
+    APPROVED: 'ORDER_APPROVED',
+    CANCELLED: 'ORDER_CANCELLED',
+    COMPLETED: 'ORDER_COMPLETED',
+    CREATED: 'ORDER_CREATED',
+    HOLD: 'ORDER_HOLD',
+    IN_TRANSIT: 'ORDER_IN_TRANSIT',
+    PROCESSING: 'ORDER_PROCESSING',
+    REJECTED: 'ORDER_REJECTED',
+    SADAPPROVED: 'ORDER_SADAPPROVED',
+    DELIVERED: 'ORDER_DELIVERED',
+  },
 };
