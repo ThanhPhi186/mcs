@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
-import {AppText} from '../../../components/atoms';
+import {AppLoading, AppText} from '../../../components/atoms';
 import {container} from '../../../styles/GlobalStyles';
 import {Const, trans} from '../../../utils';
 import {Colors, Mixin} from '../../../styles';
@@ -12,22 +12,27 @@ import SimpleToast from 'react-native-simple-toast';
 const CashierLoginHistory = ({navigation}) => {
   const store = useSelector(state => state.StoreReducer.store);
   const [loginHistoryData, setLoginHistoryData] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const params = {
-      viewIndex: 0,
-      viewSize: 10,
-      productStoreId: store.productStoreId,
+    const getListData = () => {
+      setLoading(true);
+      const params = {
+        viewIndex: 0,
+        viewSize: 10,
+        productStoreId: store.productStoreId,
+      };
+      ServiceHandle.post(Const.API.GetListLoginPosHistoryMobilemcs, params)
+        .then(res => {
+          if (res.ok) {
+            setLoginHistoryData(res.data.listLoginPosHistory);
+          } else {
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }
+        })
+        .finally(() => setLoading(false));
     };
-    ServiceHandle.post(Const.API.GetListLoginPosHistoryMobilemcs, params).then(
-      res => {
-        if (res.ok) {
-          setLoginHistoryData(res.data.listLoginPosHistory);
-        } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
-        }
-      },
-    );
+    getListData();
   }, [store.productStoreId]);
 
   const renderItem = item => {
@@ -48,6 +53,7 @@ const CashierLoginHistory = ({navigation}) => {
 
   return (
     <View style={container}>
+      <AppLoading isVisible={loading} />
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('CashierLoginHistory')} />

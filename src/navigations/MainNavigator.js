@@ -6,9 +6,17 @@ import LoginNavigator from './LoginNavigator';
 import CompanyNavigator from './CompanyNavigator';
 
 const MainNavigator = () => {
-  const domain = useSelector(state => state.AuthenOverallReducer.domain);
-  const userAuthen = useSelector(
-    state => state.AuthenOverallReducer.userAuthen,
+  const {domain, userAuthen} = useSelector(state => ({
+    domain: state.AuthenOverallReducer.domain,
+    userAuthen: state.AuthenOverallReducer.userAuthen,
+  }));
+
+  console.log(
+    'xxxx',
+    useSelector(state => ({
+      domain: state.AuthenOverallReducer.domain,
+      userAuthen: state.AuthenOverallReducer.userAuthen,
+    })),
   );
 
   return (

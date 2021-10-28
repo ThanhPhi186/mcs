@@ -5,6 +5,12 @@ const styles = {
   contentContainer: {
     flex: 1,
   },
+  containerChooseDate: {
+    flexDirection: 'row',
+    padding: 12,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   line: {
     width: 20,
     backgroundColor: Colors.LIGHT_GREY,

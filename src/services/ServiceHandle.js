@@ -34,14 +34,14 @@ api.addMonitor(res => {
 // );
 
 const returnData = response => {
-  // console.log('response =====>', response);
+  console.log('response =====>', response);
   if (response.data) {
-    if (response.data._ERROR_MESSAGE_ || response.data._ERROR_MESSAGE_LIST_) {
+    if (response.data?._ERROR_MESSAGE_ || response.data?._ERROR_MESSAGE_LIST_) {
       return {
         ok: false,
         error:
-          response.data._ERROR_MESSAGE_ ||
-          response.data._ERROR_MESSAGE_LIST_[0],
+          response.data?._ERROR_MESSAGE_ ||
+          response.data?._ERROR_MESSAGE_LIST_[0],
       };
     } else {
       return {

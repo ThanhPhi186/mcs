@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
-import {AppText} from '../../../../components/atoms';
+import {AppLoading, AppText} from '../../../../components/atoms';
 import {Button, CardItem} from '../../../../components/molecules';
 import {Colors} from '../../../../styles';
 import {container} from '../../../../styles/GlobalStyles';
@@ -15,6 +15,7 @@ const ConfirmOrder = ({navigation, route}) => {
   const {dataCart} = route.params;
   const {params} = route.params;
   const [orderValue, setOrderValue] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     ServiceHandle.post(Const.API.CalculatePOMobilemcs, params).then(res => {
@@ -27,9 +28,9 @@ const ConfirmOrder = ({navigation, route}) => {
   }, [params]);
 
   const submitOrder = () => {
-    ServiceHandle.post(Const.API.CreateOrderPurchaseMobilemcs, params).then(
-      res => {
-        console.log('params', params);
+    setLoading(true);
+    ServiceHandle.post(Const.API.CreateOrderPurchaseMobilemcs, params)
+      .then(res => {
         if (res.ok) {
           Toast.show({
             type: 'success',
@@ -38,10 +39,12 @@ const ConfirmOrder = ({navigation, route}) => {
           });
           navigation.popToTop();
         } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
+          setTimeout(() => {
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }, 700);
         }
-      },
-    );
+      })
+      .finally(() => setLoading(false));
   };
 
   const renderItem = item => {
@@ -50,6 +53,7 @@ const ConfirmOrder = ({navigation, route}) => {
 
   return (
     <View style={container}>
+      <AppLoading isVisible={loading} />
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('confirmOrder')} />

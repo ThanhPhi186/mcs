@@ -3,34 +3,37 @@ import {FlatList, TouchableOpacity, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {useSelector} from 'react-redux';
-import {AppText} from '../../../../components/atoms';
+import {AppLoading, AppText} from '../../../../components/atoms';
 import {NAVIGATION_NAME} from '../../../../navigations/NavigationName';
 import {ServiceHandle} from '../../../../services';
 import {Colors, Mixin} from '../../../../styles';
 import {container} from '../../../../styles/GlobalStyles';
-import {FONT_SIZE_20} from '../../../../styles/Typography';
 import {Const, trans} from '../../../../utils';
 
 const ListPricePolicy = ({navigation}) => {
   const store = useSelector(state => state.StoreReducer.store);
 
   const [listPricePolicy, setListPricePolicy] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const params = {
       productStoreId: store.productStoreId,
       viewIndex: 0,
       viewSize: 0,
     };
-    ServiceHandle.post(Const.API.GetListQuotationsMobilemcs, params).then(
-      res => {
+    ServiceHandle.post(Const.API.GetListQuotationsMobilemcs, params)
+      .then(res => {
         if (res.ok) {
           setListPricePolicy(res.data.listQuotations);
         } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
+          setTimeout(() => {
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }, 700);
         }
-      },
-    );
+      })
+      .finally(() => setLoading(false));
   }, [store.productStoreId]);
 
   const renderItem = item => {
@@ -53,17 +56,16 @@ const ListPricePolicy = ({navigation}) => {
 
   return (
     <View style={container}>
+      <AppLoading isVisible={loading} />
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('listPricePolicy')} />
       </Appbar.Header>
-      <View>
-        <FlatList
-          data={listPricePolicy}
-          renderItem={({item}) => renderItem(item)}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
+      <FlatList
+        data={listPricePolicy}
+        renderItem={({item}) => renderItem(item)}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   );
 };

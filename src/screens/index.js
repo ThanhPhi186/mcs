@@ -19,6 +19,8 @@ import {
   ListLocation,
 } from './Home';
 import {MainAccount, ChangePassword, ChangeStore} from './Account';
+import ContactScreen from './ContactScreen';
+import ShareScreen from './ShareScreen';
 
 export {
   LoginScreen,
@@ -42,4 +44,6 @@ export {
   ListInventoryPeriod,
   DetailInventoryPeriod,
   ListLocation,
+  ShareScreen,
+  ContactScreen,
 };

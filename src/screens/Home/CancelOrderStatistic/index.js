@@ -3,7 +3,7 @@ import {FlatList, TouchableOpacity, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {useSelector} from 'react-redux';
-import {AppText} from '../../../components/atoms';
+import {AppLoading, AppText} from '../../../components/atoms';
 import {ServiceHandle} from '../../../services';
 import {Colors, Mixin} from '../../../styles';
 import {container} from '../../../styles/GlobalStyles';
@@ -14,27 +14,32 @@ import numeral from 'numeral';
 const CancelOrderStatistic = ({navigation}) => {
   const store = useSelector(state => state.StoreReducer.store);
   const [cancelList, setCancelList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const params = {
-      viewIndex: 0,
-      viewSize: 10,
-      productStoreId: store.productStoreId,
+    setLoading(true);
+    const getListCancelOrder = () => {
+      const params = {
+        viewIndex: 0,
+        viewSize: 10,
+        productStoreId: store.productStoreId,
+      };
+      ServiceHandle.post(Const.API.GetListSalesTrackMobilemcs, params)
+        .then(res => {
+          if (res.ok) {
+            setCancelList(res.data.listSalesTrack);
+          } else {
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }
+        })
+        .finally(() => setLoading(false));
     };
-    ServiceHandle.post(Const.API.GetListSalesTrackMobilemcs, params).then(
-      res => {
-        if (res.ok) {
-          setCancelList(res.data.listSalesTrack);
-        } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
-        }
-      },
-    );
+    getListCancelOrder();
   }, [store.productStoreId]);
 
   const renderItem = item => {
     return (
-      <TouchableOpacity style={styles.containerItem}>
+      <View style={styles.containerItem}>
         <AppText style={styles.nameProduct}>
           {item.createdByUserLogin} - {item.terminalId}
         </AppText>
@@ -48,12 +53,13 @@ const CancelOrderStatistic = ({navigation}) => {
           {item.quantity} - {item.quantityUomName} -{' '}
           {numeral(item.unitPrice).format()} đ
         </AppText>
-      </TouchableOpacity>
+      </View>
     );
   };
 
   return (
     <View style={container}>
+      <AppLoading isVisible={loading} />
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('CancelOrderStatistic')} />

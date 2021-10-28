@@ -23,17 +23,18 @@ const ListPriceChange = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    const params = {
-      productStoreId: store.productStoreId,
-      fromDateStr: moment(startDate, 'DD/MM/YYYY').unix() * 1000,
-      thruDateStr: moment(endDate, 'DD/MM/YYYY').unix() * 1000,
-      viewIndex: 0,
-      viewSize: 50,
-    };
     const getListPriceChange = () => {
+      setLoading(true);
+      const params = {
+        productStoreId: store.productStoreId,
+        fromDateStr: moment(startDate, 'DD/MM/YYYY').unix() * 1000,
+        thruDateStr: moment(endDate, 'DD/MM/YYYY').unix() * 1000,
+        viewIndex: 0,
+        viewSize: 50,
+      };
       ServiceHandle.post(Const.API.GetListPriceChangeMobilemcs, params)
         .then(res => {
+          console.log('ress', res);
           if (res.ok) {
             setListPriceChange(res.data.listProPriceChanges);
           } else {
@@ -79,13 +80,7 @@ const ListPriceChange = ({navigation}) => {
       </Appbar.Header>
       <AppLoading isVisible={loading} />
       <View style={styles.contentContainer}>
-        <View
-          style={{
-            flexDirection: 'row',
-            padding: 12,
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
+        <View style={styles.containerChooseDate}>
           <AppText>Thời gian:</AppText>
           <View style={{flexDirection: 'row'}}>
             <SelectDate

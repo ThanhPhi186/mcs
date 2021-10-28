@@ -18,17 +18,8 @@ const ChangePassword = ({navigation}) => {
   const [passwordVerify, setPasswordVerify] = useState('');
   const [messErr, setMessErr] = useState();
   const [modalError, setModalError] = useState(false);
-  const [modalLogout, setModalLogout] = useState(false);
-
-  const accountUser = useSelector(
-    state => state.AuthenOverallReducer.accountUser,
-  );
 
   const dispatch = useDispatch();
-  // const validatePassWord = (text) => {
-  //   const regexp = /(?=.*[A-Za-z])(?=.*[0-9])[a-zA-Z0-9!@#$&()\\-`.+,/\"]+$/;
-  //   return regexp.test(text);
-  // };
 
   const handelCheckValue = () => {
     if (!currentPassword || !newPassword || !passwordVerify) {
@@ -44,28 +35,20 @@ const ChangePassword = ({navigation}) => {
       return;
     }
     const params = {
-      username: accountUser.USERNAME,
       currentPassword,
       newPassword,
       passwordVerify,
     };
-    ServiceHandle.post(Const.API.ChangePassWord, params).then(res => {
+    ServiceHandle.post(Const.API.UpdatePassWordMobilemcs, params).then(res => {
       if (res.ok) {
-        if (!res.data._ERROR_MESSAGE_ && !res.data._ERROR_MESSAGE_LIST_) {
-          if (res.data.login === 'FALSE') {
-            return setModalLogout(true);
-          }
-          SimpleToast.show(trans('changePassSuccess'));
-          setTimeout(() => {
-            dispatch(AuthenOverallRedux.Actions.logout.request());
-          }, 500);
-        } else {
-          if (res.data.login === 'FALSE') {
-            return setModalLogout(true);
-          }
-          setMessErr(res.data._ERROR_MESSAGE_ || trans('errorOccurred'));
-          setModalError(true);
-        }
+        SimpleToast.show(trans('changePassSuccess'));
+        setTimeout(() => {
+          dispatch(AuthenOverallRedux.Actions.logout.request());
+        }, 500);
+      } else {
+        console.log('bbbb');
+        setMessErr(res.error);
+        setModalError(true);
       }
     });
   };
@@ -113,16 +96,6 @@ const ChangePassword = ({navigation}) => {
         content={messErr}
         isVisible={modalError}
         onPressClose={() => setModalError(false)}
-      />
-      <AppDialog
-        content={trans('expiredToken')}
-        isVisible={modalLogout}
-        onPressClose={() => {
-          setModalLogout(false);
-          setTimeout(() => {
-            dispatch(AuthenOverallRedux.Actions.logout.request());
-          }, 500);
-        }}
       />
     </View>
   );

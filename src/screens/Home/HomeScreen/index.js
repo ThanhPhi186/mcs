@@ -10,7 +10,6 @@ import {Colors} from '../../../styles';
 import {container, titleBold, viewRow} from '../../../styles/GlobalStyles';
 import {device_width, statusBar} from '../../../styles/Mixin';
 import ItemHomeMenu from '../component/ItemHomeMenu';
-import Toast from 'react-native-toast-message';
 
 const HomeScreen = ({navigation}) => {
   const store = useSelector(state => state.StoreReducer.store);
@@ -25,13 +24,13 @@ const HomeScreen = ({navigation}) => {
   const renderHeader = (
     <View style={styles.headerContainer}>
       <View style={styles.headerContent}>
-        <View style={viewRow}>
+        <View style={[viewRow, {flex: 1}]}>
           <FastImage
             source={images.avatar}
             style={styles.avatar}
             resizeMode="contain"
           />
-          <View>
+          <View style={{flex: 1}}>
             <AppText style={titleBold}>Nguyễn Thành Phi</AppText>
             <AppText>{store.storeName}</AppText>
           </View>
@@ -44,6 +43,7 @@ const HomeScreen = ({navigation}) => {
       </View>
     </View>
   );
+
   const renderImageSlider = (
     <SliderBox
       images={imagesSlider}

@@ -34,6 +34,7 @@ export default {
     GetLocationsMobilemcs: '/getLocationsMobilemcs',
     ApprovePOMobilemcs: '/approvePOMobilemcs',
     CancelPOMobilemcs: '/cancelPOMobilemcs',
+    UpdatePassWordMobilemcs: '/updatePassWordMobilemcs',
   },
 
   RESPONSE_CODES: {

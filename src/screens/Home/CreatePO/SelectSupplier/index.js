@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, TouchableOpacity, View} from 'react-native';
 import {Appbar, Searchbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
-import {AppText} from '../../../../components/atoms';
+import {AppLoading, AppText} from '../../../../components/atoms';
 import {getBottomSpace} from '../../../../helpers/iphoneXHelper';
 import {NAVIGATION_NAME} from '../../../../navigations/NavigationName';
 import {ServiceHandle} from '../../../../services';
@@ -14,22 +14,27 @@ import {Const, trans} from '../../../../utils';
 const SelectSupplier = ({navigation}) => {
   const [searchString, setSearchString] = useState('');
   const [listSupplier, setListSupplier] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const params = {
-      viewSize: 0,
-      viewIndex: 0,
-      searchString,
+    const getListSupplier = () => {
+      setLoading(true);
+      const params = {
+        viewSize: 0,
+        viewIndex: 0,
+        searchString,
+      };
+      ServiceHandle.post(Const.API.FindSupplierInfoMobilemcs, params)
+        .then(res => {
+          if (res.ok) {
+            setListSupplier(res.data.listSuppliers);
+          } else {
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }
+        })
+        .finally(() => setLoading(false));
     };
-    ServiceHandle.post(Const.API.FindSupplierInfoMobilemcs, params).then(
-      res => {
-        if (res.ok) {
-          setListSupplier(res.data.listSuppliers);
-        } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
-        }
-      },
-    );
+    getListSupplier();
   }, [searchString]);
 
   const renderItem = item => {
@@ -49,6 +54,7 @@ const SelectSupplier = ({navigation}) => {
 
   return (
     <View style={container}>
+      <AppLoading isVisible={loading} />
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('selectSupplier')} />
