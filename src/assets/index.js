@@ -25,4 +25,5 @@ export const images = {
   TopSaleT7: require('./images/TopSaleT7.png'),
   logoHorizontal: require('./images/logo-horizontal.png'),
   logoVertical: require('./images/logo-vertical.png'),
+  call: require('./images/call.png'),
 };

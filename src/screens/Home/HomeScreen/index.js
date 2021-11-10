@@ -5,7 +5,7 @@ import {SliderBox} from 'react-native-image-slider-box';
 import {useSelector} from 'react-redux';
 import {images} from '../../../assets';
 import {AppText} from '../../../components/atoms';
-import {NAVIGATION_NAME} from '../../../navigations/NavigationName';
+import {NAVIGATION_NAME} from '../../../navigations';
 import {Colors} from '../../../styles';
 import {container, titleBold, viewRow} from '../../../styles/GlobalStyles';
 import {device_width, statusBar} from '../../../styles/Mixin';

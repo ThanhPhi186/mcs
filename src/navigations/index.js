@@ -1,5 +1,5 @@
 import MainNavigator from './MainNavigator';
-import {NAVIGATION_NAME} from './NavigationName';
+import NAVIGATION_NAME from './navigationName';
 import BottomTabNavigator from './BottomTabNavigator';
 import LoginNavigator from './LoginNavigator';
 import CompanyNavigator from './CompanyNavigator';

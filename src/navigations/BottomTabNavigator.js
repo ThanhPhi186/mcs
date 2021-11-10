@@ -21,6 +21,9 @@ import {
   ListInventoryPeriod,
   DetailInventoryPeriod,
   ListLocation,
+  ContactScreen,
+  ShareScreen,
+  ImportItem,
 } from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
@@ -32,7 +35,7 @@ import {FONT_SIZE_10} from '../styles/Typography';
 import {device_width} from '../styles/Mixin';
 import TabShape from './TabShape';
 import {NAVIGATION_BOTTOM_TABS_HEIGHT} from '../styles/GlobalStyles';
-import {NAVIGATION_NAME} from './NavigationName';
+import {NAVIGATION_NAME} from '.';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -56,7 +59,8 @@ const BottomTabNavigator = () => {
       routeName === NAVIGATION_NAME.EditPO ||
       routeName === NAVIGATION_NAME.ListInventoryPeriod ||
       routeName === NAVIGATION_NAME.DetailInventoryPeriod ||
-      routeName === NAVIGATION_NAME.ListLocation
+      routeName === NAVIGATION_NAME.ListLocation ||
+      routeName === NAVIGATION_NAME.ImportItem
     ) {
       return false;
     }
@@ -147,6 +151,10 @@ const BottomTabNavigator = () => {
         <Stack.Screen
           name={NAVIGATION_NAME.ListLocation}
           component={ListLocation}
+        />
+        <Stack.Screen
+          name={NAVIGATION_NAME.ImportItem}
+          component={ImportItem}
         />
       </Stack.Navigator>
     );
@@ -299,7 +307,7 @@ const BottomTabNavigator = () => {
           tabBarVisible: getTabBarVisibility(route),
         })}
       />
-      <Tab.Screen name={trans('contact')} component={HomeScreen} />
+      <Tab.Screen name={trans('contact')} component={ContactScreen} />
       <Tab.Screen
         name="Lên đơn"
         component={middleComponent}
@@ -335,7 +343,7 @@ const BottomTabNavigator = () => {
             );
           },
         }}
-        component={HomeScreen}
+        component={ShareScreen}
       />
       <Tab.Screen
         name={trans('personal')}

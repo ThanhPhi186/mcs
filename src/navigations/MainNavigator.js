@@ -11,14 +11,6 @@ const MainNavigator = () => {
     userAuthen: state.AuthenOverallReducer.userAuthen,
   }));
 
-  console.log(
-    'xxxx',
-    useSelector(state => ({
-      domain: state.AuthenOverallReducer.domain,
-      userAuthen: state.AuthenOverallReducer.userAuthen,
-    })),
-  );
-
   return (
     <NavigationContainer>
       {!domain ? (

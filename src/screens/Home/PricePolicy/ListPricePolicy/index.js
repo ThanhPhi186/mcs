@@ -4,7 +4,7 @@ import {Appbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {useSelector} from 'react-redux';
 import {AppLoading, AppText} from '../../../../components/atoms';
-import {NAVIGATION_NAME} from '../../../../navigations/NavigationName';
+import {NAVIGATION_NAME} from '../../../../navigations';
 import {ServiceHandle} from '../../../../services';
 import {Colors, Mixin} from '../../../../styles';
 import {container} from '../../../../styles/GlobalStyles';

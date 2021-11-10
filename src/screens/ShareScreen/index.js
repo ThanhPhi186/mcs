@@ -2,25 +2,21 @@ import React, {useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {Appbar} from 'react-native-paper';
-import {images} from '../../assets';
-import {AppText} from '../../components/atoms';
-import {Button} from '../../components/molecules';
-import {Colors} from '../../styles';
+
+import numeral from 'numeral';
+import {useSelector} from 'react-redux';
 import {
   container,
   HEIGHT_MIDDLE_HOME_BTN,
   NAVIGATION_BOTTOM_TABS_HEIGHT,
 } from '../../styles/GlobalStyles';
 import {Const, trans} from '../../utils';
-import numeral from 'numeral';
-import {useSelector} from 'react-redux';
-// import Share from 'react-native-share';
-// import Clipboard from '@react-native-community/clipboard';
-import SimpleToast from 'react-native-simple-toast';
+import {AppText} from '../../components/atoms';
+import {Colors} from '../../styles';
+import {images} from '../../assets';
 
 const ShareScreen = () => {
   const userInfo = useSelector(state => state.AuthenOverallReducer.userAuthen);
-  const appConfig = useSelector(state => state.AppConfigReducer.appConfig);
 
   // const shareOption = async () => {
   //   const shareOptions = {
@@ -54,10 +50,8 @@ const ShareScreen = () => {
           paddingBottom: NAVIGATION_BOTTOM_TABS_HEIGHT + HEIGHT_MIDDLE_HOME_BTN,
         }}>
         <FastImage
-          source={{
-            uri: Const.API.baseUrlImage + appConfig?.general?.shareBanner,
-          }}
-          style={{width: '100%', height: 200}}
+          source={images.shareBG}
+          style={{width: '100%', height: 190}}
           resizeMode="contain"
         />
         <View style={{paddingHorizontal: 16, marginTop: 16}}>

@@ -6,7 +6,7 @@ import SimpleToast from 'react-native-simple-toast';
 import {useSelector} from 'react-redux';
 import {AppLoading} from '../../../../components/atoms';
 import {Button} from '../../../../components/molecules';
-import {NAVIGATION_NAME} from '../../../../navigations/NavigationName';
+import {NAVIGATION_NAME} from '../../../../navigations';
 import {ServiceHandle} from '../../../../services';
 import {Colors} from '../../../../styles';
 import {container} from '../../../../styles/GlobalStyles';

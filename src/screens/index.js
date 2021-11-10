@@ -17,6 +17,7 @@ import {
   ListInventoryPeriod,
   DetailInventoryPeriod,
   ListLocation,
+  ImportItem,
 } from './Home';
 import {MainAccount, ChangePassword, ChangeStore} from './Account';
 import ContactScreen from './ContactScreen';
@@ -46,4 +47,5 @@ export {
   ListLocation,
   ShareScreen,
   ContactScreen,
+  ImportItem,
 };

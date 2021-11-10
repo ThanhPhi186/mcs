@@ -25,8 +25,6 @@ import {device_height} from '../../styles/Mixin';
 import {Const, trans} from '../../utils';
 
 const ContactScreen = ({navigation}) => {
-  const appConfig = useSelector(state => state.AppConfigReducer.appConfig);
-
   const [title, setTitle] = useState('');
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
@@ -70,7 +68,7 @@ const ContactScreen = ({navigation}) => {
   };
 
   const openFacebook = () => {
-    const pageID = 101186448739325;
+    const pageID = 460699881054856;
     const scheme = Platform.select({
       ios: 'fb://profile/',
       android: 'fb://page/',
@@ -79,11 +77,11 @@ const ContactScreen = ({navigation}) => {
   };
 
   const callPhone = () => {
-    Linking.openURL(`tel:0981929986`);
+    Linking.openURL(`tel:0376871280`);
   };
 
   const openzalo = () => {
-    Linking.openURL('https://zalo.me/0981830805');
+    Linking.openURL('https://zalo.me/0376871280');
   };
 
   return (
@@ -92,7 +90,7 @@ const ContactScreen = ({navigation}) => {
         <Appbar.Content
           style={{alignItems: 'center'}}
           color="white"
-          title={trans('contactColla')}
+          title={trans('contactMontE')}
         />
       </Appbar.Header>
       <ScrollView
@@ -101,9 +99,7 @@ const ContactScreen = ({navigation}) => {
           paddingBottom: NAVIGATION_BOTTOM_TABS_HEIGHT + HEIGHT_MIDDLE_HOME_BTN,
         }}>
         <FastImage
-          source={{
-            uri: Const.API.baseUrlImage + appConfig?.general?.contactBanner,
-          }}
+          source={images.contactBG}
           style={{width: '100%', height: 200}}
         />
         <View style={{flex: 1, paddingHorizontal: 16, marginTop: 16}}>

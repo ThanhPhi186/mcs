@@ -14,7 +14,7 @@ import {Colors, Mixin} from '../../../../styles';
 import {ServiceHandle} from '../../../../services';
 import SimpleToast from 'react-native-simple-toast';
 import {isIphoneX} from '../../../../helpers/iphoneXHelper';
-import {NAVIGATION_NAME} from '../../../../navigations/NavigationName';
+import {NAVIGATION_NAME} from '../../../../navigations';
 import {handleStatus} from '../../../../helpers/mcsHelper';
 import {FONT_SIZE_16} from '../../../../styles/Typography';
 import Toast from 'react-native-toast-message';
@@ -55,6 +55,8 @@ const DetailPO = ({navigation, route}) => {
       })
       .finally(() => setLoading(false));
   };
+
+  console.log('dataDetail', dataDetail);
 
   const approveOrder = () => {
     setModalApprove(false);
@@ -160,11 +162,20 @@ const DetailPO = ({navigation, route}) => {
             titleColor={Colors.PRIMARY}
             disabled={dataDetail.statusId !== Const.ORDER_STATUS.CREATED}
           />
-          <Button
+          {/* <Button
             containerStyle={styles.btnOrdered}
             title={trans('approve')}
             onPress={() => setModalApprove(true)}
             disabled={dataDetail.statusId !== Const.ORDER_STATUS.CREATED}
+          /> */}
+          <Button
+            containerStyle={styles.btnOrdered}
+            title={trans('importItem')}
+            onPress={() =>
+              navigation.navigate(NAVIGATION_NAME.ImportItem, {
+                dataItems: dataDetail.orderItems,
+              })
+            }
           />
         </View>
       </View>

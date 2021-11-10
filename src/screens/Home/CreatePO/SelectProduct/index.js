@@ -16,7 +16,7 @@ import moment from 'moment';
 import {Colors, Mixin} from '../../../../styles';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {getBottomSpace} from '../../../../helpers/iphoneXHelper';
-import {NAVIGATION_NAME} from '../../../../navigations/NavigationName';
+import {NAVIGATION_NAME} from '../../../../navigations';
 import {useSelector} from 'react-redux';
 
 const SelectProduct = ({navigation, route}) => {

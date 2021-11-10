@@ -14,7 +14,7 @@ import ItemAccount from '../component/ItemAccount';
 import BannerBehind from '../component/BannerBehind';
 import {images} from '../../../assets';
 import {AppDialog} from '../../../components/molecules';
-import {NAVIGATION_NAME} from '../../../navigations/NavigationName';
+import {NAVIGATION_NAME} from '../../../navigations';
 import CookieManager from '@react-native-cookies/cookies';
 
 const MainAccount = ({navigation}) => {

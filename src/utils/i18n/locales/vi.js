@@ -226,4 +226,6 @@ export default {
   approveOrderSuccess: 'Duyệt đơn thành công',
   cancelOrderSuccess: 'Huỷ đơn thành công',
   editOrderSuccess: 'Cập nhật đơn thành công',
+  contactMontE: 'Liên hệ với Mont-E',
+  importItem: 'Nhập hàng',
 };

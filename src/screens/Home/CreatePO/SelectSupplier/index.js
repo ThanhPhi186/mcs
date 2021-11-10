@@ -4,7 +4,7 @@ import {Appbar, Searchbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {AppLoading, AppText} from '../../../../components/atoms';
 import {getBottomSpace} from '../../../../helpers/iphoneXHelper';
-import {NAVIGATION_NAME} from '../../../../navigations/NavigationName';
+import {NAVIGATION_NAME} from '../../../../navigations';
 import {ServiceHandle} from '../../../../services';
 import {Colors, Mixin} from '../../../../styles';
 import {container} from '../../../../styles/GlobalStyles';

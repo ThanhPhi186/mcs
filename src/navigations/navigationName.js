@@ -20,6 +20,9 @@ const NAVIGATION_NAME = {
   ListInventoryPeriod: 'ListInventoryPeriod',
   DetailInventoryPeriod: 'DetailInventoryPeriod',
   ListLocation: 'ListLocation',
+  ContactScreen: 'ContactScreen',
+  ShareScreen: 'ShareScreen',
+  ImportItem: 'ImportItem',
 };
 
-export {NAVIGATION_NAME};
+export default NAVIGATION_NAME;
