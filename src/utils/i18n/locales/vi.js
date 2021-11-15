@@ -229,4 +229,6 @@ export default {
   contactMontE: 'Liên hệ với Mont-E',
   importItem: 'Nhập hàng',
   copy: 'Sao chép',
+  tally: 'Kiểm đếm',
+  crossCheck: 'Kiểm chéo',
 };

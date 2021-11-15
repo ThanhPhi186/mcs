@@ -3,7 +3,7 @@ import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Appbar, Searchbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {AppText} from '../../../../components/atoms';
-import {ItemInfo} from '../../../../components/molecules';
+import {Button, ItemInfo} from '../../../../components/molecules';
 import {isIphoneX} from '../../../../helpers/iphoneXHelper';
 import {ServiceHandle} from '../../../../services';
 import {Colors, Mixin} from '../../../../styles';
@@ -72,6 +72,19 @@ const DetailInventoryPeriod = ({navigation, route}) => {
           />
         </View>
       </View>
+      <View style={styles.viewGroupBtn}>
+        <Button
+          containerStyle={styles.btnCancel}
+          title={trans('tally')}
+          onPress={() => {}}
+          titleColor={Colors.PRIMARY}
+        />
+        <Button
+          containerStyle={styles.btnOrdered}
+          title={trans('crossCheck')}
+          onPress={() => {}}
+        />
+      </View>
     </View>
   );
 };
@@ -86,6 +99,7 @@ const styles = StyleSheet.create({
     paddingBottom: isIphoneX() ? 26 : 12,
   },
   content: {
+    flex: 1,
     backgroundColor: Colors.WHITE,
     padding: 12,
     marginTop: 12,
@@ -98,5 +112,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  viewGroupBtn: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 16,
+  },
+  btnCancel: {
+    width: '45%',
+    backgroundColor: Colors.WHITE,
+    borderWidth: 1,
+    borderColor: Colors.PRIMARY,
+  },
+  btnOrdered: {
+    width: '45%',
   },
 });

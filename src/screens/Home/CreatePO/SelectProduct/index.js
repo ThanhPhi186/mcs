@@ -42,8 +42,6 @@ const SelectProduct = ({navigation, route}) => {
     rowTranslateAnimatedValues[elm.productId] = new Animated.Value(1);
   });
 
-  console.log('rowTranslateAnimatedValues', rowTranslateAnimatedValues);
-
   useEffect(() => {
     const params = {
       viewSize: 0,
@@ -134,7 +132,6 @@ const SelectProduct = ({navigation, route}) => {
 
   const onSwipeValueChange = swipeData => {
     const {key, value} = swipeData;
-    console.log('swipeData', swipeData);
     if (value < -Mixin.device_width && !animationIsRunning.current) {
       animationIsRunning.current = true;
       Animated.timing(rowTranslateAnimatedValues[key], {

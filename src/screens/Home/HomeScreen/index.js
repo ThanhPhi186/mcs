@@ -5,6 +5,7 @@ import {SliderBox} from 'react-native-image-slider-box';
 import {useSelector} from 'react-redux';
 import {images} from '../../../assets';
 import {AppText} from '../../../components/atoms';
+import {isIphoneX} from '../../../helpers/iphoneXHelper';
 import {NAVIGATION_NAME} from '../../../navigations';
 import {Colors} from '../../../styles';
 import {container, titleBold, viewRow} from '../../../styles/GlobalStyles';
@@ -120,7 +121,7 @@ const HomeScreen = ({navigation}) => {
     <View style={container}>
       <View
         style={{
-          // height: statusBar,
+          height: isIphoneX() ? statusBar : 0,
           backgroundColor: Colors.WHITE,
         }}>
         {/* <StatusBar

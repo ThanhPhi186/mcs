@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {AppLoading, AppText} from '../../../../components/atoms';
@@ -11,31 +11,34 @@ import {ServiceHandle} from '../../../../services';
 import SimpleToast from 'react-native-simple-toast';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {Button, CardItem} from '../../../../components/molecules';
-import {getBottomSpace} from '../../../../helpers/iphoneXHelper';
+import {getBottomSpace, isIphoneX} from '../../../../helpers/iphoneXHelper';
 import Toast from 'react-native-toast-message';
+import {cloneDeep, differenceBy} from 'lodash';
 
 const EditPO = ({navigation, route}) => {
   const {orderDetail} = route.params;
   const [loading, setLoading] = useState(false);
-  const [startDate, setStartDate] = useState(
-    moment(orderDetail?.shipAfterDate).format('DD/MM/YYYY'),
-  );
+  const [startDate, setStartDate] = useState();
 
-  const [endDate, setEndDate] = useState(
-    moment(orderDetail?.shipBeforeDate).format('DD/MM/YYYY'),
-  );
+  const [endDate, setEndDate] = useState();
 
-  const [listChooseProduct, setListChooseProduct] = useState(
-    orderDetail.orderItems,
-  );
+  const [listChooseProduct, setListChooseProduct] = useState([]);
 
   const rowTranslateAnimatedValues = {};
 
-  listChooseProduct.map(elm => {
-    rowTranslateAnimatedValues[elm.id] = new Animated.Value(1);
+  listChooseProduct?.map(elm => {
+    rowTranslateAnimatedValues[elm.productId] = new Animated.Value(1);
   });
 
   const animationIsRunning = useRef(false);
+
+  useEffect(() => {
+    const cloneData = cloneDeep(orderDetail);
+
+    setStartDate(moment(cloneData.shipAfterDate).format('DD/MM/YYYY'));
+    setEndDate(moment(orderDetail?.shipBeforeDate).format('DD/MM/YYYY'));
+    setListChooseProduct(cloneData.orderItems);
+  }, [orderDetail]);
 
   const confirmEditOrder = () => {
     setLoading(true);
@@ -73,15 +76,18 @@ const EditPO = ({navigation, route}) => {
       .finally(() => setLoading(false));
   };
 
-  //   const checkForUpdate = () => {
-  //     if (
-  //       moment(startDate, 'DD/MM/YYYY').valueOf() !== orderDetail.shipAfterDate ||
-  //       moment(endDate, 'DD/MM/YYYY').valueOf() !== orderDetail.shipBeforeDate
-  //     ) {
-  //       return true;
-  //     }
-  //     return false;
-  //   };
+  const checkForUpdate = () => {
+    if (
+      moment(startDate, 'DD/MM/YYYY').valueOf() !== orderDetail.shipAfterDate ||
+      moment(endDate, 'DD/MM/YYYY').valueOf() !== orderDetail.shipBeforeDate ||
+      differenceBy(orderDetail.orderItems, listChooseProduct, 'quantity')
+        .length > 0 ||
+      orderDetail.orderItems.length !== listChooseProduct.length
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   const addAmount = item => {
     const newData = [...listChooseProduct].map(elm => {
@@ -123,7 +129,9 @@ const EditPO = ({navigation, route}) => {
         toValue: 0,
         duration: 200,
       }).start(() => {
-        const newData = [...listChooseProduct].filter(item => item.id !== key);
+        const newData = [...listChooseProduct].filter(
+          item => item.productId !== key,
+        );
         setListChooseProduct(newData);
         animationIsRunning.current = false;
       });
@@ -136,7 +144,7 @@ const EditPO = ({navigation, route}) => {
         style={[
           styles.rowFrontContainer,
           {
-            height: rowTranslateAnimatedValues[item.id].interpolate({
+            height: rowTranslateAnimatedValues[item.productId].interpolate({
               inputRange: [0, 1],
               outputRange: [0, 80],
             }),
@@ -199,10 +207,10 @@ const EditPO = ({navigation, route}) => {
           previewOpenDelay={3000}
           onSwipeValueChange={onSwipeValueChange}
           useNativeDriver={false}
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={(item, index) => item.productId}
         />
       </View>
-      {listChooseProduct.length >= 1 && (
+      {checkForUpdate() && (
         <Button
           containerStyle={styles.btnEditOrder}
           title={trans('updateOrder')}
@@ -233,6 +241,6 @@ const styles = StyleSheet.create({
   },
   btnEditOrder: {
     alignSelf: 'center',
-    marginBottom: getBottomSpace(),
+    marginBottom: isIphoneX() ? 34 : 12,
   },
 });
