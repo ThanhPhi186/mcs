@@ -19,6 +19,7 @@ import {Const} from '../../utils';
 import CookieManager from '@react-native-cookies/cookies';
 import {ServiceHandle} from '../../services';
 import SimpleToast from 'react-native-simple-toast';
+import {NAVIGATION_NAME} from '../../navigations';
 
 const LoginScreen = ({navigation}) => {
   const [employeeCode, setEmployeeCode] = useState();
@@ -53,10 +54,10 @@ const LoginScreen = ({navigation}) => {
         USERNAME: employeeCode,
         PASSWORD: password,
 
-        //fake
-        posTerminalId: 'NVN1',
-        isMobile: 'Y',
-        //end
+        // //fake
+        // posTerminalId: 'NVN1',
+        // isMobile: 'Y',
+        // //end
       };
       ServiceHandle.post(Const.API.Login, params)
         .then(response => {
@@ -66,9 +67,11 @@ const LoginScreen = ({navigation}) => {
               ServiceHandle.setHeader(cookies.JSESSIONID.value);
               dispatch(AuthenOverallRedux.Actions.setCookies(cookies));
               dispatch(AuthenOverallRedux.Actions.getAccount(params));
-              dispatch(AuthenOverallRedux.Actions.loginSuccess(response.data));
+              // dispatch(AuthenOverallRedux.Actions.loginSuccess(response.data));
+              navigation.navigate(NAVIGATION_NAME.ChangeStore, {
+                fromScreen: NAVIGATION_NAME.LoginScreen,
+              });
             });
-            // navigation.navigate(NAVIGATION_NAME.ChangeStore);
           } else {
             setTimeout(() => {
               SimpleToast.show(response.error, SimpleToast.SHORT);

@@ -35,6 +35,8 @@ export default {
     ApprovePOMobilemcs: '/approvePOMobilemcs',
     CancelPOMobilemcs: '/cancelPOMobilemcs',
     UpdatePassWordMobilemcs: '/updatePassWordMobilemcs',
+    GetOrderItemReceivableMobilemcs: '/getOrderItemReceivableMobilemcs',
+    ReceiveInventoryFromPOMobilemcs: '/receiveInventoryFromPOMobilemcs',
   },
 
   RESPONSE_CODES: {

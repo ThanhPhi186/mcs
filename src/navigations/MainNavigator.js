@@ -10,12 +10,13 @@ const MainNavigator = () => {
     domain: state.AuthenOverallReducer.domain,
     userAuthen: state.AuthenOverallReducer.userAuthen,
   }));
+  const store = useSelector(state => state.StoreReducer.store);
 
   return (
     <NavigationContainer>
       {!domain ? (
         <CompanyNavigator />
-      ) : userAuthen._LOGIN_PASSED_ ? (
+      ) : store ? (
         <BottomTabNavigator />
       ) : (
         <LoginNavigator />

@@ -37,8 +37,10 @@ const DetailInventoryPeriod = ({navigation, route}) => {
     return (
       <View>
         <AppText>{item.productName}</AppText>
-        <AppText>{item.quantity}</AppText>
-        <AppText>{item.quantityRecheck}</AppText>
+        <AppText style={{marginTop: 4}}>Kiểm đếm : {item.quantity}</AppText>
+        <AppText style={{marginTop: 4}}>
+          Kiểm chéo : {item.quantityRecheck}
+        </AppText>
       </View>
     );
   };
@@ -60,6 +62,7 @@ const DetailInventoryPeriod = ({navigation, route}) => {
           <ItemInfo title={trans('storeCode')} value={eventDetail.facilityId} />
           <ItemInfo title={trans('status')} value={eventDetail.isClosed} />
         </View>
+        <AppText style={{marginTop: 12, fontWeight: 'bold'}}>Sản phẩm:</AppText>
         <View style={styles.content}>
           <FlatList
             data={dataProduct}
@@ -84,7 +87,8 @@ const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: Colors.WHITE,
-    paddingHorizontal: 12,
+    padding: 12,
+    marginTop: 12,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: {

@@ -15,7 +15,7 @@ import SelectDate from '../../component/SelectDate';
 import moment from 'moment';
 import {Colors, Mixin} from '../../../../styles';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import {getBottomSpace} from '../../../../helpers/iphoneXHelper';
+import {getBottomSpace, isIphoneX} from '../../../../helpers/iphoneXHelper';
 import {NAVIGATION_NAME} from '../../../../navigations';
 import {useSelector} from 'react-redux';
 
@@ -39,8 +39,10 @@ const SelectProduct = ({navigation, route}) => {
 
   const rowTranslateAnimatedValues = {};
   listChooseProduct.map(elm => {
-    rowTranslateAnimatedValues[elm.id] = new Animated.Value(1);
+    rowTranslateAnimatedValues[elm.productId] = new Animated.Value(1);
   });
+
+  console.log('rowTranslateAnimatedValues', rowTranslateAnimatedValues);
 
   useEffect(() => {
     const params = {
@@ -64,9 +66,9 @@ const SelectProduct = ({navigation, route}) => {
     if (
       !listChooseProduct
         .map(elm => {
-          return elm.id;
+          return elm.productId;
         })
-        .includes(item.id)
+        .includes(item.productId)
     ) {
       const newList = [...listChooseProduct];
       newList.push({...item, ...{quantity: 1}});
@@ -76,7 +78,7 @@ const SelectProduct = ({navigation, route}) => {
 
   const addAmount = item => {
     const newData = [...listChooseProduct].map(elm => {
-      if (elm?.id === item?.id) {
+      if (elm?.productId === item?.productId) {
         elm.quantity += 1;
       }
       return elm;
@@ -87,7 +89,7 @@ const SelectProduct = ({navigation, route}) => {
   const lessAmount = item => {
     if (item.quantity > 1) {
       const newData = [...listChooseProduct].map(elm => {
-        if (elm?.id === item?.id) {
+        if (elm?.productId === item?.productId) {
           elm.quantity -= 1;
         }
         return elm;
@@ -98,7 +100,7 @@ const SelectProduct = ({navigation, route}) => {
 
   const changeAmount = (valueInput, item) => {
     const newData = [...listChooseProduct].map(elm => {
-      if (elm?.id === item?.id) {
+      if (elm?.productId === item?.productId) {
         elm.quantity = Number(valueInput);
       }
       return elm;
@@ -132,13 +134,16 @@ const SelectProduct = ({navigation, route}) => {
 
   const onSwipeValueChange = swipeData => {
     const {key, value} = swipeData;
+    console.log('swipeData', swipeData);
     if (value < -Mixin.device_width && !animationIsRunning.current) {
       animationIsRunning.current = true;
       Animated.timing(rowTranslateAnimatedValues[key], {
         toValue: 0,
         duration: 200,
       }).start(() => {
-        const newData = [...listChooseProduct].filter(item => item.id !== key);
+        const newData = [...listChooseProduct].filter(
+          item => item.productId !== key,
+        );
         setListChooseProduct(newData);
         animationIsRunning.current = false;
       });
@@ -159,7 +164,7 @@ const SelectProduct = ({navigation, route}) => {
         style={[
           styles.rowFrontContainer,
           {
-            height: rowTranslateAnimatedValues[item.id].interpolate({
+            height: rowTranslateAnimatedValues[item.productId].interpolate({
               inputRange: [0, 1],
               outputRange: [0, 80],
             }),
@@ -219,7 +224,7 @@ const SelectProduct = ({navigation, route}) => {
           previewOpenDelay={3000}
           onSwipeValueChange={onSwipeValueChange}
           useNativeDriver={false}
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={(item, index) => item.productId}
         />
       </View>
       {listChooseProduct.length >= 1 && (
@@ -292,6 +297,6 @@ const styles = {
   },
   btnPurchase: {
     alignSelf: 'center',
-    marginBottom: getBottomSpace(),
+    marginBottom: isIphoneX() ? 34 : 12,
   },
 };

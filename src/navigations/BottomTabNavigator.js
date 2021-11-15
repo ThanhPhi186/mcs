@@ -36,6 +36,7 @@ import {device_width} from '../styles/Mixin';
 import TabShape from './TabShape';
 import {NAVIGATION_BOTTOM_TABS_HEIGHT} from '../styles/GlobalStyles';
 import {NAVIGATION_NAME} from '.';
+import {Appbar} from 'react-native-paper';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -204,8 +205,8 @@ const BottomTabNavigator = () => {
           return 'phone-in-talk';
         case 'Lên đơn':
           return 'plus-circle-outline';
-        case trans('notification'):
-          return 'bell';
+        case trans('share'):
+          return 'share-variant';
         case trans('personal'):
           return 'account';
         default:
@@ -248,12 +249,7 @@ const BottomTabNavigator = () => {
               });
             };
             if (index === 2) {
-              return (
-                <CustomButtonTab
-                  onPress={() => navigation.navigate('ListProduct')}
-                  key={index}
-                />
-              );
+              return <CustomButtonTab onPress={() => {}} key={index} />;
             }
 
             return (
@@ -316,7 +312,7 @@ const BottomTabNavigator = () => {
         })}
       />
       <Tab.Screen
-        name={trans('notification')}
+        name={trans('share')}
         options={{
           tabBarIcon: ({color, size}) => {
             return (

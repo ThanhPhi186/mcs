@@ -63,6 +63,7 @@ const CashierLoginHistory = ({navigation}) => {
           data={loginHistoryData}
           renderItem={({item}) => renderItem(item)}
           keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={{paddingBottom: 20}}
         />
       </View>
     </View>

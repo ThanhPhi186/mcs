@@ -65,6 +65,7 @@ const ListPricePolicy = ({navigation}) => {
         data={listPricePolicy}
         renderItem={({item}) => renderItem(item)}
         keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={{paddingBottom: 20}}
       />
     </View>
   );

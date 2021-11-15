@@ -18,23 +18,6 @@ import {images} from '../../assets';
 const ShareScreen = () => {
   const userInfo = useSelector(state => state.AuthenOverallReducer.userAuthen);
 
-  // const shareOption = async () => {
-  //   const shareOptions = {
-  //     title: 'Share via',
-  //     message: 'some message',
-  //     url: 'some share url',
-  //     subject: 'Share Link',
-  //     social: Share.Social.FACEBOOK,
-  //   };
-
-  //   await Share.open(shareOptions);
-  // };
-
-  // const coppyText = () => {
-  //   Clipboard.setString(userInfo.affiliateCode);
-  //   SimpleToast.show('Sao chép mã giới thiệu thành công', SimpleToast.SHORT);
-  // };
-
   return (
     <View style={container}>
       <Appbar.Header>
@@ -51,47 +34,18 @@ const ShareScreen = () => {
         }}>
         <FastImage
           source={images.shareBG}
-          style={{width: '100%', height: 190}}
+          style={{width: '100%', height: 200}}
           resizeMode="contain"
         />
         <View style={{paddingHorizontal: 16, marginTop: 16}}>
-          {/* <AppText>Link chia sẻ</AppText>
-          <View style={{flexDirection: 'row', marginTop: 4}}>
-            <View
-              style={{
-                height: 40,
-                backgroundColor: Colors.GREEN_2,
-                justifyContent: 'center',
-                flex: 3,
-                paddingLeft: 12,
-                borderTopLeftRadius: 12,
-                borderBottomLeftRadius: 12,
-              }}>
-              <Text numberOfLines={1}>
-                https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.shivramgroup.com%2Fcontact%2F&psig=AOvVaw1MwyZ-E6KjPplVsCf8DPzj&ust=1622519122961000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLj4oMqB8_ACFQAAAAAdAAAAABAS
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={{
-                flex: 1,
-                height: 40,
-                justifyContent: 'center',
-                backgroundColor: Colors.ORANGE,
-                alignItems: 'center',
-                borderTopRightRadius: 12,
-                borderBottomRightRadius: 12,
-              }}>
-              <AppText style={{color: Colors.WHITE, fontWeight: 'bold'}}>
-                {trans('copy')}
-              </AppText>
-            </TouchableOpacity>
-          </View> */}
-
-          <AppText style={{marginTop: 16}}>Mã giới thiệu của bạn</AppText>
+          <AppText title style={{marginTop: 16}}>
+            Link chia sẻ :
+          </AppText>
 
           <View
             style={{flexDirection: 'row', alignItems: 'center', marginTop: 4}}>
             <AppText
+              numberOfLines={1}
               containerStyle={{
                 height: 40,
                 backgroundColor: Colors.GREEN_2,
@@ -103,7 +57,7 @@ const ShareScreen = () => {
                 alignItems: 'center',
               }}
               style={{fontWeight: 'bold'}}>
-              {userInfo.affiliateCode}
+              https://play.google.com/store/apps/details?id=com.mont_e
             </AppText>
             <TouchableOpacity
               // onPress={coppyText}
@@ -121,45 +75,6 @@ const ShareScreen = () => {
               </AppText>
             </TouchableOpacity>
           </View>
-
-          {/* <AppText style={{marginTop: 16}}>Chia sẻ</AppText>
-
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: 8,
-            }}>
-            <TouchableOpacity
-            //  onPress={shareOption}
-            >
-              <FastImage
-                source={images.facebook}
-                style={{width: 50, height: 50}}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <FastImage
-                source={images.insta}
-                style={{width: 50, height: 50}}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <FastImage source={images.zalo} style={{width: 50, height: 50}} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <FastImage
-                source={images.gmail}
-                style={{width: 50, height: 50}}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <FastImage
-                source={images.message}
-                style={{width: 50, height: 50}}
-              />
-            </TouchableOpacity>
-          </View> */}
 
           <View
             style={{

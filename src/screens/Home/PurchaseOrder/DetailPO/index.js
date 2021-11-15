@@ -56,8 +56,6 @@ const DetailPO = ({navigation, route}) => {
       .finally(() => setLoading(false));
   };
 
-  console.log('dataDetail', dataDetail);
-
   const approveOrder = () => {
     setModalApprove(false);
     ServiceHandle.post(Const.API.ApprovePOMobilemcs, {orderId}).then(res => {
@@ -173,7 +171,7 @@ const DetailPO = ({navigation, route}) => {
             title={trans('importItem')}
             onPress={() =>
               navigation.navigate(NAVIGATION_NAME.ImportItem, {
-                dataItems: dataDetail.orderItems,
+                orderId: dataDetail.orderId,
               })
             }
           />

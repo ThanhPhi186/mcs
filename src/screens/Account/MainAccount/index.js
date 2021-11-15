@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppText} from '../../../components/atoms';
-import {AuthenOverallRedux} from '../../../redux';
+import {AuthenOverallRedux, StoreRedux} from '../../../redux';
 import {
   HEIGHT_MIDDLE_HOME_BTN,
   NAVIGATION_BOTTOM_TABS_HEIGHT,
@@ -32,6 +32,7 @@ const MainAccount = ({navigation}) => {
 
     // dispatch(AuthenOverallRedux.Actions.logout.request());
     dispatch(AuthenOverallRedux.Actions.handleLogout());
+    dispatch(StoreRedux.Actions.changeStore(''));
   };
 
   const changeCompany = () => {
@@ -44,9 +45,9 @@ const MainAccount = ({navigation}) => {
       <BannerBehind backGround={images.ic_Background} avatar={images.avatar} />
       <View style={styles.viewInfo}>
         <AppText title style={styles.txtName}>
-          {userInfo.lastName} {userInfo.middleName} {userInfo.partyName}
+          Nguyễn Thành Phi
         </AppText>
-        <AppText style={styles.txtInfo}>{userInfo.partyId}</AppText>
+        <AppText style={styles.txtInfo}>POS05</AppText>
       </View>
       <View style={{flex: 1}}>
         <View style={styles.largeIndicate} />
@@ -61,7 +62,11 @@ const MainAccount = ({navigation}) => {
           <ItemAccount
             icon="gift-outline"
             title={trans('changeStore')}
-            onPress={() => navigation.navigate(NAVIGATION_NAME.ChangeStore)}
+            onPress={() =>
+              navigation.navigate(NAVIGATION_NAME.ChangeStore, {
+                fromScreen: NAVIGATION_NAME.MainAccount,
+              })
+            }
           />
           <View style={styles.smallIndicate} />
           <ItemAccount

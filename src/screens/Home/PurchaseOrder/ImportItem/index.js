@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,30 +9,82 @@ import {
 import {FlatList} from 'react-native-gesture-handler';
 import {Appbar} from 'react-native-paper';
 import {AppText} from '../../../../components/atoms';
-import {CardItem} from '../../../../components/molecules';
 import {container, fontWeightBold} from '../../../../styles/GlobalStyles';
-import {trans} from '../../../../utils';
+import {Const, trans} from '../../../../utils';
 import numeral from 'numeral';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Colors, Mixin} from '../../../../styles';
+import {cloneDeep, forEach} from 'lodash';
+import {post} from '../../../../services/ServiceHandle';
+import SimpleToast from 'react-native-simple-toast';
 
 const ImportItem = ({navigation, route}) => {
-  const {dataItems} = route.params;
+  const {orderId} = route.params;
 
-  console.log('dataItems', dataItems);
+  const [dataOrder, setDataOrder] = useState([]);
 
-  const lessAmountProps = () => {};
-  const changeAmountProps = () => {};
-  const addAmountProps = () => {};
+  useEffect(() => {
+    const params = {orderId};
+    const getDataReceivable = () => {
+      post(Const.API.GetOrderItemReceivableMobilemcs, params).then(res => {
+        if (res.ok) {
+          setDataOrder(res.data.orderItems);
+        } else {
+          SimpleToast.show(res.error, SimpleToast.SHORT);
+        }
+      });
+    };
+    getDataReceivable();
+  }, [orderId]);
+
+  const importItem = () => {
+    // const params = {
+    //   orderId,
+    //   listOrderItems: [],
+    // };
+    // post(Const.API.ReceiveInventoryFromPOMobilemcs, params).then(res => {
+    //   if (res.ok) {
+    //   } else {
+    //     SimpleToast.show(res.error, SimpleToast.SHORT);
+    //   }
+    // });
+  };
+
+  const lessAmount = item => {
+    const convertData = [...dataOrder];
+    convertData.map(elm => {
+      if (elm.productId === item.productId) {
+        elm.quantity -= 1;
+      }
+      return elm;
+    });
+    setDataOrder(convertData);
+  };
+
+  const changeAmount = () => {};
+
+  const addAmount = item => {
+    const convertData = [...dataOrder];
+    convertData.map(elm => {
+      if (
+        elm.productId === item.productId &&
+        elm.quantity < elm.quantityRequired
+      ) {
+        elm.quantity += 1;
+      }
+      return elm;
+    });
+    setDataOrder(convertData);
+  };
 
   const renderItem = item => {
     return (
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row', marginBottom: 12}}>
         <View style={{flex: 1}}>
           <AppText style={{fontWeight: 'bold'}}>
             {item.productId} ({item.uomId})
           </AppText>
-          <AppText>SL cần: {item.quantity}</AppText>
+          <AppText>SL cần: {item.quantityRequired}</AppText>
           <AppText>{numeral(item.unitPrice).format()} đ</AppText>
         </View>
 
@@ -41,13 +93,13 @@ const ImportItem = ({navigation, route}) => {
             style={styles.boxAmount}
             value={item.quantity.toString()}
             keyboardType="number-pad"
-            onChangeText={valueInput => changeAmountProps(valueInput, item)}
+            onChangeText={valueInput => changeAmount(valueInput, item)}
           />
           <View>
-            <TouchableOpacity onPress={() => addAmountProps(item)}>
+            <TouchableOpacity onPress={() => addAmount(item)}>
               <Icon name="plus-circle" size={28} color={Colors.PRIMARY} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => lessAmountProps(item)}>
+            <TouchableOpacity onPress={() => lessAmount(item)}>
               <Icon name="minus-circle" size={28} color={Colors.PRIMARY} />
             </TouchableOpacity>
           </View>
@@ -55,16 +107,16 @@ const ImportItem = ({navigation, route}) => {
 
         <View style={styles.viewQuantity}>
           <TextInput
-            style={styles.boxAmount}
-            value={item.quantity.toString()}
+            style={[styles.boxAmount, {borderColor: Colors.RED}]}
+            value={item.selectedAmount.toString()}
             keyboardType="number-pad"
-            onChangeText={valueInput => changeAmountProps(valueInput, item)}
+            onChangeText={valueInput => changeAmount(valueInput, item)}
           />
           <View>
-            <TouchableOpacity onPress={() => addAmountProps(item)}>
+            <TouchableOpacity onPress={() => addAmount(item)}>
               <Icon name="plus-circle" size={28} color={Colors.PRIMARY} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => lessAmountProps(item)}>
+            <TouchableOpacity onPress={() => lessAmount(item)}>
               <Icon name="minus-circle" size={28} color={Colors.PRIMARY} />
             </TouchableOpacity>
           </View>
@@ -78,6 +130,7 @@ const ImportItem = ({navigation, route}) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('importItem')} />
+        <Appbar.Action icon="telegram" onPress={importItem} />
       </Appbar.Header>
       <View style={{flex: 1, paddingHorizontal: 12}}>
         <View style={{flexDirection: 'row', paddingVertical: 12}}>
@@ -96,7 +149,7 @@ const ImportItem = ({navigation, route}) => {
           </AppText>
         </View>
         <FlatList
-          data={dataItems}
+          data={dataOrder}
           renderItem={({item}) => renderItem(item)}
           keyExtractor={(item, index) => index.toString()}
         />

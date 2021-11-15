@@ -15,10 +15,10 @@ const HomeScreen = ({navigation}) => {
   const store = useSelector(state => state.StoreReducer.store);
 
   const imagesSlider = [
-    'https://source.unsplash.com/1024x768/?nature',
-    'https://source.unsplash.com/1024x768/?water',
-    'https://source.unsplash.com/1024x768/?girl',
-    'https://source.unsplash.com/1024x768/?tree',
+    images.intro1,
+    images.intro2,
+    images.intro3,
+    images.intro4,
   ];
 
   const renderHeader = (
@@ -65,17 +65,15 @@ const HomeScreen = ({navigation}) => {
           onPress={() => navigation.navigate(NAVIGATION_NAME.ListPO)}
         />
         <ItemHomeMenu
+          iconName="file-plus"
+          title={`Lên đơn ${'\n'} PO`}
+          onPress={() => navigation.navigate(NAVIGATION_NAME.SelectSupplier)}
+        />
+        <ItemHomeMenu
           iconName="shopping-search"
           title={`Tra cứu ${'\n'} sản phẩm`}
           onPress={() =>
             navigation.navigate(NAVIGATION_NAME.SearchProductScreen)
-          }
-        />
-        <ItemHomeMenu
-          iconName="bag-personal"
-          title="Kiểm kê"
-          onPress={() =>
-            navigation.navigate(NAVIGATION_NAME.ListInventoryPeriod)
           }
         />
       </View>
@@ -100,16 +98,18 @@ const HomeScreen = ({navigation}) => {
       </View>
       <View style={styles.viewRowItem}>
         <ItemHomeMenu
+          iconName="bag-personal"
+          title="Kiểm kê"
+          onPress={() =>
+            navigation.navigate(NAVIGATION_NAME.ListInventoryPeriod)
+          }
+        />
+        <ItemHomeMenu
           iconName="history"
           title={`Lịch sử ${'\n'} đăng nhập`}
           onPress={() =>
             navigation.navigate(NAVIGATION_NAME.CashierLoginHistory)
           }
-        />
-        <ItemHomeMenu
-          iconName="file-plus"
-          title={`Lên đơn ${'\n'} PO`}
-          onPress={() => navigation.navigate(NAVIGATION_NAME.SelectSupplier)}
         />
         <ItemHomeMenu />
       </View>
@@ -118,12 +118,16 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <View style={container}>
-      <View style={{height: statusBar, backgroundColor: Colors.WHITE}}>
-        <StatusBar
+      <View
+        style={{
+          // height: statusBar,
+          backgroundColor: Colors.WHITE,
+        }}>
+        {/* <StatusBar
           backgroundColor={Colors.WHITE}
           translucent
           barStyle="dark-content"
-        />
+        /> */}
       </View>
       {renderHeader}
       {renderImageSlider}

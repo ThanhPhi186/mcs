@@ -12,7 +12,7 @@ import {Appbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {useSelector} from 'react-redux';
 import {images} from '../../assets';
-import {AppText} from '../../components/atoms';
+import {AppLoading, AppText} from '../../components/atoms';
 import {Button} from '../../components/molecules';
 import {post} from '../../services/ServiceHandle';
 import {Colors} from '../../styles';
@@ -28,6 +28,7 @@ const ContactScreen = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handelCheckValue = () => {
     if (!name) {
@@ -49,22 +50,16 @@ const ContactScreen = ({navigation}) => {
     if (handelCheckValue()) {
       return;
     }
-    const params = {
-      title,
-      name,
-      content,
-    };
-    post(Const.API.baseURL + Const.API.Contact, params).then(res => {
-      if (res.ok) {
-        SimpleToast.show('Gửi phản hồi thành công', SimpleToast.SHORT);
-        navigation.reset({
-          index: 0,
-          routes: [{name: trans('contact')}],
-        });
-      } else {
-        SimpleToast.show(res.error, SimpleToast.SHORT);
-      }
-    });
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setContent('');
+      setName('');
+      setTitle('');
+      setTimeout(() => {
+        return SimpleToast.show('Gửi phản hồi thành công', SimpleToast.SHORT);
+      }, 700);
+    }, 1000);
   };
 
   const openFacebook = () => {
@@ -86,6 +81,7 @@ const ContactScreen = ({navigation}) => {
 
   return (
     <View style={container}>
+      <AppLoading isVisible={loading} />
       <Appbar.Header>
         <Appbar.Content
           style={{alignItems: 'center'}}
@@ -93,15 +89,15 @@ const ContactScreen = ({navigation}) => {
           title={trans('contactMontE')}
         />
       </Appbar.Header>
+      <FastImage
+        source={images.contactBG}
+        style={{width: '100%', height: 200}}
+      />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: NAVIGATION_BOTTOM_TABS_HEIGHT + HEIGHT_MIDDLE_HOME_BTN,
         }}>
-        <FastImage
-          source={images.contactBG}
-          style={{width: '100%', height: 200}}
-        />
         <View style={{flex: 1, paddingHorizontal: 16, marginTop: 16}}>
           <AppText>Liên hệ</AppText>
           <View

@@ -228,4 +228,5 @@ export default {
   editOrderSuccess: 'Cập nhật đơn thành công',
   contactMontE: 'Liên hệ với Mont-E',
   importItem: 'Nhập hàng',
+  copy: 'Sao chép',
 };

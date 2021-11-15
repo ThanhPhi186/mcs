@@ -91,7 +91,7 @@ const ConfirmOrder = ({navigation, route}) => {
           <Button
             containerStyle={styles.btnCancel}
             title={trans('cancelOrder')}
-            onPress={submitOrder}
+            onPress={() => {}}
             titleColor={Colors.PRIMARY}
           />
           <Button
