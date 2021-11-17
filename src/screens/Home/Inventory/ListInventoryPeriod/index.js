@@ -1,4 +1,3 @@
-import {set} from 'lodash';
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Appbar, Searchbar} from 'react-native-paper';
@@ -46,11 +45,12 @@ const ListInventoryPeriod = ({navigation}) => {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
-        onPress={() =>
-          navigation.navigate(NAVIGATION_NAME.DetailInventoryPeriod, {
-            eventDetail: item,
-          })
-        }
+        // onPress={() =>
+        //   navigation.navigate(NAVIGATION_NAME.DetailInventoryPeriod, {
+        //     eventDetail: item,
+        //   })
+        // }
+        onPress={() => navigation.navigate(NAVIGATION_NAME.ListTally)}
         style={styles.containerItem}>
         <View style={styles.viewHeaderItem}>
           <AppText style={styles.txtEventId}>

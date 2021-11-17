@@ -184,7 +184,6 @@ const SelectProduct = ({navigation, route}) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('purchaseOrder')} />
-        <Appbar.Action icon="magnify" onPress={() => {}} />
       </Appbar.Header>
       <View style={styles.contentContainer}>
         <SearchProductComponent

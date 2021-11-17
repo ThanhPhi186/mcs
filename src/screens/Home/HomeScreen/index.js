@@ -59,61 +59,49 @@ const HomeScreen = ({navigation}) => {
 
   const renderItem = (
     <View style={styles.containerItem}>
-      <View style={styles.viewRowItem}>
-        <ItemHomeMenu
-          iconName="cart"
-          title={`Đơn hàng ${'\n'} mua`}
-          onPress={() => navigation.navigate(NAVIGATION_NAME.ListPO)}
-        />
-        <ItemHomeMenu
-          iconName="file-plus"
-          title={`Lên đơn ${'\n'} PO`}
-          onPress={() => navigation.navigate(NAVIGATION_NAME.SelectSupplier)}
-        />
-        <ItemHomeMenu
-          iconName="shopping-search"
-          title={`Tra cứu ${'\n'} sản phẩm`}
-          onPress={() =>
-            navigation.navigate(NAVIGATION_NAME.SearchProductScreen)
-          }
-        />
-      </View>
-      <View style={styles.viewRowItem}>
-        <ItemHomeMenu
-          iconName="currency-usd-circle"
-          title={'Danh sách chính sách giá'}
-          onPress={() => navigation.navigate(NAVIGATION_NAME.ListPricePolicy)}
-        />
-        <ItemHomeMenu
-          iconName="file-edit"
-          title={'Danh sách giá thay đổi'}
-          onPress={() => navigation.navigate(NAVIGATION_NAME.ListPriceChange)}
-        />
-        <ItemHomeMenu
-          iconName="file-remove"
-          title={'Thống kê huỷ hàng'}
-          onPress={() =>
-            navigation.navigate(NAVIGATION_NAME.CancelOrderStatistic)
-          }
-        />
-      </View>
-      <View style={styles.viewRowItem}>
-        <ItemHomeMenu
-          iconName="bag-personal"
-          title="Kiểm kê"
-          onPress={() =>
-            navigation.navigate(NAVIGATION_NAME.ListInventoryPeriod)
-          }
-        />
-        <ItemHomeMenu
-          iconName="history"
-          title={`Lịch sử ${'\n'} đăng nhập`}
-          onPress={() =>
-            navigation.navigate(NAVIGATION_NAME.CashierLoginHistory)
-          }
-        />
-        <ItemHomeMenu />
-      </View>
+      <ItemHomeMenu
+        iconName="cart"
+        title={`Đơn hàng ${'\n'} mua`}
+        onPress={() => navigation.navigate(NAVIGATION_NAME.ListPO)}
+      />
+      <ItemHomeMenu
+        iconName="file-plus"
+        title={`Lên đơn ${'\n'} PO`}
+        onPress={() => navigation.navigate(NAVIGATION_NAME.SelectSupplier)}
+      />
+      <ItemHomeMenu
+        iconName="shopping-search"
+        title={`Tra cứu ${'\n'} sản phẩm`}
+        onPress={() => navigation.navigate(NAVIGATION_NAME.SearchProductScreen)}
+      />
+
+      <ItemHomeMenu
+        iconName="currency-usd-circle"
+        title={'Danh sách chính sách giá'}
+        onPress={() => navigation.navigate(NAVIGATION_NAME.ListPricePolicy)}
+      />
+      <ItemHomeMenu
+        iconName="file-edit"
+        title={`Danh sách giá ${'\n'} thay đổi`}
+        onPress={() => navigation.navigate(NAVIGATION_NAME.ListPriceChange)}
+      />
+      <ItemHomeMenu
+        iconName="file-remove"
+        title={`Thống kê ${'\n'} huỷ hàng`}
+        onPress={() =>
+          navigation.navigate(NAVIGATION_NAME.CancelOrderStatistic)
+        }
+      />
+      <ItemHomeMenu
+        iconName="bag-personal"
+        title="Kiểm kê"
+        onPress={() => navigation.navigate(NAVIGATION_NAME.ListInventoryPeriod)}
+      />
+      <ItemHomeMenu
+        iconName="history"
+        title={`Lịch sử ${'\n'} đăng nhập`}
+        onPress={() => navigation.navigate(NAVIGATION_NAME.CashierLoginHistory)}
+      />
     </View>
   );
 
@@ -171,6 +159,8 @@ const styles = {
     marginTop: 12,
   },
   containerItem: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     padding: 12,
     backgroundColor: 'white',
     shadowColor: '#000',

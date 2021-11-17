@@ -21,11 +21,17 @@ const ChangeStore = ({navigation, route}) => {
   const [listStore, setListStore] = useState([]);
 
   useEffect(() => {
-    ServiceHandle.post(Const.API.GetListProductStoreMobileMcs).then(res => {
-      if (res.ok) {
-        setListStore(res.data.listStores);
-      }
-    });
+    const params = {
+      viewIndex: 0,
+      viewSize: 200,
+    };
+    ServiceHandle.post(Const.API.GetListProductStoreMobileMcs, params).then(
+      res => {
+        if (res.ok) {
+          setListStore(res.data.listStores);
+        }
+      },
+    );
   }, []);
 
   console.log('fromScreen', fromScreen);

@@ -160,21 +160,27 @@ const DetailPO = ({navigation, route}) => {
             titleColor={Colors.PRIMARY}
             disabled={dataDetail.statusId !== Const.ORDER_STATUS.CREATED}
           />
-          {/* <Button
-            containerStyle={styles.btnOrdered}
-            title={trans('approve')}
-            onPress={() => setModalApprove(true)}
-            disabled={dataDetail.statusId !== Const.ORDER_STATUS.CREATED}
-          /> */}
-          <Button
-            containerStyle={styles.btnOrdered}
-            title={trans('importItem')}
-            onPress={() =>
-              navigation.navigate(NAVIGATION_NAME.ImportItem, {
-                orderId: dataDetail.orderId,
-              })
-            }
-          />
+          {dataDetail.statusId === Const.ORDER_STATUS.APPROVED &&
+          (!dataDetail.mainSupplier ||
+            (dataDetail.mainSupplier &&
+              dataDetail.isSupplierApproved === 'Y')) ? (
+            <Button
+              containerStyle={styles.btnOrdered}
+              title={trans('importItem')}
+              onPress={() =>
+                navigation.navigate(NAVIGATION_NAME.ImportItem, {
+                  orderId: dataDetail.orderId,
+                })
+              }
+            />
+          ) : (
+            <Button
+              containerStyle={styles.btnOrdered}
+              title={trans('approve')}
+              onPress={() => setModalApprove(true)}
+              disabled={dataDetail.statusId !== Const.ORDER_STATUS.CREATED}
+            />
+          )}
         </View>
       </View>
       <AppDialog

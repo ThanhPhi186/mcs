@@ -23,6 +23,7 @@ const NAVIGATION_NAME = {
   ContactScreen: 'ContactScreen',
   ShareScreen: 'ShareScreen',
   ImportItem: 'ImportItem',
+  ListTally: 'ListTally',
 };
 
 export default NAVIGATION_NAME;

@@ -82,7 +82,7 @@ const ImportItem = ({navigation, route}) => {
   const lessAmount = item => {
     const convertData = [...dataOrder];
     convertData.map(elm => {
-      if (elm.productId === item.productId) {
+      if (elm.productId === item.productId && elm.quantityRequired > 0) {
         elm.quantityRequired -= 1;
       }
       return elm;
@@ -100,6 +100,31 @@ const ImportItem = ({navigation, route}) => {
         elm.quantityRequired < elm.defaultRequired
       ) {
         elm.quantityRequired += 1;
+      }
+      return elm;
+    });
+    setDataOrder(convertData);
+  };
+
+  const addDebit = item => {
+    const convertData = [...dataOrder];
+    convertData.map(elm => {
+      if (
+        elm.productId === item.productId &&
+        elm.debitQuantity < elm.defaultRequired
+      ) {
+        elm.debitQuantity += 1;
+      }
+      return elm;
+    });
+    setDataOrder(convertData);
+  };
+
+  const lessDebit = item => {
+    const convertData = [...dataOrder];
+    convertData.map(elm => {
+      if (elm.productId === item.productId && elm.debitQuantity > 0) {
+        elm.debitQuantity -= 1;
       }
       return elm;
     });
@@ -142,10 +167,10 @@ const ImportItem = ({navigation, route}) => {
             onChangeText={valueInput => changeAmount(valueInput, item)}
           />
           <View>
-            <TouchableOpacity onPress={() => addAmount(item)}>
+            <TouchableOpacity onPress={() => addDebit(item)}>
               <Icon name="plus-circle" size={28} color={Colors.PRIMARY} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => lessAmount(item)}>
+            <TouchableOpacity onPress={() => lessDebit(item)}>
               <Icon name="minus-circle" size={28} color={Colors.PRIMARY} />
             </TouchableOpacity>
           </View>

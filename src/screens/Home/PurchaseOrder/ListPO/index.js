@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {FlatList, View} from 'react-native';
-import {Appbar} from 'react-native-paper';
+import {Appbar, FAB} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {useSelector} from 'react-redux';
 import {AppLoading} from '../../../../components/atoms';
@@ -187,6 +187,11 @@ const ListPO = ({navigation}) => {
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
+      <FAB
+        style={styles.fab}
+        icon="plus"
+        onPress={() => navigation.navigate(NAVIGATION_NAME.SelectSupplier)}
+      />
     </View>
   );
 };
@@ -213,5 +218,11 @@ const styles = {
   },
   txtBtnSearch: {
     fontSize: FONT_SIZE_14,
+  },
+  fab: {
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
+    backgroundColor: Colors.PRIMARY,
   },
 };

@@ -10,6 +10,7 @@ import {
   ListInventoryPeriod,
   DetailInventoryPeriod,
   ListLocation,
+  ListTally,
 } from './Inventory';
 
 export {
@@ -30,4 +31,5 @@ export {
   DetailInventoryPeriod,
   ListLocation,
   ImportItem,
+  ListTally,
 };

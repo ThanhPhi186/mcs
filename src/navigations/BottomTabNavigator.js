@@ -24,6 +24,7 @@ import {
   ContactScreen,
   ShareScreen,
   ImportItem,
+  ListTally,
 } from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
@@ -61,7 +62,8 @@ const BottomTabNavigator = () => {
       routeName === NAVIGATION_NAME.ListInventoryPeriod ||
       routeName === NAVIGATION_NAME.DetailInventoryPeriod ||
       routeName === NAVIGATION_NAME.ListLocation ||
-      routeName === NAVIGATION_NAME.ImportItem
+      routeName === NAVIGATION_NAME.ImportItem ||
+      routeName === NAVIGATION_NAME.ListTally
     ) {
       return false;
     }
@@ -157,6 +159,7 @@ const BottomTabNavigator = () => {
           name={NAVIGATION_NAME.ImportItem}
           component={ImportItem}
         />
+        <Stack.Screen name={NAVIGATION_NAME.ListTally} component={ListTally} />
       </Stack.Navigator>
     );
   };

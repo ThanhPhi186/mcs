@@ -14,9 +14,18 @@ import {Const, trans} from '../../utils';
 import {AppText} from '../../components/atoms';
 import {Colors} from '../../styles';
 import {images} from '../../assets';
+import SimpleToast from 'react-native-simple-toast';
+import Clipboard from '@react-native-community/clipboard';
 
 const ShareScreen = () => {
   const userInfo = useSelector(state => state.AuthenOverallReducer.userAuthen);
+
+  const coppyText = () => {
+    Clipboard.setString(
+      'https://play.google.com/store/apps/details?id=com.mont_e',
+    );
+    SimpleToast.show('Sao chép mã giới thiệu thành công', SimpleToast.SHORT);
+  };
 
   return (
     <View style={container}>
@@ -52,15 +61,15 @@ const ShareScreen = () => {
                 justifyContent: 'center',
                 borderTopLeftRadius: 12,
                 borderBottomLeftRadius: 12,
-
-                width: '40%',
+                paddingLeft: 12,
+                width: '60%',
                 alignItems: 'center',
               }}
               style={{fontWeight: 'bold'}}>
               https://play.google.com/store/apps/details?id=com.mont_e
             </AppText>
             <TouchableOpacity
-              // onPress={coppyText}
+              onPress={coppyText}
               style={{
                 height: 40,
                 width: '30%',

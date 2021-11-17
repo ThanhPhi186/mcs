@@ -5,6 +5,7 @@ import ItemProduct from './ItemProduct';
 import ItemInfo from './ItemInfo';
 import CardItem from './CardItem';
 import SearchProductComponent from './SearchProductComponent';
+import ScanComponent from './ScanComponent';
 
 export {
   Button,
@@ -14,4 +15,5 @@ export {
   ItemInfo,
   SearchProductComponent,
   CardItem,
+  ScanComponent,
 };

@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {AppText} from '../../../../components/atoms';
 import {ItemInfo} from '../../../../components/molecules';
 import {ServiceHandle} from '../../../../services';
 import {Colors, Mixin} from '../../../../styles';
-import {container} from '../../../../styles/GlobalStyles';
+import {container, fontWeightBold} from '../../../../styles/GlobalStyles';
 import {FONT_SIZE_20} from '../../../../styles/Typography';
 import {Const, trans} from '../../../../utils';
 import moment from 'moment';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const DetailPricePolicy = ({navigation, route}) => {
   const {productQuotationId} = route.params;
@@ -30,7 +31,21 @@ const DetailPricePolicy = ({navigation, route}) => {
     );
   }, [productQuotationId]);
 
-  const renderApplyStore = (
+  const renderApplyComponent = (title, onPress) => {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        style={[
+          styles.infoPolicy,
+          {flexDirection: 'row', justifyContent: 'space-between'},
+        ]}>
+        <AppText style={fontWeightBold}>{title}</AppText>
+        <AppText style={styles.txtSeeDetail}>{trans('seeDetails')}</AppText>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderApplyProduct = (
     <View style={styles.infoPolicy}>
       <AppText style={styles.productName} containerStyle={styles.viewTitle}>
         {trans('applicableProducts')} :
@@ -82,34 +97,43 @@ const DetailPricePolicy = ({navigation, route}) => {
       </Appbar.Header>
       <View style={styles.contentContainer}>
         <View style={styles.infoPolicy}>
-          <View style={styles.viewProductName}>
+          {/* <View style={styles.viewProductName}>
             <AppText
               style={styles.productName}
               containerStyle={styles.viewTitle}>
               {detailPricePolicy?.quotationName}
             </AppText>
-          </View>
+          </View> */}
+          <ItemInfo
+            title={trans('name')}
+            value={detailPricePolicy?.quotationName}
+          />
           <ItemInfo
             title={trans('id')}
             value={detailPricePolicy?.productQuotationId}
           />
           <ItemInfo
             title={trans('startDate')}
-            value={moment(detailPricePolicy?.fromDate).format('DD-MM-YYYY')}
+            value={moment(detailPricePolicy?.fromDate, 'DD-MM-YYYY').format(
+              'DD-MM-YYYY',
+            )}
           />
           <ItemInfo
             title={trans('unit')}
             value={detailPricePolicy?.currencyUomId}
           />
         </View>
-        {renderApplyStore}
+        {renderApplyComponent(trans('applicableStore'))}
+        {renderApplyComponent(trans('applicableStoreGroup'))}
+        {renderApplyComponent(trans('statusEditHistory'))}
+        {renderApplyProduct}
       </View>
     </View>
   );
 };
 export default DetailPricePolicy;
 
-const styles = {
+const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
   },
@@ -144,4 +168,9 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-};
+  txtSeeDetail: {
+    color: Colors.PRIMARY,
+    fontStyle: 'italic',
+    textDecorationLine: 'underline',
+  },
+});

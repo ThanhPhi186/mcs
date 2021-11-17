@@ -231,4 +231,7 @@ export default {
   copy: 'Sao chép',
   tally: 'Kiểm đếm',
   crossCheck: 'Kiểm chéo',
+  listProduct: 'Danh sách sản phẩm',
+  name: 'Tên',
+  seeDetails: 'Xem chi tiết',
 };

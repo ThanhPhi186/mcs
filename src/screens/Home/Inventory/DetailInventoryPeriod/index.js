@@ -6,9 +6,9 @@ import {AppText} from '../../../../components/atoms';
 import {Button, ItemInfo} from '../../../../components/molecules';
 import {isIphoneX} from '../../../../helpers/iphoneXHelper';
 import {ServiceHandle} from '../../../../services';
-import {Colors, Mixin} from '../../../../styles';
+import {Colors} from '../../../../styles';
 import {container} from '../../../../styles/GlobalStyles';
-
+import {NAVIGATION_NAME} from '../../../../navigations';
 import {Const, trans} from '../../../../utils';
 
 const DetailInventoryPeriod = ({navigation, route}) => {
@@ -32,6 +32,14 @@ const DetailInventoryPeriod = ({navigation, route}) => {
       },
     );
   }, [eventDetail]);
+
+  const renderStatus = status => {
+    if (status === 'N') {
+      return trans('notClosedYet');
+    } else {
+      return trans('closed');
+    }
+  };
 
   const renderItem = ({item}) => {
     return (
@@ -60,7 +68,10 @@ const DetailInventoryPeriod = ({navigation, route}) => {
           <ItemInfo title={trans('createdTime')} value={eventDetail.fromDate} />
           <ItemInfo title={trans('endDate')} value={eventDetail.thruDate} />
           <ItemInfo title={trans('storeCode')} value={eventDetail.facilityId} />
-          <ItemInfo title={trans('status')} value={eventDetail.isClosed} />
+          <ItemInfo
+            title={trans('status')}
+            value={renderStatus(eventDetail.isClosed)}
+          />
         </View>
         <AppText style={{marginTop: 12, fontWeight: 'bold'}}>Sản phẩm:</AppText>
         <View style={styles.content}>
@@ -71,19 +82,23 @@ const DetailInventoryPeriod = ({navigation, route}) => {
             contentContainerStyle={styles.contentFlatList}
           />
         </View>
-      </View>
-      <View style={styles.viewGroupBtn}>
-        <Button
-          containerStyle={styles.btnCancel}
-          title={trans('tally')}
-          onPress={() => {}}
-          titleColor={Colors.PRIMARY}
-        />
-        <Button
-          containerStyle={styles.btnOrdered}
-          title={trans('crossCheck')}
-          onPress={() => {}}
-        />
+        <View style={styles.viewGroupBtn}>
+          <Button
+            containerStyle={styles.btnCancel}
+            title={trans('tally')}
+            onPress={() =>
+              navigation.navigate(NAVIGATION_NAME.ListLocation, {
+                eventId: eventDetail.eventId,
+              })
+            }
+            titleColor={Colors.PRIMARY}
+          />
+          <Button
+            containerStyle={styles.btnOrdered}
+            title={trans('crossCheck')}
+            onPress={() => navigation.navigate(NAVIGATION_NAME.ListLocation)}
+          />
+        </View>
       </View>
     </View>
   );

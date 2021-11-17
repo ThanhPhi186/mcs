@@ -23,7 +23,8 @@ export default ItemHomeMenu;
 const styles = {
   btn: {
     alignItems: 'center',
-    width: '30%',
+    width: '33%',
+    marginTop: 16,
   },
   title: {
     textAlign: 'center',
