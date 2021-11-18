@@ -29,7 +29,9 @@ const SelectSupplier = ({navigation}) => {
           if (res.ok) {
             setListSupplier(res.data.listSuppliers);
           } else {
-            SimpleToast.show(res.error, SimpleToast.SHORT);
+            setTimeout(() => {
+              SimpleToast.show(res.error, SimpleToast.SHORT);
+            }, 700);
           }
         })
         .finally(() => setLoading(false));

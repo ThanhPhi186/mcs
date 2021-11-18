@@ -24,6 +24,7 @@ const NAVIGATION_NAME = {
   ShareScreen: 'ShareScreen',
   ImportItem: 'ImportItem',
   ListTally: 'ListTally',
+  ListApplicableStore: 'ListApplicableStore',
 };
 
 export default NAVIGATION_NAME;

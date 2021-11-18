@@ -1,7 +1,8 @@
 import {trans} from '../utils';
 import {create} from 'apisauce';
 import qs from 'querystring';
-import SimpleToast from 'react-native-simple-toast';
+import {useDispatch} from 'react-redux';
+import {AuthenOverallRedux, StoreRedux} from '../redux';
 
 const api = create({
   timeout: 20000,
@@ -10,14 +11,14 @@ const api = create({
   },
 });
 
-api.addMonitor(res => {
-  console.log('addMonitor', res);
-  if (res.data._USER_HAS_LOGOUT === 'Y') {
-    setTimeout(() => {
-      SimpleToast.show(trans('expiredToken'), SimpleToast.SHORT);
-    }, 700);
-  }
-});
+// api.addMonitor(res => {
+//   console.log('addMonitor', res);
+//   if (res.data._USER_HAS_LOGOUT === 'Y') {
+//     setTimeout(() => {
+//       SimpleToast.show(trans('expiredToken'), SimpleToast.SHORT);
+//     }, 700);
+//   }
+// });
 
 // api.axiosInstance.interceptors.request.use(
 //   (config) => {
@@ -35,6 +36,8 @@ api.addMonitor(res => {
 
 const returnData = response => {
   console.log('response =====>', response);
+
+  // const dispatch = useDispatch();
   if (response.data) {
     if (response.data?._ERROR_MESSAGE_ || response.data?._ERROR_MESSAGE_LIST_) {
       return {
@@ -42,6 +45,13 @@ const returnData = response => {
         error:
           response.data?._ERROR_MESSAGE_ ||
           response.data?._ERROR_MESSAGE_LIST_[0],
+      };
+    } else if (response.data._USER_HAS_LOGOUT === 'Y') {
+      // dispatch(AuthenOverallRedux.Actions.handleLogout());
+      // dispatch(StoreRedux.Actions.changeStore(''));
+      return {
+        ok: false,
+        error: trans('expiredToken'),
       };
     } else {
       return {

@@ -44,20 +44,18 @@ const SelectProduct = ({navigation, route}) => {
 
   useEffect(() => {
     const params = {
-      viewSize: 0,
+      viewSize: 200,
       viewIndex: 0,
       searchString,
       supplierId: supplierId,
     };
-    ServiceHandle.post(Const.API.GetProductBySupplierMobilemcs, params).then(
-      res => {
-        if (res.ok) {
-          setListProduct(res.data.listProducts);
-        } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
-        }
-      },
-    );
+    ServiceHandle.post(Const.API.FindProductInfoMobilemcs, params).then(res => {
+      if (res.ok) {
+        setListProduct(res.data.listProducts);
+      } else {
+        SimpleToast.show(res.error, SimpleToast.SHORT);
+      }
+    });
   }, [searchString, supplierId]);
 
   const chooseProduct = item => {

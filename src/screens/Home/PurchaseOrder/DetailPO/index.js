@@ -102,17 +102,18 @@ const DetailPO = ({navigation, route}) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('detailOrder')} />
-        {dataDetail.statusId !== Const.ORDER_STATUS.CANCELLED && (
-          <Appbar.Action
-            icon="pencil"
-            onPress={() =>
-              navigation.navigate(NAVIGATION_NAME.EditPO, {
-                orderDetail: dataDetail,
-                onGoBack,
-              })
-            }
-          />
-        )}
+        {dataDetail.statusId !== Const.ORDER_STATUS.CANCELLED &&
+          dataDetail.statusId !== Const.ORDER_STATUS.COMPLETED && (
+            <Appbar.Action
+              icon="pencil"
+              onPress={() =>
+                navigation.navigate(NAVIGATION_NAME.EditPO, {
+                  orderDetail: dataDetail,
+                  onGoBack,
+                })
+              }
+            />
+          )}
       </Appbar.Header>
       <View style={styles.contentContainer}>
         <AppText style={styles.txtStatus}>

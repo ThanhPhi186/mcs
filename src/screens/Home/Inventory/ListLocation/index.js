@@ -27,7 +27,9 @@ const ListLocation = ({navigation, route}) => {
         if (res.ok) {
           setListLocation(res.data.listLocations);
         } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
+          setTimeout(() => {
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }, 700);
         }
       });
     };

@@ -57,36 +57,40 @@ const ListPO = ({navigation}) => {
   }, [navigation, store.productStoreId]);
 
   useEffect(() => {
-    setLoading(true);
-    const params = {
-      viewSize: 0,
-      viewIndex: 0,
+    const getListSupplier = () => {
+      const params = {
+        viewSize: 0,
+        viewIndex: 0,
+      };
+      ServiceHandle.post(Const.API.GetListSupplierMobilemcs, params)
+        .then(res => {
+          if (res.ok) {
+            const convertSupplier = res.data.listSuppliers.map(elm => {
+              return {
+                label: elm.groupName,
+                value: elm.partyId,
+              };
+            });
+            setSupplierList(convertSupplier);
+          } else {
+            console.log('error', res.error);
+          }
+        })
+        .finally(() => setLoading(false));
     };
-    ServiceHandle.post(Const.API.GetListSupplierMobilemcs, params)
-      .then(res => {
-        if (res.ok) {
-          const convertSupplier = res.data.listSuppliers.map(elm => {
-            return {
-              label: elm.groupName,
-              value: elm.partyId,
-            };
-          });
-          setSupplierList(convertSupplier);
-        } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
-        }
-      })
-      .finally(() => setLoading(false));
-  }, []);
+    displaySearch && getListSupplier();
+  }, [displaySearch]);
 
-  const getListOrderPO = params => {
+  const getListOrderPO = async params => {
     setLoading(true);
     ServiceHandle.post(Const.API.GetListPOMobilemcs, params)
       .then(res => {
         if (res.ok) {
           setDataOrder(res.data.listOrders);
         } else {
-          SimpleToast.show(res.error);
+          setTimeout(() => {
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }, 700);
         }
       })
       .finally(() => setLoading(false));

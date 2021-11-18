@@ -21,7 +21,7 @@ const CancelOrderStatistic = ({navigation}) => {
     const getListCancelOrder = () => {
       const params = {
         viewIndex: 0,
-        viewSize: 10,
+        viewSize: 200,
         productStoreId: store.productStoreId,
       };
       ServiceHandle.post(Const.API.GetListSalesTrackMobilemcs, params)
@@ -29,7 +29,9 @@ const CancelOrderStatistic = ({navigation}) => {
           if (res.ok) {
             setCancelList(res.data.listSalesTrack);
           } else {
-            SimpleToast.show(res.error, SimpleToast.SHORT);
+            setTimeout(() => {
+              SimpleToast.show(res.error, SimpleToast.SHORT);
+            }, 700);
           }
         })
         .finally(() => setLoading(false));

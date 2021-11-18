@@ -38,7 +38,9 @@ const ListPriceChange = ({navigation}) => {
           if (res.ok) {
             setListPriceChange(res.data.listProPriceChanges);
           } else {
-            SimpleToast.show(res.error, SimpleToast.SHORT);
+            setTimeout(() => {
+              SimpleToast.show(res.error, SimpleToast.SHORT);
+            }, 700);
           }
         })
         .finally(res => setLoading(false));
@@ -71,6 +73,9 @@ const ListPriceChange = ({navigation}) => {
       </View>
     );
   };
+  const renderEmptyComponent = () => {
+    return <AppText style={styles.txtEmpty}>{trans('noDataYet')}</AppText>;
+  };
 
   return (
     <View style={container}>
@@ -102,6 +107,7 @@ const ListPriceChange = ({navigation}) => {
           data={listPriceChange}
           renderItem={({item}) => renderItem(item)}
           keyExtractor={(item, index) => index.toString()}
+          ListEmptyComponent={renderEmptyComponent}
         />
       </View>
     </View>

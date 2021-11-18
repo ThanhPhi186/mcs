@@ -1,7 +1,8 @@
+import {StyleSheet} from 'react-native';
 import {Colors, Mixin} from '../../../styles';
 import {FONT_SIZE_20} from '../../../styles/Typography';
 
-const styles = {
+const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
   },
@@ -59,7 +60,9 @@ const styles = {
   txtEmpty: {
     color: Colors.GRAY,
     fontSize: FONT_SIZE_20,
+    textAlign: 'center',
+    marginTop: '50%',
   },
-};
+});
 
 export default styles;

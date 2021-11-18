@@ -28,7 +28,9 @@ const ListInventoryPeriod = ({navigation}) => {
         if (res.ok) {
           setData(res.data.listEvents);
         } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
+          setTimeout(() => {
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }, 700);
         }
       })
       .finally(() => setLoading(false));

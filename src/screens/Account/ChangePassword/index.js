@@ -4,7 +4,8 @@ import {Appbar, TextInput} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDialog, Button} from '../../../components/molecules';
-import {AuthenOverallRedux} from '../../../redux/authen';
+import {AuthenOverallRedux, StoreRedux} from '../../../redux';
+
 import {ServiceHandle} from '../../../services';
 
 import {Colors} from '../../../styles';
@@ -43,10 +44,10 @@ const ChangePassword = ({navigation}) => {
       if (res.ok) {
         SimpleToast.show(trans('changePassSuccess'));
         setTimeout(() => {
-          dispatch(AuthenOverallRedux.Actions.logout.request());
+          dispatch(AuthenOverallRedux.Actions.handleLogout());
+          dispatch(StoreRedux.Actions.changeStore(''));
         }, 500);
       } else {
-        console.log('bbbb');
         setMessErr(res.error);
         setModalError(true);
       }

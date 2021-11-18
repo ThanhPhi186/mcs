@@ -2,7 +2,11 @@ import HomeScreen from './HomeScreen';
 import {ListPO, DetailPO, EditPO, ImportItem} from './PurchaseOrder';
 import SearchProductScreen from './SearchProductScreen';
 import ListPriceChange from './ListPriceChange';
-import {ListPricePolicy, DetailPricePolicy} from './PricePolicy';
+import {
+  ListPricePolicy,
+  DetailPricePolicy,
+  ListApplicableStore,
+} from './PricePolicy';
 import CancelOrderStatistic from './CancelOrderStatistic';
 import CashierLoginHistory from './CashierLoginHistory';
 import {ConfirmOrder, SelectProduct, SelectSupplier} from './CreatePO';
@@ -32,4 +36,5 @@ export {
   ListLocation,
   ImportItem,
   ListTally,
+  ListApplicableStore,
 };

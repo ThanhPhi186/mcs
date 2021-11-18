@@ -11,6 +11,8 @@ import {FONT_SIZE_20} from '../../../../styles/Typography';
 import {Const, trans} from '../../../../utils';
 import moment from 'moment';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {NAVIGATION_NAME} from '../../../../navigations';
+import {isEmpty} from 'lodash';
 
 const DetailPricePolicy = ({navigation, route}) => {
   const {productQuotationId} = route.params;
@@ -25,11 +27,38 @@ const DetailPricePolicy = ({navigation, route}) => {
         if (res.ok) {
           setDetailPricePolicy(res.data);
         } else {
-          SimpleToast.show(res.error, SimpleToast.SHORT);
+          setTimeout(() => {
+            SimpleToast.show(res.error, SimpleToast.SHORT);
+          }, 700);
         }
       },
     );
   }, [productQuotationId]);
+
+  const goApplicableStore = () => {
+    navigation.navigate(NAVIGATION_NAME.ListApplicableStore, {
+      data: detailPricePolicy.productStoreAppls,
+      type: 'store',
+    });
+  };
+
+  const goApplicableStoreGroup = () => {
+    if (isEmpty(detailPricePolicy.detailPricePolicy)) {
+      SimpleToast.show('Chưa có dữ liệu ở mục này', SimpleToast.SHORT);
+    } else {
+      navigation.navigate(NAVIGATION_NAME.ListApplicableStore, {
+        data: detailPricePolicy.listStatusInfo,
+        type: 'group',
+      });
+    }
+  };
+
+  const goStatusEditHistory = () => {
+    navigation.navigate(NAVIGATION_NAME.ListApplicableStore, {
+      data: detailPricePolicy.listStatusInfo,
+      type: 'status',
+    });
+  };
 
   const renderApplyComponent = (title, onPress) => {
     return (
@@ -123,9 +152,12 @@ const DetailPricePolicy = ({navigation, route}) => {
             value={detailPricePolicy?.currencyUomId}
           />
         </View>
-        {renderApplyComponent(trans('applicableStore'))}
-        {renderApplyComponent(trans('applicableStoreGroup'))}
-        {renderApplyComponent(trans('statusEditHistory'))}
+        {renderApplyComponent(trans('applicableStore'), goApplicableStore)}
+        {renderApplyComponent(
+          trans('applicableStoreGroup'),
+          goApplicableStoreGroup,
+        )}
+        {renderApplyComponent(trans('statusEditHistory'), goStatusEditHistory)}
         {renderApplyProduct}
       </View>
     </View>

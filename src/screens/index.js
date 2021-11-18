@@ -19,6 +19,7 @@ import {
   ListLocation,
   ImportItem,
   ListTally,
+  ListApplicableStore,
 } from './Home';
 import {MainAccount, ChangePassword, ChangeStore} from './Account';
 import ContactScreen from './ContactScreen';
@@ -50,4 +51,5 @@ export {
   ContactScreen,
   ImportItem,
   ListTally,
+  ListApplicableStore,
 };

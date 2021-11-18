@@ -234,4 +234,5 @@ export default {
   listProduct: 'Danh sách sản phẩm',
   name: 'Tên',
   seeDetails: 'Xem chi tiết',
+  noDataYet: 'Chưa có dữ liệu',
 };

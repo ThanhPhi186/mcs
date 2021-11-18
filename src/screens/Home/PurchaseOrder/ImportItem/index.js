@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -32,15 +33,19 @@ const ImportItem = ({navigation, route}) => {
       post(Const.API.GetOrderItemReceivableMobilemcs, params)
         .then(res => {
           if (res.ok) {
-            const addDebitQuantityToArr = res.data.orderItems.map(elm => {
-              return {
-                ...elm,
-                ...{debitQuantity: 0, defaultRequired: elm.quantityRequired},
-              };
-            });
+            const addDebitQuantityToArr = res.data.orderItems
+              .map(elm => {
+                return {
+                  ...elm,
+                  ...{debitQuantity: 0, importQuantity: elm.quantityRequired},
+                };
+              })
+              .filter(elm => elm.quantityRequired > 0);
             setDataOrder(addDebitQuantityToArr);
           } else {
-            SimpleToast.show(res.error, SimpleToast.SHORT);
+            setTimeout(() => {
+              SimpleToast.show(res.error, SimpleToast.SHORT);
+            }, 700);
           }
         })
         .finally(() => setLoading(false));
@@ -48,17 +53,33 @@ const ImportItem = ({navigation, route}) => {
     getDataReceivable();
   }, [orderId]);
 
+  const handelCheckValue = () => {
+    const convertData = [...dataOrder].filter(elm => {
+      return elm.importQuantity + elm.debitQuantity > elm.quantityRequired;
+    });
+    if (convertData.length > 0) {
+      SimpleToast.show('Tổng số lượng không được lớn hơn số lượng chưa nhập');
+      return true;
+    }
+    return false;
+  };
+
   const importItem = () => {
+    if (handelCheckValue()) {
+      return;
+    }
+
     setLoading(true);
     const products = dataOrder.map(elm => {
       return {
         orderId,
         productId: elm.productId,
-        quantity: elm.quantity,
+        quantity: elm.importQuantity,
         debitQuantity: elm.debitQuantity,
         orderItemSeqId: elm.orderItemSeqId,
       };
     });
+
     const params = {
       orderId,
       listOrderItems: JSON.stringify(products),
@@ -82,8 +103,8 @@ const ImportItem = ({navigation, route}) => {
   const lessAmount = item => {
     const convertData = [...dataOrder];
     convertData.map(elm => {
-      if (elm.productId === item.productId && elm.quantityRequired > 0) {
-        elm.quantityRequired -= 1;
+      if (elm.productId === item.productId && elm.importQuantity > 0) {
+        elm.importQuantity -= 1;
       }
       return elm;
     });
@@ -97,9 +118,9 @@ const ImportItem = ({navigation, route}) => {
     convertData.map(elm => {
       if (
         elm.productId === item.productId &&
-        elm.quantityRequired < elm.defaultRequired
+        elm.importQuantity < elm.quantityRequired
       ) {
-        elm.quantityRequired += 1;
+        elm.importQuantity += 1;
       }
       return elm;
     });
@@ -111,7 +132,7 @@ const ImportItem = ({navigation, route}) => {
     convertData.map(elm => {
       if (
         elm.productId === item.productId &&
-        elm.debitQuantity < elm.defaultRequired
+        elm.debitQuantity < elm.quantityRequired
       ) {
         elm.debitQuantity += 1;
       }
@@ -138,14 +159,14 @@ const ImportItem = ({navigation, route}) => {
           <AppText style={{fontWeight: 'bold'}}>
             {item.productId} ({item.uomId})
           </AppText>
-          <AppText>SL cần: {item.defaultRequired}</AppText>
+          <AppText>SL cần: {item.quantityRequired}</AppText>
           <AppText>{numeral(item.unitPrice).format()} đ</AppText>
         </View>
 
         <View style={styles.viewQuantity}>
           <TextInput
             style={styles.boxAmount}
-            value={item.quantityRequired.toString()}
+            value={item.importQuantity.toString()}
             keyboardType="number-pad"
             onChangeText={valueInput => changeAmount(valueInput, item)}
           />
