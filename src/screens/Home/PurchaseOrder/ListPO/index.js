@@ -178,10 +178,10 @@ const ListPO = ({navigation}) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('orderList')} />
-        <Appbar.Action
+        {/* <Appbar.Action
           icon={displaySearch ? 'close' : 'magnify'}
           onPress={() => setDisplaySearch(!displaySearch)}
-        />
+        /> */}
       </Appbar.Header>
       <View style={styles.contentContainer}>
         {displaySearch && renderSearch}

@@ -21,6 +21,7 @@ const MainAccount = ({navigation}) => {
   const dispatch = useDispatch();
 
   const userInfo = useSelector(state => state.AuthenOverallReducer.userAuthen);
+  const store = useSelector(state => state.StoreReducer.store);
 
   const [modalLogout, setModalLogout] = useState(false);
   const [modalChangeCompany, setModalChangeCompany] = useState(false);
@@ -47,7 +48,7 @@ const MainAccount = ({navigation}) => {
         <AppText title style={styles.txtName}>
           Nguyễn Thành Phi
         </AppText>
-        <AppText style={styles.txtInfo}>POS05</AppText>
+        <AppText style={styles.txtInfo}>{store.storeName}</AppText>
       </View>
       <View style={{flex: 1}}>
         <View style={styles.largeIndicate} />

@@ -47,12 +47,12 @@ const ListInventoryPeriod = ({navigation}) => {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
-        // onPress={() =>
-        //   navigation.navigate(NAVIGATION_NAME.DetailInventoryPeriod, {
-        //     eventDetail: item,
-        //   })
-        // }
-        onPress={() => navigation.navigate(NAVIGATION_NAME.ListTally)}
+        onPress={() =>
+          navigation.navigate(NAVIGATION_NAME.DetailInventoryPeriod, {
+            eventDetail: item,
+          })
+        }
+        // onPress={() => navigation.navigate(NAVIGATION_NAME.ListTally)}
         style={styles.containerItem}>
         <View style={styles.viewHeaderItem}>
           <AppText style={styles.txtEventId}>

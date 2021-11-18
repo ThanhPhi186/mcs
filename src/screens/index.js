@@ -24,6 +24,7 @@ import {
 import {MainAccount, ChangePassword, ChangeStore} from './Account';
 import ContactScreen from './ContactScreen';
 import ShareScreen from './ShareScreen';
+import RootView from './RootView';
 
 export {
   LoginScreen,
@@ -52,4 +53,5 @@ export {
   ImportItem,
   ListTally,
   ListApplicableStore,
+  RootView,
 };

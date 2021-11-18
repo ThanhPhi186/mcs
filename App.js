@@ -11,6 +11,7 @@ import BootSplash from 'react-native-bootsplash';
 import {Animated, StyleSheet} from 'react-native';
 import {device_height} from './src/styles/Mixin';
 import {images} from './src/assets';
+import {RootView} from './src/screens';
 
 const {persistor, store} = configureStore();
 // persistor.purge();
@@ -67,7 +68,7 @@ const App = () => {
     <Provider store={store}>
       <PaperProvider theme={theme}>
         <PersistGate persistor={persistor}>
-          <SafeAreaProvider>
+          <RootView>
             {bootSplashIsVisible ? (
               <Animated.View
                 style={[
@@ -89,7 +90,7 @@ const App = () => {
               <MainNavigator />
             )}
             <Toast ref={ref => Toast.setRef(ref)} />
-          </SafeAreaProvider>
+          </RootView>
         </PersistGate>
       </PaperProvider>
     </Provider>
