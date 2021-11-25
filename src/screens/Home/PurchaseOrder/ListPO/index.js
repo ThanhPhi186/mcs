@@ -128,31 +128,31 @@ const ListPO = ({navigation}) => {
         onChangeText={setSearchString}
       />
       <ComponentSearch
-        zIndex={3} //ios
         type="dropdown"
         title="Trạng thái"
         value={statusId}
         setValue={setStatusId}
         items={statusList}
         setItems={setStatusList}
+        zIndexContainer={3}
       />
       <ComponentSearch
-        zIndex={2}
         type="dropdown"
         title="Nhà CC"
         value={supplierId}
         setValue={setSupplierId}
         items={supplierList}
         setItems={setSupplierList}
+        zIndexContainer={2}
       />
       <ComponentSearch
-        zIndex={1} //ios
         type="dropdown"
         title="TT Khovt"
         value={isSupplierApproved}
         setValue={setIsSupplierApproved}
         items={supplierApprovedData}
         setItems={setSupplierApprovedData}
+        zIndexContainer={1}
       />
 
       <View style={styles.viewBtn}>
@@ -178,10 +178,10 @@ const ListPO = ({navigation}) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={trans('orderList')} />
-        {/* <Appbar.Action
+        <Appbar.Action
           icon={displaySearch ? 'close' : 'magnify'}
           onPress={() => setDisplaySearch(!displaySearch)}
-        /> */}
+        />
       </Appbar.Header>
       <View style={styles.contentContainer}>
         {displaySearch && renderSearch}
@@ -208,7 +208,7 @@ const styles = {
   containerSearch: {
     backgroundColor: Colors.WHITE,
     padding: 12,
-    zIndex: 1, // ios
+    zIndex: 9999, // ios
   },
   viewBtn: {
     flexDirection: 'row',

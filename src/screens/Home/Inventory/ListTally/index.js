@@ -1,5 +1,13 @@
-import React, {useRef, useState} from 'react';
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useRef, useState, useEffect} from 'react';
+import {
+  Alert,
+  Dimensions,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {Appbar, FAB} from 'react-native-paper';
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -8,10 +16,24 @@ import {Colors, Mixin} from '../../../../styles';
 import {container} from '../../../../styles/GlobalStyles';
 import {trans} from '../../../../utils';
 
+const CAM_VIEW_HEIGHT = Dimensions.get('screen').width * 1.5;
+const CAM_VIEW_WIDTH = Dimensions.get('screen').width;
+
+const leftMargin = 100;
+const topMargin = 50;
+const frameWidth = 200;
+const frameHeight = 250;
+
+const scanAreaX = leftMargin / CAM_VIEW_HEIGHT;
+const scanAreaY = topMargin / CAM_VIEW_WIDTH;
+const scanAreaWidth = frameWidth / CAM_VIEW_HEIGHT;
+const scanAreaHeight = frameHeight / CAM_VIEW_WIDTH;
+
 const ListTally = ({navigation}) => {
   const [listProduct, setListProduct] = useState([]);
-  const [scanQr, setScanQr] = useState(false);
-  const [torchOn, setTorchOn] = useState(false);
+  const [barcodeType, setBarcodeType] = useState('');
+  const [isBarcodeRead, setIsBarcodeRead] = useState(false);
+  const [barcodeValue, setBarcodeValue] = useState('');
 
   const [camera, setCamera] = useState({
     camera: {
@@ -20,17 +42,32 @@ const ListTally = ({navigation}) => {
     },
   });
 
+  const defaultBarcodeTypes = [RNCamera.Constants.BarCodeType];
+
   const cameraRef = useRef();
 
-  const onBarCodeRead = e => {
-    console.log('onBarCodeRead', e);
-  };
+  useEffect(() => {
+    if (isBarcodeRead) {
+      Alert.alert(barcodeType, barcodeValue, [
+        {
+          text: 'OK',
+          onPress: () => {
+            // reset everything
+            setIsBarcodeRead(false);
+            setBarcodeType('');
+            setBarcodeValue('');
+          },
+        },
+      ]);
+    }
+  }, [isBarcodeRead, barcodeType, barcodeValue]);
 
-  const handleTourch = value => {
-    if (value === true) {
-      setTorchOn(false);
-    } else {
-      setTorchOn(true);
+  const onBarcodeRead = event => {
+    console.log('event', event);
+    if (!isBarcodeRead) {
+      setIsBarcodeRead(true);
+      setBarcodeType(event.type);
+      setBarcodeValue(event.data);
     }
   };
 
@@ -62,7 +99,7 @@ const ListTally = ({navigation}) => {
         defaultTouchToFocus
         // flashMode={this.state.camera.flashMode}
         mirrorImage={false}
-        onBarCodeRead={e => onBarCodeRead(e)}
+        onBarCodeRead={onBarcodeRead}
         onFocusChanged={() => {}}
         onZoomChanged={() => {}}
         permissionDialogTitle={'Permission to use camera'}
@@ -71,9 +108,17 @@ const ListTally = ({navigation}) => {
         }
         style={styles.preview}
         type={camera.type}
-        // onGoogleVisionBarcodesDetected={({barcodes}) => {
-        //   console.log('barcodes', barcodes);
-        // }}
+        barcodeTypes={isBarcodeRead ? [] : defaultBarcodeTypes}
+        rectOfInterest={{
+          x: scanAreaX,
+          y: scanAreaY,
+          width: scanAreaWidth,
+          height: scanAreaHeight,
+        }}
+        cameraViewDimensions={{
+          width: CAM_VIEW_WIDTH,
+          height: CAM_VIEW_HEIGHT,
+        }}
       />
       <View style={[styles.overlay, styles.topOverlay]}>
         <Text style={styles.scanScreenMessage}>Please scan the barcode.</Text>
@@ -87,6 +132,18 @@ const ListTally = ({navigation}) => {
           title="Enter Barcode"
         />
       </View>
+      <View
+        style={{
+          position: 'absolute',
+          top: leftMargin,
+          right: topMargin,
+          width: frameWidth,
+          height: frameHeight,
+          borderWidth: 2,
+          borderColor: 'red',
+          opacity: 0.5,
+        }}
+      />
     </View>
   );
 };
